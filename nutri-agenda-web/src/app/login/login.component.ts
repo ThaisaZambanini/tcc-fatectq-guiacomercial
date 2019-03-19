@@ -11,7 +11,6 @@ import {AuthenticationService} from "../service/auth.service";
 })
 
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   submitted: boolean = false;
   invalidLogin: boolean = false;
@@ -22,8 +21,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    if(this.loginForm.controls.email.value == 'dhiraj@gmail.com' && this.loginForm.controls.password.value == 'password') {
-        this.router.navigate(['list-user']);
+    if(this.loginForm.controls.cpf.value == '40700081879' && this.loginForm.controls.password.value == '123') {
+        this.router.navigate(['home']);
     }else {
       this.invalidLogin = true;
     }
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      cpf: ['', Validators.required],
       password: ['', Validators.required]
     });
   }

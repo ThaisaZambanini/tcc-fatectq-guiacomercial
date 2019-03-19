@@ -11,6 +11,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import {ListUserComponent} from "./list-user/list-user.component";
 import {UserService} from "./service/user.service";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {UserService} from "./service/user.service";
     LoginComponent,
     ListUserComponent,
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

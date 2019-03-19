@@ -1,0 +1,39 @@
+.login {
+  padding-top: 20vh;
+
+  .login__container {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    width: 100%;
+  }
+
+  .login_container-title {
+    position: relative;
+
+    .login__title {
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .login {
+    padding-top: 25vh;
+
+    .login__container {
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+      width: 50%;
+    }
+
+    .login_container-title {
+      position: relative;
+
+      .login__title {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
