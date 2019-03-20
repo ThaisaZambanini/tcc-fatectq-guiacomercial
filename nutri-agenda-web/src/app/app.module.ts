@@ -12,6 +12,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import {ListUserComponent} from "./list-user/list-user.component";
 import {UserService} from "./service/user.service";
 import { HomeComponent } from './home/home.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
