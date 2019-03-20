@@ -1,28 +1,38 @@
 <app-menu></app-menu>
 <div class="container">
-  <div class="col-md-6">
-    <h2>Consulta de Usuários</h2>
-    <button class="btn btn-danger" (click)="addUser()"> Add User</button>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="hidden">Id</th>
-          <th>Nome</th>
-          <th>Sobrenome</th>
-          <th>E-mail</th>
-          <th>Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td class="hidden">{{user.id}}</td>
-          <td>{{user.nome}}</td>
-          <td>{{user.sobrenome}}</td>
-          <td>{{user.email}}</td>
-          <td><button class="btn btn-danger" (click)="deleteUser(user)"> Excluir</button>
-            <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Editar</button></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Usuários
+      </span>
+    </h3>
+    <div class="table-responsive">
+      <table class="table table-striped margin--top-3x">
+        <thead>
+          <tr>
+            <th class="hidden">Id</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>E-mail</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="hidden">{{user.id}}</td>
+            <td>{{user.nome}}</td>
+            <td>{{user.sobrenome}}</td>
+            <td>{{user.email}}</td>
+            <td><button class="btn btn-danger" (click)="deleteUser(user)"> Excluir</button>
+              <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <p>Nenhum resultado!</p>
+    <div class="text-right">
+      <button class="btn btn-danger margin--vertical" (click)="addUser()"> Add User</button>
+    </div>
   </div>
 </div>
