@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.estado.Estado;
 
 @Entity
@@ -31,6 +32,7 @@ public class Cidade {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Estado estado;
 
 	@Transient
