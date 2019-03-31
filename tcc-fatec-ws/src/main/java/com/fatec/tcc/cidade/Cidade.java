@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fatec.tcc.estado.Estado;
@@ -18,9 +20,9 @@ import com.fatec.tcc.estado.Estado;
 public class Cidade {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	@NotNull
+	@SequenceGenerator(name = "dbguiacomercial.sq_cidade", sequenceName = "dbguiacomercial.sq_cidade", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dbguiacomercial.sq_cidade")
+	@Column(name = "co_seq_cidade", nullable = false)
 	private Long id;
 
 	@Column(name = "nome", nullable = false)
@@ -28,8 +30,11 @@ public class Cidade {
 	private String nome;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_ESTADO")
+	@JoinColumn(name = "id_uf")
 	private Estado estado;
+
+	@Transient
+	private Long idEstado;
 
 	public Long getId() {
 		return id;
@@ -53,6 +58,14 @@ public class Cidade {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public Long getIdEstado() {
+		return idEstado;
+	}
+
+	public void setIdEstado(Long idEstado) {
+		this.idEstado = idEstado;
 	}
 
 }

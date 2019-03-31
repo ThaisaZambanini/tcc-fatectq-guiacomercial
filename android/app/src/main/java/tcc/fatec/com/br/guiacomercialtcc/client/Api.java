@@ -13,7 +13,7 @@ public interface Api {
     @GET("estado/")
     Call<List<EstadoDTO>> findEstados();
 
-    @GET("v1/cidade")
+    @GET("cidade/estado")
     Call<List<CidadeDTO>> findCidades(@Query("idEstado") Long idEstado);
 
    /*  @GET("v1/categoria")

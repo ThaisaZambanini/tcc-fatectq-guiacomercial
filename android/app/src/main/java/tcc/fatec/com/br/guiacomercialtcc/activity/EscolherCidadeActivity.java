@@ -63,7 +63,6 @@ public class EscolherCidadeActivity extends AppCompatActivity {
                     alert.show();
                 } else {
                     mDialog.show();
-
                     SessaoUtil.setCidade(getApplicationContext(), dto);
                     Intent intent = new Intent(EscolherCidadeActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -164,7 +163,7 @@ public class EscolherCidadeActivity extends AppCompatActivity {
         if (cidadeSessao != null) {
             SessaoUtil.limpar(getApplicationContext());
             for (int i = 0; i < listaEstados.size(); i++) {
-                if (listaEstados.get(i).getNome().equals(cidadeSessao.getEstado())) {
+                if (listaEstados.get(i).getNome().equals(cidadeSessao.getEstadoDTO().getNome())) {
                     estado.setSelection(i);
                 }
             }
