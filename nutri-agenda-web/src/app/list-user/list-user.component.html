@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
+          <tr *ngFor="let user of users | paginate: {itemsPerPage: 10, currentPage: pageActual}">
             <td class="hidden">{{user.id}}</td>
             <td>{{user.nome}}</td>
             <td>{{user.sobrenome}}</td>
@@ -28,6 +28,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
 
     </div>
     <p>Nenhum resultado!</p>

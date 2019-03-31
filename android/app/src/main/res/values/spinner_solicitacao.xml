@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tipoSolicitacao">
+        <item>Selecione</item>
+        <item>Sou responsável pela empresa</item>
+        <item>Quero apenas relatar um problema</item>
+    </string-array>
+
+</resources>

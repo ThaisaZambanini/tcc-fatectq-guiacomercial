@@ -10,7 +10,7 @@
 		<relativePath />
 	</parent>
 	<groupId>com.fatec.tcc</groupId>
-	<artifactId>nutri-agenda</artifactId>
+	<artifactId>fatec-tcc</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
@@ -25,6 +25,6 @@
 	</properties>
 
 	<modules>
-		<module>nutri-agenda-ws</module>
+		<module>fatec-tcc-ws</module>
 	</modules>
 </project>

@@ -13,6 +13,7 @@ import {ListUserComponent} from "./list-user/list-user.component";
 import {UserService} from "./service/user.service";
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MenuComponent } from './menu/menu.component';
     BrowserModule,
     routing,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [AuthenticationService, UserService],
   bootstrap: [AppComponent]

@@ -1,0 +1,224 @@
+<resources>
+    <string name="app_name">Apps Guia Comercial</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- OUTROS -->
+    <string name="formas_pagamento">Formas de Pagamento</string>
+    <string name="trocarCidade">Trocar de Cidade</string>
+    <string name="mensagem_indiqueAmigo">Olá, já conhece o APP do Guia Fonejá? É um aplicativo bem completo com informações das empresas como: endereço, telefones, horários de atendimento, formas de pagamento aceita, localização e muito mais. Tem mais de 700 cidades do Brasil disponíveis para consultar as empresas. Também tem o Clube de Vantagens, onde você se cadastra e vê as Vantagens que as empresas estão oferecendo para os participantes do Clube. Instale agora mesmo, é gratuito. </string>
+    <string name="cadastre_empresa">Cadastre sua Empresa</string>
+
+    <!-- ATUALIZA DADOS -->
+    <string name="atualiza_label_manifest">Atualização</string>
+    <string name="atualiza_descricao">Altere seus dados cadastrais</string>
+
+    <!-- GERAL -->
+    <string name="compartilhar">Compartilhar</string>
+    <string name="indique_app">Indique o App</string>
+    <string name="desenvolvedor">Desenvolvedor</string>
+    <string name="inicio">Início</string>
+    <string name="contato">Contato</string>
+    <string name="guia_comercial">Guia Comercial</string>
+    <string name="clube_vantagens">Clube de Vantagens</string>
+    <string name="pesquisa">Pesquisa</string>
+    <string name="associe">Associe-se</string>
+    <string name="a_cidade">A Cidade</string>
+    <string name="conheca_associacao">Conheça a Associação</string>
+    <string name="consulta_scpc">Consulta SCPC</string>
+    <string name="pontos_turisticos">Pontos Turísticos</string>
+    <string name="atividades_turisticas">Atividades Turísticas</string>
+    <string name="vagas_emprego">Vagas de Emprego</string>
+    <string name="associado_destaque">Associado em Destaque</string>
+    <string name="campanhas_eventos">Campanhas e Eventos</string>
+    <string name="servicos_associacao">Serviços da Associação</string>
+    <string name="horario_comercio">Horário do Comércio</string>
+    <string name="locacao_sala">Locação de Sala</string>
+    <string name="noticias">Notícias</string>
+    <string name="guia_residencial">Guia Residencial</string>
+    <string name="guia_residencial_digite">Digite um Nome ou Sobrenome e clique em buscar.</string>
+    <string name="carregando">Carregando...</string>
+    <string name="arquivos">Arquivos</string>
+    <string name="formulario">Formulário</string>
+    <string name="quero_reservar">Quero reservar</string>
+    <string name="download">Baixar</string>
+    <string name="como_chegar">Como Chegar</string>
+    <string name="video_institucional">Vídeo Institucional</string>
+    <string name="site">Site</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="enviar_email">Enviar E-mail</string>
+    <string name="detalhes">Detalhes</string>
+    <string name="inscrever">Inscrever-se</string>
+    <string name="nenhum_resultado">Nenhum resultado encontrado.</string>
+    <string name="atualizacao">Atualização</string>
+    <string name="salvar">Salvar</string>
+    <string name="indique_app_mensagem">A ASSOCIAÇÃO COMERCIAL na Palma da sua Mão. História da cidade, Pontos Turísticos, Atividades Turísticas, informações da Associação, Guia Comercial completo, agenda de eventos, Clube de Vantagens, associado em destaque, serviços da associação e mais ...</string>
+
+    <!-- MEUS DADOS -->
+    <string name="title_activity_meus_dados">Meus Dados</string>
+    <string name="meus_dados">Meus Dados</string>
+    <string name="clube_cartao_info">Cartão</string>
+    <string name="clube_validade">Validade</string>
+    <string name="meus_dados_atualizar">Atualizar meus dados</string>
+    <string name="clube_vantagem">Vantagens</string>
+    <string name="meusDados_salvar">Salvar</string>
+    <string name="saiba_mais">Saiba Mais</string>
+    <string name="vantagens">Vantagens</string>
+    <string name="atualize_dados">Atualize os Dados</string>
+
+    <string name="associe_titulo">Não é Associado(a)?</string>
+    <string name="associe_descricao">Preencha o formulário abaixo que entraremos em contato.</string>
+
+    <!-- A CIDADE -->
+    <string name="historia">História</string>
+    <string name="finalizar">Finalizar</string>
+
+    <!-- GUIA COMERCIAL -->
+    <string name="oops">Oops!</string>
+    <string name="sem_internet">Verifique sua conexão com a Internet e tente novamente.</string>
+    <string name="selecione">Selecione</string>
+    <string name="digite_que_procura">Digite o que procura</string>
+    <string name="search_hint">Digite a Empresa ou Categoria</string>
+    <string name="endereco">Endereço</string>
+    <string name="distancia">Distância</string>
+    <string name="categoria">Cateogria</string>
+    <string name="publicidade">Publicidade</string>
+    <string name="data">Data</string>
+    <string name="obrigatorio">Obrigatório</string>
+    <string name="entendi">Entendi</string>
+    <string name="data_invalida">Data Inválida</string>
+    <string name="email_invalido">E-mail Inválido</string>
+
+    <!-- SPLASH SCREEN ACTIVITY -->
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="text_splash_activity1">Seu </string>
+    <string name="text_splash_activity2">Guia Comercial </string>
+    <string name="text_splash_activity3">na palma da mão!</string>
+
+    <!-- ESCOLHER CIDADE -->
+    <string name="escolha_cidade">Escolha sua Cidade</string>
+    <string name="estado">Estado</string>
+    <string name="cidade">Cidade</string>
+    <string name="enviar">Enviar</string>
+    <string name="entrar">Entrar</string>
+    <string name="identifique">Identifique-se</string>
+    <string name="aguarde">Aguarde ...</string>
+
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="atencao">Atenção!</string>
+    <string name="mensagem_encerrar">Tem certeza que deseja SAIR do Aplicativo?</string>
+
+    <!-- CONFIGURAÇÕES -->
+    <string name="configuracoes">Configurações</string>
+    <string name="descricao_config">Escolha a maneira como prefere navegar pelo App.</string>
+    <string name="config_permitir">Permitir uso GPS</string>
+    <string name="title_activity_configuracao">Configuração</string>
+
+    <!-- SOLICITAÇÃO DE ATUALIZAÇÃO -->
+    <string name="title_activity_solicitacao_atualizacao">SolicitacaoAtualizacaoActivity</string>
+    <string name="sol_atual_descricao">Preencha o formulário abaixo para solicitar a atualização</string>
+
+    <string name="pessoa_fisica">Pessoa Física</string>
+    <string name="acerta">Acerta</string>
+    <string name="acerta_cadastral">Acerta Cadastral</string>
+    <string name="acerta_cheque">Acerta Cheque</string>
+    <string name="acerta_completo">Acerta Completo</string>
+    <string name="acerta_essencial">Acerta Essencial</string>
+    <string name="acerta_mais">Acerta Mais</string>
+
+    <string name="pessoa_juridica">Pessoa Jurídica</string>
+    <string name="define_cadastro">Define Cadastro</string>
+    <string name="define_limite">Define Limite</string>
+    <string name="define_negocio">Define Negócio</string>
+    <string name="define_risco">Define Risco</string>
+
+    <string name="compre_sao_carlos">Compre em São Carlos</string>
+    <string name="permissao_mensagem">Para utilizar essa funcionalidade precisamos de algumas permissões.</string>
+
+    <string name="camera_suporte_recortar">Sua câmera não suporta recorte de imagens.</string>
+    <string name="erro_desconhecido">Encontramos um problema, tente novamente mais tarde.</string>
+    <string name="erro_enviar">Encontramos um problema ao realizar esta operação, tente novamente mais tarde.</string>
+
+    <string name="boavista_menu_descricao">Escolha uma funcionalidade do Boa Vista SCPC</string>
+    <string name="consulta_scpc_indisponivel">Consulta SCPC temporariamente indisponível, tente novamente mais tarde.</string>
+
+    <string name="evento_formulario_descricao">Preencha o Formulário abaixo.</string>
+    <string name="locacao_sala_formulario_descricao">Preencha o Formulário e nós entraremos em contato para confirmar sua Solicitação de Reserva.</string>
+
+    <string name="nome_completo">Nome Completo</string>
+    <string name="nova_pesquisa_disponivel">Nova Pesquisa Disponível</string>
+    <string name="quero_participar">Quero Participar</string>
+    <string name="nao_quero_participar">Não Quero Participar</string>
+    <string name="nenhuma_pesquisa_disponivel">No momento não há nenhuma pesquisa disponível.</string>
+
+    <!-- CLUBE DE VANTAGENS -->
+    <string name="clube_identifique">Identifique-se</string>
+    <string name="clube_cpf">CPF</string>
+    <string name="clube_nome">Nome Completo</string>
+    <string name="clube_dataNascimento">Data de Nascimento</string>
+    <string name="clube_lembrar">Lembrar-me</string>
+    <string name="clube_continuar">Continuar</string>
+    <string name="clube_criarConta">Criar uma conta</string>
+    <string name="clube_naoPossuiConta">Ainda não possui conta?</string>
+    <string name="clube_crieSuaConta">Crie sua conta</string>
+    <string name="clube_crieSuaConta_descricao">Parar criar sua conta é necessário preencher todos os campos do formulário abaixo.</string>
+    <string name="clube_dadosPessoais">Dados Pessoais</string>
+    <string name="clube_digite_cpf">Digite seu CPF</string>
+    <string name="clube_digite_nome">Digite seu Nome Completo</string>
+    <string name="clube_digite_celular">Digite seu celular</string>
+    <string name="clube_celular">Celular</string>
+    <string name="clube_digite_email">Digite seu e-mail pessoal</string>
+    <string name="clube_email">E-mail</string>
+    <string name="clube_sexo">Sexo</string>
+    <string name="clube_tirarFoto">Tirar uma foto</string>
+    <string name="clube_escolhaFoto">Escolha uma foto</string>
+    <string name="clube_privacidade">Privacidade</string>
+    <string name="clube_receber_email">Receber e-mails promocionais</string>
+    <string name="clube_receber_sms">Receber SMS promocionais</string>
+    <string name="clube_finalizar">Finalizar</string>
+    <string name="clube_bemVindo">Seja Bem Vindo(a) ao Clube de Vantagens!</string>
+    <string name="clube_verEmpresas">Ver Empresas</string>
+    <string name="clube_meusDados">Meus Dados</string>
+    <string name="clube_meuCartao">Meu Cartão</string>
+    <string name="clube_sair">Sair</string>
+    <string name="clube_cartaoExpira">Seu Cartão Digital expira em:</string>
+    <string name="clube_cartao">Cartão:</string>
+    <string name="clube_sair_messagem">Tem certeza que deseja sair?</string>
+    <string name="ver_vantagens">Ver Vantagens</string>
+    <string name="cpf">CPF</string>
+    <string name="validade">Validade</string>
+    <string name="aviso">Aviso</string>
+    <string name="capturar_foto">Tirar Foto</string>
+    <string name="cancelar">Cancelar</string>
+
+    <string name="escolha_uma_foto">Escolha uma foto</string>
+
+    <!-- CADASTRO EMPRESA -->
+    <string name="cadastroEmpresa_naoEncontrou">Não encontrou sua empresa?</string>
+    <string name="cadastroEmpresa_solicite">Solicite a inclusão!</string>
+    <string name="cadastroEmpresa_preencha">Preencha o formulário abaixo que em breve entraremos em contato.</string>
+    <string name="cadastroEmpresa_dadosEmpresa">Dados da Empresa</string>
+    <string name="cadastroEmpresa_tipo">Tipo</string>
+    <string name="cadastroEmpresa_nomeFantasia">Nome Fantasia</string>
+    <string name="cadastroEmpresa_cnpj">CNPJ</string>
+    <string name="cadastroEmpresa_ramo">Ramo de Atividade/Atuação da Empresa</string>
+    <string name="cadastroEmpresa_endereco">Endereço da Empresa</string>
+    <string name="cadastroEmpresa_cidade">Cidade</string>
+    <string name="cadastroEmpresa_estado">Estado</string>
+    <string name="cadastroEmpresa_cep">CEP</string>
+    <string name="cadastroEmpresa_end">Endereço</string>
+    <string name="cadastroEmpresa_numero">Número</string>
+    <string name="cadastroEmpresa_bairro">Bairro</string>
+    <string name="cadastroEmpresa_contato_dados">Dados para Contato</string>
+    <string name="cadastroEmpresa_contatoNome">Nome para Contato</string>
+    <string name="cadastroEmpresa_telefone">Telefone</string>
+    <string name="cadastroEmpresa_celular">Celular</string>
+    <string name="cadastroEmpresa_email">E-mail</string>
+    <string name="cadastroEmpresa_enviarSolicitacao">Enviar Solicitação</string>
+
+</resources>

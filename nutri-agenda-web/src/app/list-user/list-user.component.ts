@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {User} from "../model/user.model";
 
+
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -13,6 +14,7 @@ export class ListUserComponent implements OnInit {
   users: User[];
 
   constructor(private router: Router, private userService: UserService) { }
+  pageActual = 1;
 
   ngOnInit() {
     this.userService.getUsers()
