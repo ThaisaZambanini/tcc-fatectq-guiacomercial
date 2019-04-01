@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.cidade.Cidade;
 import com.fatec.tcc.commons.SimNao;
@@ -39,10 +40,12 @@ public class Categoria {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cidade")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnore
 	private Cidade cidade;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "st_ativo")
+	@JsonIgnore
 	private SimNao ativo;
 
 	public Long getId() {

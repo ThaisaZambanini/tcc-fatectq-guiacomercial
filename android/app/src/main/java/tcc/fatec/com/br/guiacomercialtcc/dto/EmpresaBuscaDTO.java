@@ -4,10 +4,9 @@ public class EmpresaBuscaDTO {
 
     private Long id;
     private String nome;
-    private String categoria;
+    private CategoriaDTO categoria;
     private String logo;
     private String distancia;
-    private boolean clubeVantagens;
     private EnderecoDTO endereco;
 
     public String getNome() {
@@ -18,11 +17,11 @@ public class EmpresaBuscaDTO {
         this.nome = nome;
     }
 
-    public String getCategoria() {
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 
@@ -58,11 +57,4 @@ public class EmpresaBuscaDTO {
         this.endereco = endereco;
     }
 
-    public boolean isClubeVantagens() {
-        return clubeVantagens;
-    }
-
-    public void setClubeVantagens(boolean clubeVantagens) {
-        this.clubeVantagens = clubeVantagens;
-    }
 }

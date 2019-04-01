@@ -3,36 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_guiaComercial"
+            android:icon="@drawable/ic_map"
+            android:title="@string/guia_comercial" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_cadastrarEmpresa"
+            android:icon="@drawable/ic_card_travel"
+            android:title="@string/cadastre_empresa" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_clubeVantagens"
+            android:icon="@drawable/ic_clube_vantagem"
+            android:title="@string/clube_vantagens" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_contato"
+            android:icon="@drawable/ic_mail"
+            android:title="@string/contato" />
+
+        <item
+            android:id="@+id/nav_trocar"
+            android:icon="@drawable/ic_trocar"
+            android:title="@string/trocarCidade" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_indicar"
+            android:icon="@drawable/ic_share"
+            android:title="@string/indique_app" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/configuracoes" />
+
+    </group>
 
 </menu>

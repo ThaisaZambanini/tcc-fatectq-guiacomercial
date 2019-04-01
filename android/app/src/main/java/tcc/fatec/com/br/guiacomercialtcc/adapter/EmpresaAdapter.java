@@ -41,7 +41,7 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
 
         viewHolder.mImage.setImageURI(uri);
         viewHolder.mNomeEmpresa.setText(dto.getNome());
-        viewHolder.mCategoria.setText(dto.getCategoria());
+        viewHolder.mCategoria.setText(dto.getCategoria().getNome());
         viewHolder.mEndereco1.setText(dto.getEndereco().getLinha1());
         viewHolder.mEndereco2.setText(dto.getEndereco().getLinha2());
         viewHolder.mEndereco3.setText(dto.getEndereco().getLinha3());
@@ -53,10 +53,6 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
 
         if (dto.getDistancia() == null || dto.getDistancia().equals("")) {
             viewHolder.layout_local.setVisibility(View.GONE);
-        }
-
-        if (!dto.isClubeVantagens()) {
-            viewHolder.mBotaoClubeVantagens.setVisibility(View.GONE);
         }
     }
 
@@ -74,7 +70,6 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
         public TextView mCategoria;
         public TextView mLocalizacao;
         public Button mBotaoDetalhes;
-        public Button mBotaoClubeVantagens;
         public LinearLayout layout_local;
 
         public MyViewHolder(View itemView) {
@@ -98,20 +93,9 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
                     abrir(dto);
                 }
             });
-
-            mBotaoClubeVantagens = itemView.findViewById(R.id.btn_clubeVantagens_empresa);
-            mBotaoClubeVantagens.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EmpresaBuscaDTO dto = listaEmpresas.get(getAdapterPosition());
-                    clubeVantagens(dto);
-                }
-            });
         }
     }
 
     public abstract void abrir(EmpresaBuscaDTO dto);
-
-    public abstract void clubeVantagens(EmpresaBuscaDTO dto);
 
 }

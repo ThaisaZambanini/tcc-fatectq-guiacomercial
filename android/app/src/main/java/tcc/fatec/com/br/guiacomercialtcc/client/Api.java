@@ -1,11 +1,16 @@
 package tcc.fatec.com.br.guiacomercialtcc.client;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+import tcc.fatec.com.br.guiacomercialtcc.dto.CategoriaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.CidadeDTO;
+import tcc.fatec.com.br.guiacomercialtcc.dto.ClientEmpresaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.EstadoDTO;
 
 public interface Api {
@@ -16,13 +21,13 @@ public interface Api {
     @GET("cidade/estado")
     Call<List<CidadeDTO>> findCidades(@Query("idEstado") Long idEstado);
 
-   /*  @GET("v1/categoria")
-    Call<List<CategoriaDTO>> findCategorias(@Header("X-Cidade-Id") String idCidade);
+    @GET("categoria/")
+    Call<List<CategoriaDTO>> findCategorias(@Header("X-Cidade-Id") Long idCidade);
 
-    @GET("v1/empresa")
-    Call<ClientEmpresaDTO> findCategoriaEmpresaTermo(@Header("X-Cidade-Id") String idCidade, @QueryMap Map<String, Object> options);
+    @GET("empresa/categoria")
+    Call<ClientEmpresaDTO> findCategoriaEmpresaTermo(@Header("X-Cidade-Id") Long idCidade, @QueryMap Map<String, Object> options);
 
-    @GET("v1/empresa/{id}")
+   /*  @GET("v1/empresa/{id}")
     Call<Empresa> findEmpresaDetalhes(@Header("X-Cidade-Id") String idCidade, @Path("id") Long id, @QueryMap Map<String, String> options);
 
     @POST("v1/empresa/atualizacao")

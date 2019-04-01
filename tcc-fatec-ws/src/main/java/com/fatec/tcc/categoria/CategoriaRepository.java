@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-	@Query("SELECT categoria FROM Categoria categoria INNER JOIN categoria.cidade cidade where cidade.id = :id")
+	@Query("SELECT categoria FROM Categoria categoria INNER JOIN categoria.cidade cidade where cidade.id = :id AND categoria.ativo = 'S' ")
 	List<Categoria> findAllPorCidades(@Param("id") Long idCidade);
 
 }

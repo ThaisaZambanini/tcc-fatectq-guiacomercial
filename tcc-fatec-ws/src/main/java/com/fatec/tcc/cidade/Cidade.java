@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.estado.Estado;
 
@@ -36,6 +37,7 @@ public class Cidade {
 	private Estado estado;
 
 	@Transient
+	@JsonIgnore
 	private Long idEstado;
 
 	public Long getId() {

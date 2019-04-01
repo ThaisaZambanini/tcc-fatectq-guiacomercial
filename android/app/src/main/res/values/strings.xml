@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apps Guia Comercial</string>
+    <string name="app_name">Guia Comercial</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -220,5 +220,8 @@
     <string name="cadastroEmpresa_celular">Celular</string>
     <string name="cadastroEmpresa_email">E-mail</string>
     <string name="cadastroEmpresa_enviarSolicitacao">Enviar Solicitação</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

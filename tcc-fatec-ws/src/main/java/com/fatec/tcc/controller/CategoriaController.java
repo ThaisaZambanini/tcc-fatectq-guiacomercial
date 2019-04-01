@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,4 +58,14 @@ public class CategoriaController {
 		return new ResponseEntity<Categoria>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@PutMapping("/alterar")
+	public ResponseEntity<Categoria> updateCategoria(@Validated @RequestBody Categoria categoria)
+			throws ResourceNotFoundException {
+		Categoria categoriaBanco = categoriaRepository.findById(categoria.getId())
+				.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + categoria.getId()));
+		categoriaBanco.setNome(categoria.getNome());
+		categoriaBanco.setIcone(categoria.getIcone());
+		final Categoria alteracaoCategoria = categoriaRepository.save(categoriaBanco);
+		return ResponseEntity.ok(alteracaoCategoria);
+	}
 }

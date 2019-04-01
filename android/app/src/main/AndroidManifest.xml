@@ -25,12 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <!--
-            <meta-data
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        -->
+
         <activity
             android:name=".activity.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -44,7 +42,19 @@
             android:name=".activity.MainActivity"
             android:label="GuiaComercial"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.EscolherCidadeActivity"></activity>
+        <activity
+            android:name=".activity.EscolherCidadeActivity"
+            android:label=""
+            android:theme="@style/AppTheme.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.EmpresaListaActivity"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

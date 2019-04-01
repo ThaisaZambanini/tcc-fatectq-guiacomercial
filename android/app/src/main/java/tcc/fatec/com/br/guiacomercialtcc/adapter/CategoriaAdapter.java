@@ -41,7 +41,6 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
         final Uri uri = Uri.parse(dto.getIcone());
         holder.mImage.setImageURI(uri);
-
         holder.mTitle.setText(dto.getNome());
     }
 
