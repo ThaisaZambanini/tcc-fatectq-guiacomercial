@@ -6,12 +6,14 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import tcc.fatec.com.br.guiacomercialtcc.dto.CategoriaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.CidadeDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.ClientEmpresaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.EstadoDTO;
+import tcc.fatec.com.br.guiacomercialtcc.model.Empresa;
 
 public interface Api {
 
@@ -27,10 +29,10 @@ public interface Api {
     @GET("empresa/busca")
     Call<ClientEmpresaDTO> findCategoriaEmpresaTermo(@Header("X-Cidade-Id") Long idCidade, @QueryMap Map<String, Object> options);
 
-   /*  @GET("v1/empresa/{id}")
-    Call<Empresa> findEmpresaDetalhes(@Header("X-Cidade-Id") String idCidade, @Path("id") Long id, @QueryMap Map<String, String> options);
+    @GET("empresa/empresa/")
+    Call<Empresa> findEmpresaDetalhes(@Header("X-Cidade-Id") Long idCidade, @QueryMap Map<String, Long> options);
 
-    @POST("v1/empresa/atualizacao")
+   /* @POST("v1/empresa/atualizacao")
     Call<MensagemDTO> sendSolicitacao(@Header("X-Cidade-Id") String idCidade, @Body SolicitacaoRB solicitacao);
 
     @GET("v1/cidade/abrangencia")

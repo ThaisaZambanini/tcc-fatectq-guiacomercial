@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".activity.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -40,7 +39,6 @@
             android:name=".activity.EscolherCidadeActivity"
             android:label=""
             android:theme="@style/AppTheme.Light.NoActionBar" />
-
         <activity
             android:name=".activity.EmpresaListaActivity"
             android:parentActivityName=".activity.MainActivity"
@@ -49,6 +47,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.EmpresaDetalhesActivity"
+            android:label="@string/title_activity_empresa_detalhes"
+            android:parentActivityName=".activity.EmpresaListaActivity"
+            android:theme="@style/AppTheme.Light.NoActionBar" />
     </application>
 
 </manifest>

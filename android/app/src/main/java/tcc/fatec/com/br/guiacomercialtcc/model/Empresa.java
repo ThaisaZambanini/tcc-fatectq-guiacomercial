@@ -3,6 +3,7 @@ package tcc.fatec.com.br.guiacomercialtcc.model;
 import java.io.Serializable;
 import java.util.List;
 
+import tcc.fatec.com.br.guiacomercialtcc.dto.CategoriaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.StatusEmpresaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.VantagemDTO;
 
@@ -10,7 +11,7 @@ public class Empresa implements Serializable {
 
     private Long id;
     private String nome;
-    private String categoria;
+    private CategoriaDTO categoria;
     private String linkFoneja;
     private String linkSite;
     private String linkFacebook;
@@ -50,11 +51,11 @@ public class Empresa implements Serializable {
         this.nome = nome;
     }
 
-    public String getCategoria() {
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 

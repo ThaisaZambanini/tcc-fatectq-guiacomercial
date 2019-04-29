@@ -2,6 +2,7 @@ package tcc.fatec.com.br.guiacomercialtcc.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -39,6 +40,7 @@ import tcc.fatec.com.br.guiacomercialtcc.dto.EmpresaBuscaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.GeoLocalizacaoDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.ParametroBuscaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.util.Constantes;
+import tcc.fatec.com.br.guiacomercialtcc.util.ExtraConstantes;
 import tcc.fatec.com.br.guiacomercialtcc.util.GeralUtil;
 import tcc.fatec.com.br.guiacomercialtcc.util.SessaoUtil;
 
@@ -252,10 +254,10 @@ public class EmpresaListaActivity extends AppCompatActivity {
     }
 
     private void abrir(EmpresaBuscaDTO dto) {
-      /*  Intent intent = new Intent(getApplicationContext(), EmpresaDetalhesActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EmpresaDetalhesActivity.class);
         intent.putExtra(ExtraConstantes.ID, dto.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        EmpresaListaActivity.this.startActivity(intent);*/
+        EmpresaListaActivity.this.startActivity(intent);
     }
 
     @Override
