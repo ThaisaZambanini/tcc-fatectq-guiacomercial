@@ -201,7 +201,7 @@ public class EscolherCidadeActivity extends AppCompatActivity {
     }
 
     public void createDialog() {
-        mDialog = new Dialog(EscolherCidadeActivity.this, android.R.style.Theme_Translucent_NoTitleBar);
+        mDialog = new Dialog(EscolherCidadeActivity.this, android.R.style.Theme_Translucent);
         mDialog.setContentView(R.layout.dialog);
         mDialog.setCancelable(false);
     }

@@ -13,6 +13,6 @@ public class CidadeSessaoActivity extends Fragment {
 
     public void inicializaCidadeSessao(Context context, View view) {
         CidadeDTO cidadeDTO = SessaoUtil.getCidade(context);
-       // ((TextView) view.findViewById(R.id.id_cidade_sessao)).setText(new StringBuilder(cidadeDTO.getNome()).append("-").append(cidadeDTO.getEstado()).toString());
+       ((TextView) view.findViewById(R.id.id_cidade_sessao)).setText(new StringBuilder(cidadeDTO.getNome()).append("-").append(cidadeDTO.getEstadoDTO().getNome()).toString());
     }
 }

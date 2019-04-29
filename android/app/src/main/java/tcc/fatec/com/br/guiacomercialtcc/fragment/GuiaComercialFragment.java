@@ -1,7 +1,6 @@
 package tcc.fatec.com.br.guiacomercialtcc.fragment;
 
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -49,9 +47,7 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
     private EditText edt_busca;
     private AppCompatImageButton btn_buscar;
     private ProgressBar progressBar;
-    private Dialog mDialog;
     private CardView card_nenhumResultado;
-    private LinearLayout layout_propaganda;
     private List<CategoriaDTO> listaCategoria;
 
     public GuiaComercialFragment() {
@@ -65,7 +61,6 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
         progressBar = view.findViewById(R.id.progresso);
 
         card_nenhumResultado = view.findViewById(R.id.card_nenhumResultado);
-        layout_propaganda = view.findViewById(R.id.layout_propaganda);
 
         inicializaCidadeSessao(getActivity(), view);
 
@@ -111,7 +106,6 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
             AlertDialog alert = builder.create();
             alert.show();
         } else {
-
             ParametroBuscaDTO dto = new ParametroBuscaDTO();
             dto.setTermo(termoBusca);
             SessaoUtil.setParametrosBusca(getContext(), dto);
@@ -120,15 +114,6 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
             startActivity(intent);
 
         }
-    }
-
-    public void openDialog() {
-        mDialog = new Dialog(getActivity(), android.R.style.Theme_Translucent);
-        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mDialog.setContentView(R.layout.dialog);
-        mDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        mDialog.setCancelable(false);
-        mDialog.show();
     }
 
     private void carregaListaCategoria(View view) {
@@ -140,9 +125,6 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
         Api api = ClientApi.getApi();
         CidadeDTO cidade = SessaoUtil.getCidade(getActivity());
         Call<List<CategoriaDTO>> call = api.findCategorias(cidade.getId());
-
-        openDialog();
-        CategoriaAdapter myAdapter = new CategoriaAdapter(getActivity(), listaCategoria);
 
         call.enqueue(new Callback<List<CategoriaDTO>>() {
             @Override
@@ -167,7 +149,6 @@ public class GuiaComercialFragment extends CidadeSessaoActivity implements Recyc
                         CategoriaAdapter myAdapter = new CategoriaAdapter(getActivity(), listaCategoria);
                         myAdapter.setRecyclerViewOnClickListenerHack(GuiaComercialFragment.this);
                         categoriaRecyclerView.setAdapter(myAdapter);
-                        mDialog.dismiss();
                         card_nenhumResultado.setVisibility(View.GONE);
                     }
                 } else {

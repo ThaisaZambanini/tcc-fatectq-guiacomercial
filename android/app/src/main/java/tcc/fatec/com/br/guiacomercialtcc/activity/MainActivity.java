@@ -2,10 +2,7 @@ package tcc.fatec.com.br.guiacomercialtcc.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Location;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,29 +13,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.yayandroid.locationmanager.LocationManager;
-import com.yayandroid.locationmanager.configuration.Configurations;
-import com.yayandroid.locationmanager.listener.LocationListener;
 
 import tcc.fatec.com.br.guiacomercialtcc.R;
 import tcc.fatec.com.br.guiacomercialtcc.commons.RecyclerViewOnClickListenerHack;
-import tcc.fatec.com.br.guiacomercialtcc.dto.GeoLocalizacaoDTO;
 import tcc.fatec.com.br.guiacomercialtcc.fragment.GuiaComercialFragment;
 import tcc.fatec.com.br.guiacomercialtcc.model.Usuario;
-import tcc.fatec.com.br.guiacomercialtcc.util.Constantes;
 import tcc.fatec.com.br.guiacomercialtcc.util.GeralUtil;
 import tcc.fatec.com.br.guiacomercialtcc.util.SessaoUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewOnClickListenerHack {
-    private static final int REQUEST_CHECK_SETTINGS = 0x1;
-    private LocationManager awesomeLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,73 +56,6 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.include, new GuiaComercialFragment());
         tx.commit();
-
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isAutorizaGPS = sharedPreferences.getBoolean(Constantes.CONFIG_PERMITE_GPS, true);
-
-        if (isAutorizaGPS) {
-
-            awesomeLocationManager = new LocationManager.Builder(getApplicationContext())
-                    .activity(this) // Only required to ask permission and/or GoogleApi - SettingsApi
-                    .configuration(Configurations.defaultConfiguration("ABC", "DEF"))
-                    .notify(new LocationListener() {
-                        @Override
-                        public void onProcessTypeChanged(int processType) {
-                        }
-
-                        @Override
-                        public void onLocationChanged(Location location) {
-                            handleNewLocation(location);
-                        }
-
-                        @Override
-                        public void onLocationFailed(int type) {
-                        }
-
-                        @Override
-                        public void onPermissionGranted(boolean alreadyHadPermission) {
-                        }
-
-                        @Override
-                        public void onStatusChanged(String provider, int status, Bundle extras) {
-                        }
-
-                        @Override
-                        public void onProviderEnabled(String provider) {
-                        }
-
-                        @Override
-                        public void onProviderDisabled(String provider) {
-                        }
-                    })
-                    .build();
-
-        } else {
-            handleNewLocation(null);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CHECK_SETTINGS:
-                switch (resultCode) {
-                    case RESULT_OK:
-                        SharedPreferences sharedPreferences =
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences.edit().putBoolean(Constantes.CONFIG_PERMITE_GPS, true).apply();
-                        break;
-                    case RESULT_CANCELED:
-                        SharedPreferences sharedPreferences2 =
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences2.edit().putBoolean(Constantes.CONFIG_PERMITE_GPS, false).apply();
-                        SessaoUtil.setGeoLocalizacao(getApplicationContext(), null);
-                        Log.e("Settings", "Result Cancel");
-                        break;
-                }
-                break;
-        }
     }
 
     @Override
@@ -222,38 +144,5 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClickListener(View view, int position) {
-    }
-
-    private void handleNewLocation(final Location location) {
-        if (location != null) {
-            SessaoUtil.setGeoLocalizacao(getApplicationContext(), new GeoLocalizacaoDTO(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())));
-        } else {
-            SessaoUtil.setGeoLocalizacao(getApplicationContext(), null);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (awesomeLocationManager != null) {
-            awesomeLocationManager.onResume();
-            awesomeLocationManager.get();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (awesomeLocationManager != null) {
-            awesomeLocationManager.onPause();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (awesomeLocationManager != null) {
-            awesomeLocationManager.onDestroy();
-        }
     }
 }

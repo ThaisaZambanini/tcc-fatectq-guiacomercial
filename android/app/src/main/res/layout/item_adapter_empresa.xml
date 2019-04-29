@@ -168,17 +168,6 @@
                 android:layout_marginRight="@dimen/fab_margin"
                 android:text="@string/saiba_mais" />
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_clubeVantagens_empresa"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_bg_white_border"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/ver_vantagens"
-                android:textColor="@color/red" />
-
         </LinearLayout>
 
     </LinearLayout>

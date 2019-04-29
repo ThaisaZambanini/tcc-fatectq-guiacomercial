@@ -182,11 +182,6 @@ public class EmpresaListaActivity extends AppCompatActivity {
         options.put("paginaAtual", PAGE_START);
         options.put("paginaLimite", Constantes.limitePagina);
 
-        if (geo != null && geo.isValid()) {
-            options.put("lat", geo.getLatitude());
-            options.put("lng", geo.getLongitude());
-        }
-
         if (parametros.getCategoria() != null && parametros.getCategoria() != 0) {
             options.put("idCategoria", parametros.getCategoria());
         }
@@ -203,7 +198,9 @@ public class EmpresaListaActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ClientEmpresaDTO body = response.body();
 
-                    listaEmpresas.addAll(body.getEmpresas());
+                    if (body.getEmpresas() != null) {
+                        listaEmpresas.addAll(body.getEmpresas());
+                    }
 
                     StringBuilder text_quantidade = new StringBuilder();
                     if (body.getTotal() > 0) {
