@@ -22,5 +22,4 @@ public class GuiaComercialWsApplication extends SpringBootServletInitializer {
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
-
 }

@@ -4,15 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import tcc.fatec.com.br.guiacomercialtcc.dto.CategoriaDTO;
-import tcc.fatec.com.br.guiacomercialtcc.dto.StatusEmpresaDTO;
-import tcc.fatec.com.br.guiacomercialtcc.dto.VantagemDTO;
 
 public class Empresa implements Serializable {
 
     private Long id;
     private String nome;
     private CategoriaDTO categoria;
-    private String linkFoneja;
     private String linkSite;
     private String linkFacebook;
     private String linkInstagram;
@@ -21,17 +18,10 @@ public class Empresa implements Serializable {
     private String logo;
 
     private Endereco endereco;
-    private String distancia;
-    private boolean clubeVantagens;
 
-    private StatusEmpresaDTO status;
     private List<TelefoneDTO> telefones;
     private List<Horario> horarios;
     private List<Cartao> cartoes;
-
-    private List<Imagem> fotos;
-
-    private List<VantagemDTO> vantagens;
 
     private String maisInformacoes;
 
@@ -57,14 +47,6 @@ public class Empresa implements Serializable {
 
     public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
-    }
-
-    public String getLinkFoneja() {
-        return linkFoneja;
-    }
-
-    public void setLinkFoneja(String linkFoneja) {
-        this.linkFoneja = linkFoneja;
     }
 
     public String getLinkSite() {
@@ -115,30 +97,6 @@ public class Empresa implements Serializable {
         this.endereco = endereco;
     }
 
-    public String getDistancia() {
-        return distancia;
-    }
-
-    public void setDistancia(String distancia) {
-        this.distancia = distancia;
-    }
-
-    public boolean isClubeVantagens() {
-        return clubeVantagens;
-    }
-
-    public void setClubeVantagens(boolean clubeVantagens) {
-        this.clubeVantagens = clubeVantagens;
-    }
-
-    public StatusEmpresaDTO getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEmpresaDTO status) {
-        this.status = status;
-    }
-
     public List<TelefoneDTO> getTelefones() {
         return telefones;
     }
@@ -155,28 +113,12 @@ public class Empresa implements Serializable {
         this.horarios = horarios;
     }
 
-    public List<Imagem> getFotos() {
-        return fotos;
-    }
-
-    public void setFotos(List<Imagem> fotos) {
-        this.fotos = fotos;
-    }
-
     public List<Cartao> getCartoes() {
         return cartoes;
     }
 
     public void setCartoes(List<Cartao> cartoes) {
         this.cartoes = cartoes;
-    }
-
-    public List<VantagemDTO> getVantagens() {
-        return vantagens;
-    }
-
-    public void setVantagens(List<VantagemDTO> vantagens) {
-        this.vantagens = vantagens;
     }
 
     public String getLinkTwitter() {

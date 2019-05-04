@@ -145,30 +145,6 @@
                                 android:textColor="@color/white"
                                 android:theme="@style/BotaoPrimario" />
 
-                            <android.support.v7.widget.AppCompatButton
-                                android:id="@+id/estabelecimento_statusAberto"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:enabled="false"
-                                android:text="Aberto Agora"
-                                android:theme="@style/BotaoTextoSucesso"
-                                android:visibility="gone" />
-
-                            <android.support.v7.widget.AppCompatButton
-                                android:id="@+id/estabelecimento_statusFechado"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
-                                android:enabled="false"
-                                android:text="Fechado Agora"
-                                android:theme="@style/BotaoTextoAtencao"
-                                android:visibility="gone" />
-
                         </LinearLayout>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>

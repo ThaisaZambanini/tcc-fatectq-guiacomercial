@@ -1,5 +1,7 @@
 package com.fatec.tcc.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -37,13 +39,27 @@ public class EmpresaController {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
-	@GetMapping("/categoria")
-	public ResponseEntity<EmpresaDTO> getEmpresaPorCategoria(
+	@GetMapping("/busca")
+	public ResponseEntity<EmpresaDTO> getEmpresaPorCategoriaTermo(
 			@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade,
-			@RequestParam("idCategoria") Long idCategoria, int paginaAtual, int paginaLimite) {
+			@RequestParam("idCategoria") Optional<Long> idCategoria, @RequestParam("termo") Optional<String> termo,
+			@RequestParam("paginaAtual") int paginaAtual, @RequestParam("paginaLimite") int paginaLimite) {
 		EmpresaDTO dto = null;
-		dto = empresaRepository.findAllPorCategoria(idCategoria, paginaAtual, paginaLimite);
+		dto = empresaRepository.findAllPorCategoriaTermo(idCategoria.isPresent() ? idCategoria.get() : null,
+				termo.isPresent() ? termo.get() : org.apache.commons.lang3.StringUtils.EMPTY, paginaAtual,
+				paginaLimite);
 		return ResponseEntity.ok().body(dto);
+	}
+
+	@GetMapping("/empresa/")
+	public ResponseEntity<Empresa> getEmpresaPorId(@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade,
+			@RequestParam("id") Optional<Long> id) {
+		Empresa empresa = empresaRepository.findById(id.get())
+				.orElseThrow(() -> new ResourceNotFoundException("Empresa não encontrada :: " + id));
+		if (empresa != null) {
+			return ResponseEntity.ok().body(empresa);
+		}
+		return new ResponseEntity<Empresa>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")

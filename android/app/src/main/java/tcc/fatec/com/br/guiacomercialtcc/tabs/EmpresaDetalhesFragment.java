@@ -3,7 +3,6 @@ package tcc.fatec.com.br.guiacomercialtcc.tabs;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,11 +13,9 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +31,6 @@ import tcc.fatec.com.br.guiacomercialtcc.dto.CidadeDTO;
 import tcc.fatec.com.br.guiacomercialtcc.model.Empresa;
 import tcc.fatec.com.br.guiacomercialtcc.model.Endereco;
 import tcc.fatec.com.br.guiacomercialtcc.model.TelefoneDTO;
-import tcc.fatec.com.br.guiacomercialtcc.model.Usuario;
 import tcc.fatec.com.br.guiacomercialtcc.to.BotaoAcaoTO;
 import tcc.fatec.com.br.guiacomercialtcc.util.SessaoUtil;
 
@@ -73,9 +69,6 @@ public class EmpresaDetalhesFragment extends Fragment {
         final TextView txt_categoria = view.findViewById(R.id.text_categoria);
         btn_atualizar_dados = view.findViewById(R.id.btn_atualizar_dados);
 
-        final TextView estabelecimento_statusAberto = view.findViewById(R.id.estabelecimento_statusAberto);
-        final TextView estabelecimento_statusFechado = view.findViewById(R.id.estabelecimento_statusFechado);
-
         final Uri uri = Uri.parse(dto.getLogo());
         logo.setImageURI(uri);
 
@@ -95,21 +88,6 @@ public class EmpresaDetalhesFragment extends Fragment {
             txt_endereco_linha3.setText(endereco.getLinha3());
         } else {
             txt_endereco_linha3.setVisibility(View.GONE);
-        }
-
-        if (dto.getStatus() != null && dto.getStatus().getTexto() == null || StringUtils.isEmpty(dto.getStatus().getTexto())) {
-            estabelecimento_statusAberto.setVisibility(View.GONE);
-            estabelecimento_statusFechado.setVisibility(View.GONE);
-        } else {
-            if (dto.getStatus() != null && dto.getStatus().isAberto()) {
-                estabelecimento_statusAberto.setVisibility(View.VISIBLE);
-                estabelecimento_statusFechado.setVisibility(View.GONE);
-                estabelecimento_statusAberto.setText(dto.getStatus().getTexto());
-            } else {
-                estabelecimento_statusFechado.setVisibility(View.VISIBLE);
-                estabelecimento_statusAberto.setVisibility(View.GONE);
-                estabelecimento_statusFechado.setText(dto.getStatus().getTexto());
-            }
         }
 
         final List<BotaoAcaoTO> acoes = new ArrayList<>(0);
@@ -238,22 +216,9 @@ public class EmpresaDetalhesFragment extends Fragment {
                 sb.append("\n");
                 sb.append("\n");
                 sb.append("\n");
-                sb.append(EmpresaDetalhesFragment.dto.getLinkFoneja());
 
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, EmpresaDetalhesFragment.dto.getLinkFoneja());
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, sb.toString());
                 startActivity(Intent.createChooser(sharingIntent, "Compartilhar..."));
-            }
-        });
-
-        acoes.add(new BotaoAcaoTO(R.drawable.ic_map, getString(R.string.como_chegar)) {
-            @Override
-            public void onClick() {
-                String enderecoLocalizacao = dto.getEndereco().getLinha1() + ", " + cidadeSessao.getNome() + " - " + cidadeSessao.getEstadoDTO().getNome() + " - " + dto.getEndereco().getCep();
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + enderecoLocalizacao + "_system");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
             }
         });
 
