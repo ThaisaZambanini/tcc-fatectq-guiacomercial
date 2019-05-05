@@ -21,7 +21,7 @@ android {
         }
         local {
             dimension "api"
-            buildConfigField 'String', 'URL_API', '"http://192.168.0.4:8087/tcc-fatec-ws/api/"'
+            buildConfigField 'String', 'URL_API', '"http://192.168.1.103:8087/tcc-fatec-ws/api/"'
         }
         producao {
             dimension "api"

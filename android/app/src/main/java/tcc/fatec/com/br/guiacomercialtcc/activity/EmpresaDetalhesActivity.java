@@ -104,11 +104,11 @@ public class EmpresaDetalhesActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(count++).setIcon(tabIcons[0]);
 
-        if (!empresa.getHorarios().isEmpty()) {
+        if (empresa.getHorarios() != null && !empresa.getHorarios().isEmpty()) {
             tabLayout.getTabAt(count++).setIcon(tabIcons[1]);
         }
 
-        if (!empresa.getCartoes().isEmpty()) {
+        if (empresa.getCartoes() != null && !empresa.getCartoes().isEmpty()) {
             tabLayout.getTabAt(count++).setIcon(tabIcons[2]);
         }
     }

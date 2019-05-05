@@ -37,9 +37,7 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         EmpresaBuscaDTO dto = listaEmpresas.get(viewHolder.getAdapterPosition());
-        final Uri uri = Uri.parse(dto.getLogo());
 
-        viewHolder.mImage.setImageURI(uri);
         viewHolder.mNomeEmpresa.setText(dto.getNome());
         viewHolder.mCategoria.setText(dto.getCategoria().getNome());
         viewHolder.mEndereco1.setText(dto.getEndereco().getLinha1());
@@ -62,7 +60,6 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mImage;
         public TextView mNomeEmpresa;
         public TextView mEndereco1;
         public TextView mEndereco2;
@@ -75,7 +72,6 @@ public abstract class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            mImage = itemView.findViewById(R.id.image_empresa_categoria);
             mNomeEmpresa = itemView.findViewById(R.id.text_nome_empresa_categoria);
             mEndereco1 = itemView.findViewById(R.id.text_endereco1_categoria);
             mEndereco2 = itemView.findViewById(R.id.text_endereco2_categoria);
