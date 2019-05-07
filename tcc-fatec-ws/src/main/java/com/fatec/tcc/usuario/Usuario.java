@@ -5,20 +5,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "tb_usuario", schema = "dbguiacomercial")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dbguiacomercial.sq_usuario")
+	@SequenceGenerator(name = "dbguiacomercial.sq_usuario", sequenceName = "dbguiacomercial.sq_usuario", initialValue = 1, allocationSize = 1)
+	@Column(name = "co_seq_usuario", nullable = false)
+	@JsonIgnore
 	private Long id;
 
+	@Column(name = "nome", nullable = false)
 	private String nome;
 
+	@Column(name = "sobrenome", nullable = false)
 	private String sobrenome;
 
+	@Column(name = "cpf", nullable = false)
+	private String cpf;
+
+	@Column(name = "email", nullable = false)
 	private String email;
 
-	private String token;
+	@Column(name = "senha", nullable = false)
+	private String senha;
 
 	public Long getId() {
 		return id;
@@ -52,12 +68,20 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getToken() {
-		return token;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
