@@ -6,7 +6,7 @@
     <!-- OUTROS -->
     <string name="formas_pagamento">Formas de Pagamento</string>
     <string name="trocarCidade">Trocar de Cidade</string>
-    <string name="mensagem_indiqueAmigo">Olá, já conhece o APP do Guia Fonejá? É um aplicativo bem completo com informações das empresas como: endereço, telefones, horários de atendimento, formas de pagamento aceita, localização e muito mais. Tem mais de 700 cidades do Brasil disponíveis para consultar as empresas. Também tem o Clube de Vantagens, onde você se cadastra e vê as Vantagens que as empresas estão oferecendo para os participantes do Clube. Instale agora mesmo, é gratuito. </string>
+    <string name="mensagem_indiqueAmigo">Olá, já conhece o APP Guia Comercial? É um aplicativo bem completo com informações das empresas como: endereço, telefones, horários de atendimento, formas de pagamento aceitas. Instale agora mesmo, é gratuito. </string>
     <string name="cadastre_empresa">Cadastre sua Empresa</string>
 
     <!-- ATUALIZA DADOS -->

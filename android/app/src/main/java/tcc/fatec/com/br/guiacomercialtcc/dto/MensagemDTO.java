@@ -2,22 +2,22 @@ package tcc.fatec.com.br.guiacomercialtcc.dto;
 
 public class MensagemDTO {
 
-    private String text;
-    private String title;
+    private String mensagem;
+    private String titulo;
 
-    public void setText(String msg) {
-        this.text = text;
+    public String getMensagem() {
+        return mensagem;
     }
 
-    public String getText() {
-        return text;
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }

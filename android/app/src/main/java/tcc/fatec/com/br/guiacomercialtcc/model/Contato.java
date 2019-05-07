@@ -10,11 +10,14 @@ public class Contato {
     @SerializedName("telefone")
     private String telefone;
 
-    @SerializedName("celular")
-    private String celular;
-
     @SerializedName("email")
     private String email;
+
+    @SerializedName("assunto")
+    private String assunto;
+
+    @SerializedName("mensagem")
+    private String mensagem;
 
     public String getNome() {
         return nome;
@@ -32,19 +35,27 @@ public class Contato {
         this.telefone = telefone;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public void setAssunto(String assunto) {
+        this.assunto = assunto;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 }

@@ -36,7 +36,6 @@ import tcc.fatec.com.br.guiacomercialtcc.util.SessaoUtil;
 
 public class EmpresaDetalhesFragment extends Fragment {
     private static Empresa dto;
-    private Button btn_atualizar_dados;
     final private static int PERMISSAO_CHAMADA = 0;
     private String linkPermissao;
     private long id;
@@ -67,7 +66,6 @@ public class EmpresaDetalhesFragment extends Fragment {
         final TextView txt_endereco_linha3 = view.findViewById(R.id.text_endereco3_categoria);
 
         final TextView txt_categoria = view.findViewById(R.id.text_categoria);
-        btn_atualizar_dados = view.findViewById(R.id.btn_atualizar_dados);
 
         final Uri uri = Uri.parse(dto.getLogo());
         logo.setImageURI(uri);
@@ -230,7 +228,6 @@ public class EmpresaDetalhesFragment extends Fragment {
             }
         });
         AppUtils.setListViewHeightBasedOnChildren(lv_contatos);
-        listenerButton();
         return view;
     }
 
@@ -274,15 +271,5 @@ public class EmpresaDetalhesFragment extends Fragment {
                 return;
             }
         }
-    }
-
-    private void listenerButton() {
-        btn_atualizar_dados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent i = new Intent(getActivity().getApplicationContext(), SolicitacaoAtualizacaoActivity.class);
-                //startActivity(i);
-            }
-        });
     }
 }

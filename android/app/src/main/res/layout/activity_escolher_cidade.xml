@@ -15,7 +15,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/padding"
-        app:srcCompat="@drawable/logo_foneja" />
+        app:srcCompat="@drawable/logo_colorido" />
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"

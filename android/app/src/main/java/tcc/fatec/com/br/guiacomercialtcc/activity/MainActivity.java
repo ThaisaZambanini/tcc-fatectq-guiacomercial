@@ -21,7 +21,9 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import tcc.fatec.com.br.guiacomercialtcc.R;
 import tcc.fatec.com.br.guiacomercialtcc.commons.RecyclerViewOnClickListenerHack;
+import tcc.fatec.com.br.guiacomercialtcc.fragment.ContatoFragment;
 import tcc.fatec.com.br.guiacomercialtcc.fragment.GuiaComercialFragment;
+import tcc.fatec.com.br.guiacomercialtcc.fragment.IndiqueAppFragment;
 import tcc.fatec.com.br.guiacomercialtcc.model.Usuario;
 import tcc.fatec.com.br.guiacomercialtcc.util.GeralUtil;
 import tcc.fatec.com.br.guiacomercialtcc.util.SessaoUtil;
@@ -95,22 +97,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_guiaComercial) {
             fragment = new GuiaComercialFragment();
-        } else if (id == R.id.nav_clubeVantagens) {
-            Usuario usuario = SessaoUtil.getUsuario(getApplicationContext());
-            /*if (usuario != null && usuario.isLembrarLogin()) {
-                fragment = ClubeInicioFragment.newInstance(false);
-            } else {
-                fragment = ClubeLoginFragment.newInstance(false);
-            }*/
         } else if (id == R.id.nav_indicar) {
-            //  fragment = new IndiqueAppFragment();
+            fragment = new IndiqueAppFragment();
         } else if (id == R.id.nav_cadastrarEmpresa) {
             // fragment = new CadastroEmpresaFragment();
         } else if (id == R.id.nav_contato) {
-            //  fragment = new ContatoFragment();
-        } else if (id == R.id.nav_settings) {
-            // startActivity(new Intent(MainActivity.this, ConfiguracaoActivity.class));
-            finish();
+            fragment = new ContatoFragment();
         } else if (id == R.id.nav_trocar) {
             new AlertDialog.Builder(this)
                     .setTitle(getText(R.string.trocarCidade))

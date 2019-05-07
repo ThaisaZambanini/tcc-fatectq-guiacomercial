@@ -18,12 +18,10 @@ public class HorarioCustomAdapter extends RecyclerView.Adapter<HorarioCustomAdap
 
     private Context mContext;
     private List<Horario> listaHorario;
-    private Resources resources;
 
     public HorarioCustomAdapter(Context mContext, List<Horario> listaHorario, Resources resources) {
         this.mContext = mContext;
         this.listaHorario = listaHorario;
-        this.resources = resources;
     }
 
     @NonNull
@@ -38,11 +36,7 @@ public class HorarioCustomAdapter extends RecyclerView.Adapter<HorarioCustomAdap
         Horario horario = listaHorario.get(holder.getAdapterPosition());
 
         holder.diaSemana.setText(horario.getDiaSemana());
-        holder.horario.setText(horario.getTexto());
-
-        if (horario.isSelecionado()) {
-            holder.diaSemana.setTextColor(resources.getColor(R.color.colorAccent));
-        }
+        holder.horario.setText(horario.getHorario());
     }
 
     @Override

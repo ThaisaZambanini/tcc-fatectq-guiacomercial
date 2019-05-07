@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <FrameLayout
-                android:layout_width="100dp"
+                android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center">
 
@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/logo_branco" />
+                    android:background="@drawable/logo_bar" />
             </FrameLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

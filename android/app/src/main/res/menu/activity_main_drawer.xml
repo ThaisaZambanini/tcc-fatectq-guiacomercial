@@ -14,10 +14,7 @@
             android:id="@+id/nav_cadastrarEmpresa"
             android:icon="@drawable/ic_card_travel"
             android:title="@string/cadastre_empresa" />
-        <item
-            android:id="@+id/nav_clubeVantagens"
-            android:icon="@drawable/ic_clube_vantagem"
-            android:title="@string/clube_vantagens" />
+
         <item
             android:id="@+id/nav_contato"
             android:icon="@drawable/ic_mail"
@@ -36,11 +33,6 @@
             android:id="@+id/nav_indicar"
             android:icon="@drawable/ic_share"
             android:title="@string/indique_app" />
-
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/configuracoes" />
 
     </group>
 
