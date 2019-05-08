@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Usuario } from "../model/user.model";
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
@@ -20,9 +20,7 @@ export class UserService {
     params.set('cpf', cpf);
     params.set('senha', senha);
 
-    return this.http.get<Usuario>(this.baseUrl + "/autenticar", {params: params}).toPromise()
-        .then(response => response)
-        .catch(err => console.log(err));
+    return this.http.get<Usuario>(this.baseUrl + "/autenticar?cpf=" + cpf + "&senha=" + senha, {headers: headers});
   }
 
 }

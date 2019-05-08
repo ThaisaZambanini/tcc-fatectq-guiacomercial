@@ -19,13 +19,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		Query query = em.createQuery(sb.toString(), Usuario.class);
 		query.setParameter("cpf", cpf);
-		Usuario usuario = (Usuario) query.getSingleResult();
+		try {
+			Usuario usuario = (Usuario) query.getSingleResult();
 
-		String senhaDecriptografada = GeralUtil.descriptografiaBase64Decoder(usuario.getSenha());
-		if (senhaDecriptografada.equals(senha)) {
-			return usuario;
+			String senhaDecriptografada = GeralUtil.descriptografiaBase64Decoder(usuario.getSenha());
+			if (senhaDecriptografada.equals(senha)) {
+				return usuario;
+			}
+		} catch (Exception e) {
+			return null;
 		}
-
 		return null;
 	}
 
