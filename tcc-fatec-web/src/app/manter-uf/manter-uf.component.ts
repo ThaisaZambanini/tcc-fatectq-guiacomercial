@@ -5,8 +5,7 @@ import { EstadoService } from "../service/estado.service";
 
 @Component({
   selector: 'app-manter-uf',
-  templateUrl: './manter-uf.component.html',
-  styleUrls: ['./manter-uf.component.scss']
+  templateUrl: './manter-uf.component.html'
 })
 export class ManterUfComponent implements OnInit {
   estados: Estado[];
@@ -18,7 +17,7 @@ export class ManterUfComponent implements OnInit {
 
   //Método inicial, é chamado no carregamento da página
   ngOnInit() {
-    this.estadoService.getEstados().subscribe((data: {}) => {
+    this.estadoService.getEstados().subscribe((data) => {
       this.estados = data;
 
       if (this.estados.length === 0) {
@@ -27,6 +26,10 @@ export class ManterUfComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  addEstado() {
+    this.router.navigate(['add-uf']);
   }
 
 }

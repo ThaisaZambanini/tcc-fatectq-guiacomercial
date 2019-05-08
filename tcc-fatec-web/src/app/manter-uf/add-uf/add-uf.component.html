@@ -6,13 +6,28 @@
         Cadastrar/Alterar Estado
       </span>
     </h3>
-    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="nome" formControlName="nome" placeholder="Nome" name="nome" class="form-control" id="nome">
-      </div>
+    <div class="padding--vertical">
+      <ng-flash-message></ng-flash-message>
+      <form class="form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="id" class="d-none">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome:</label>
+            <input type="nome" formControlName="nome" placeholder="Nome" name="nome" class="form-control" id="nome">
+          </div>
+        </div>
 
-      <button class="btn btn-success">Salvar</button>
-    </form>
+        <div class="row margin--vertical">
+          <div class="col-md-1">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-warning" type="button" (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
   </div>
 </div>

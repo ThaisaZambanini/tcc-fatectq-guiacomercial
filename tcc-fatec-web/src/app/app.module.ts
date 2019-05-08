@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {routing} from "./app.routing";
-import {AuthenticationService} from "./service/auth.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { HttpModule } from '@angular/http';
@@ -18,6 +17,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {NgxMaskModule} from 'ngx-mask';
 import { ManterUfComponent } from './manter-uf/manter-uf.component';
 import { AdicionarUfComponent } from './manter-uf/add-uf/add-uf.component';
+import { NgFlashMessagesModule } from 'ng-flash-messages';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,10 @@ import { AdicionarUfComponent } from './manter-uf/add-uf/add-uf.component';
     HttpClientModule,
     NgxPaginationModule,
     NgxMaskModule.forRoot(),
-    HttpModule
+    HttpModule,
+    NgFlashMessagesModule.forRoot()
   ],
-  providers: [AuthenticationService, UserService, EstadoService],
+  providers: [UserService, EstadoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

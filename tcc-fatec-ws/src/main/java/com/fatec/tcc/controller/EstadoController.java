@@ -36,17 +36,31 @@ public class EstadoController {
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
-	public ResponseEntity<Estado> newUsuario(@RequestBody @Validated Estado estado) {
-		Estado estadoSalvo = estadoRepository.save(estado);
-		if (estadoSalvo != null) {
-			return new ResponseEntity<Estado>(estadoSalvo, HttpStatus.OK);
+	public ResponseEntity<MensagemRetorno> newUsuario(@RequestBody @Validated Estado estado) {
+		if (estadoRepository.findEstadoExiste(estado.getNome()) > 0) {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setCodigoRetorno(1);
+			retorno.setMensagem("Estado " + estado.getNome() + " já existe!");
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
-			return new ResponseEntity<Estado>(HttpStatus.INTERNAL_SERVER_ERROR);
+			Estado estadoSalvo = estadoRepository.save(estado);
+			if (estadoSalvo != null) {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Registro salvo com sucesso!");
+				retorno.setCodigoRetorno(0);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Falha ao salvar o registro!");
+				retorno.setCodigoRetorno(1);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}
 	}
 
-	@PutMapping("/alterar")
-	public ResponseEntity<Estado> updateUser(@Validated @RequestBody Estado estado) throws ResourceNotFoundException {
+	@PutMapping("/alterar/{id}")
+	public ResponseEntity<Estado> updateUser(@Validated @RequestBody Estado estado,
+			@PathVariable(value = "id") Long estadoId) throws ResourceNotFoundException {
 		Estado estadoBanco = estadoRepository.findById(estado.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + estado.getId()));
 		estadoBanco.setNome(estado.getNome());
@@ -55,7 +69,7 @@ public class EstadoController {
 	}
 
 	@DeleteMapping("/deletar/{id}")
-	public MensagemRetorno deleteUser(@PathVariable(value = "idEstado") Long estadoId) {
+	public MensagemRetorno deleteUser(@PathVariable(value = "id") Long estadoId) {
 		try {
 			Estado estado = estadoRepository.findById(estadoId)
 					.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + estadoId));
