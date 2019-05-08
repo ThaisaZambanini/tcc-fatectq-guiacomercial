@@ -1,0 +1,33 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Estados
+      </span>
+    </h3>
+    <div *ngIf="!nenhumResultado" class="table-responsive">
+      <table class="table table-striped margin--top-3x">
+        <thead>
+          <tr>
+            <th class="hidden">Id</th>
+            <th>Sigla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let estado of estados | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+            <td class="hidden">{{estado.id}}</td>
+            <td>{{estado.nome}}</td>
+            <td><button class="btn btn-danger" (click)="deletarEstado(user)"> Excluir</button>
+              <button class="btn btn-primary" (click)="editarEstado(user)" style="margin-left: 20px;"> Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+    </div>
+    <p *ngIf="nenhumResultado">Nenhum resultado!</p>
+    <div class="text-right">
+      <button class="btn btn-primary margin--vertical" (click)="addUser()"> Adicionar</button>
+    </div>
+  </div>
+</div>

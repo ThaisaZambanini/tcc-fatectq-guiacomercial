@@ -12,10 +12,12 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import {ListUserComponent} from "./list-user/list-user.component";
 import {UserService} from "./service/user.service";
+import {EstadoService} from "./service/estado.service";
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgxMaskModule} from 'ngx-mask';
+import { ManterUfComponent } from './manter-uf/manter-uf.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {NgxMaskModule} from 'ngx-mask';
     AddUserComponent,
     EditUserComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    ManterUfComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import {NgxMaskModule} from 'ngx-mask';
     NgxMaskModule.forRoot(),
     HttpModule
   ],
-  providers: [AuthenticationService, UserService],
+  providers: [AuthenticationService, UserService, EstadoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
