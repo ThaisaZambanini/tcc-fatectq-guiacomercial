@@ -1,0 +1,18 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Cadastrar/Alterar Estado
+      </span>
+    </h3>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="nome" formControlName="nome" placeholder="Nome" name="nome" class="form-control" id="nome">
+      </div>
+
+      <button class="btn btn-success">Salvar</button>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {routing} from "./app.routing";
@@ -18,6 +17,7 @@ import { MenuComponent } from './menu/menu.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgxMaskModule} from 'ngx-mask';
 import { ManterUfComponent } from './manter-uf/manter-uf.component';
+import { AdicionarUfComponent } from './manter-uf/add-uf/add-uf.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { ManterUfComponent } from './manter-uf/manter-uf.component';
     EditUserComponent,
     HomeComponent,
     MenuComponent,
-    ManterUfComponent
+    ManterUfComponent,
+    AdicionarUfComponent
   ],
   imports: [
     BrowserModule,

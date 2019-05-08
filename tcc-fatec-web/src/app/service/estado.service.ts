@@ -14,7 +14,8 @@ export class EstadoService {
     return this.http.get<Estado>(this.baseUrl + "/");
   }
 
-  adicionarEstado(estado: Estado) {
+  adicionarEstado(estado: Estado): Observable<Estado> {
+    return this.http.post<Estado>(this.baseUrl + "/adicionar", estado);
   }
 
 }

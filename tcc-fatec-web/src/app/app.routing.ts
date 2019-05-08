@@ -5,6 +5,7 @@ import {ListUserComponent} from "./list-user/list-user.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import { HomeComponent } from './home/home.component';
 import { ManterUfComponent } from './manter-uf/manter-uf.component';
+import { AdicionarUfComponent } from './manter-uf/add-uf/add-uf.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },
-  { path: 'manter-uf', component: ManterUfComponent }
+  { path: 'manter-uf', component: ManterUfComponent },
+    { path: 'add-uf', component: AdicionarUfComponent }
 ];
 
 export const routing = RouterModule.forRoot(routes);
