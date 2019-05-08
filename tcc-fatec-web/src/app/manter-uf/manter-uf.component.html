@@ -25,7 +25,7 @@
       </table>
       <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
     </div>
-    <p *ngIf="nenhumResultado">Nenhum resultado!</p>
+    <p *ngIf="nenhumResultado" class="padding--vertical-3x">Nenhum resultado!</p>
     <div class="text-right">
       <button class="btn btn-primary margin--vertical" (click)="addUser()"> Adicionar</button>
     </div>
