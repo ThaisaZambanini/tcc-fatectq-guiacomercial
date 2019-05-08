@@ -19,8 +19,8 @@ export class ManterUfComponent implements OnInit {
   //Método inicial, é chamado no carregamento da página
   ngOnInit() {
     this.estadoService.getEstados().subscribe((data: {}) => {
-      this.estados = [];
-      console.log(this.estados);
+      this.estados = data;
+
       if (this.estados.length === 0) {
         this.nenhumResultado = true;
       }

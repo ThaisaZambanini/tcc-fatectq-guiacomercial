@@ -18,15 +18,18 @@ export class AdicionarUfComponent implements OnInit {
   ngOnInit() {
 
     this.addForm = this.formBuilder.group({
-      id: [],
       nome: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    this.estadoService.adicionarEstado(this.addForm.value)
+    if (this.addForm.invalid) {
+      return;
+    }
+
+    this.estadoService.adicionarEstado(new Estado().deserialize(this.addForm.value))
       .subscribe(data => {
+        console.log(data);
       });
   }
-
 }
