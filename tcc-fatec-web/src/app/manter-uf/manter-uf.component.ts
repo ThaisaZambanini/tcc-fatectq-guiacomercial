@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+/**DOM - Modelo de dados*/
 import { Estado } from "../model/uf.model";
+/**LIB DE ROTAS*/
 import { Router } from "@angular/router";
+/**SERVICE DE ESTADO - API - SERVIÇO*/
 import { EstadoService } from "../service/estado.service";
+/**MOSTRAR MENSAGEM*/
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
