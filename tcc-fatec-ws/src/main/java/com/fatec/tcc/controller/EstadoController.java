@@ -1,6 +1,7 @@
 package com.fatec.tcc.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -35,6 +36,17 @@ public class EstadoController {
 		return ResponseEntity.ok().body(lista);
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<Estado> getEstado(@PathVariable(value = "id") Long estadoId) {
+		Optional<Estado> estado = estadoRepository.findById(estadoId);
+		if (estado.isPresent()) {
+			return ResponseEntity.ok().body(estado.get());
+		}
+
+		return ResponseEntity.ok().body(null);
+
+	}
+
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> newUsuario(@RequestBody @Validated Estado estado) {
 		if (estadoRepository.findEstadoExiste(estado.getNome()) > 0) {
@@ -59,24 +71,45 @@ public class EstadoController {
 	}
 
 	@PutMapping("/alterar/{id}")
-	public ResponseEntity<Estado> updateUser(@Validated @RequestBody Estado estado,
-			@PathVariable(value = "id") Long estadoId) throws ResourceNotFoundException {
-		Estado estadoBanco = estadoRepository.findById(estado.getId())
-				.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + estado.getId()));
-		estadoBanco.setNome(estado.getNome());
-		final Estado alteracaoEstado = estadoRepository.save(estadoBanco);
-		return ResponseEntity.ok(alteracaoEstado);
+	public ResponseEntity<MensagemRetorno> updateUser(@Validated @RequestBody Estado estado,
+			@PathVariable(value = "id") Long estadoId) {
+		Optional<Estado> optional = estadoRepository.findById(estado.getId());
+		if (optional.isPresent()) {
+			Estado estadoBanco = optional.get();
+			estadoBanco.setNome(estado.getNome());
+			final Estado alteracaoEstado = estadoRepository.save(estadoBanco);
+			if (alteracaoEstado != null) {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Registro salvo com sucesso!");
+				retorno.setCodigoRetorno(0);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Falha ao salvar o registro!");
+				retorno.setCodigoRetorno(1);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setMensagem("Registro não encontrado!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@DeleteMapping("/deletar/{id}")
-	public MensagemRetorno deleteUser(@PathVariable(value = "id") Long estadoId) {
+	public ResponseEntity<MensagemRetorno> deleteUser(@PathVariable(value = "id") Long estadoId) {
 		try {
 			Estado estado = estadoRepository.findById(estadoId)
 					.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + estadoId));
 			estadoRepository.delete(estado);
-			return new MensagemRetorno("Atenção", "Estado foi removido com sucesso!");
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Estado foi removido com sucesso!");
+			retorno.setCodigoRetorno(0);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
-			return new MensagemRetorno("Atenção", "Não foi possível remover o Estado!");
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Não foi possível remover o Estado!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

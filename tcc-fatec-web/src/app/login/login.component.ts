@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
   invalidLogin: boolean = false;
+  loading: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private router: Router, public service: UserService, ) { }
 
   ngOnInit() {
@@ -29,11 +31,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
+    this.loading = true;
     const cpf = this.loginForm.controls.cpf.value;
     const senha = this.loginForm.controls.senha.value;
     this.service.getUsuarioAutenticado(cpf, senha).subscribe((data: {}) => {
       if (data) {
+        this.loading = false;
         var resp = JSON.parse(JSON.stringify(data));
         if (resp.codigoRetorno === 0) {
           this.router.navigate(['home']);
@@ -45,6 +48,7 @@ export class LoginComponent implements OnInit {
       }
     }, (err) => {
       console.log(err);
+      this.loading = false;
       this.invalidLogin = true;
     });
   }

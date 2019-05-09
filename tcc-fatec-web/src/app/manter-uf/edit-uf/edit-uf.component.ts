@@ -7,21 +7,34 @@ import { EstadoService } from "../../service/estado.service";
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
-  selector: 'app-add-uf',
-  templateUrl: './add-uf.component.html'
+  selector: 'app-edit-uf',
+  templateUrl: './edit-uf.component.html'
 })
-export class AdicionarUfComponent implements OnInit {
+export class AlterarUfComponent implements OnInit {
   addForm: FormGroup;
   submitted: boolean = false;
-  loading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private estadoService: EstadoService, private ngFlashMessageService: NgFlashMessageService) { }
 
   //Método inicial, é chamado no carregamento da página
   ngOnInit() {
     this.addForm = this.formBuilder.group({
+      id: [],
       nome: ['', Validators.required]
     });
+
+    const editEstadoId = localStorage.getItem("editEstadoId");
+    localStorage.removeItem("editEstadoId");
+    if (!editEstadoId) {
+      this.router.navigate(['manter-uf']);
+      return;
+    } else {
+      this.estadoService.getEstado(editEstadoId)
+        .subscribe(data => {
+          console.log(data)
+          this.addForm.setValue(data);
+        });
+    }
   }
 
   voltar() {
@@ -34,21 +47,20 @@ export class AdicionarUfComponent implements OnInit {
     //verifica se tem campos em brancos
     if (this.addForm.invalid) {
       this.ngFlashMessageService.showFlashMessage({
-        messages: ["Campo obrigatório não preenchido!"],
+        messages: ["Dados inválidos!"],
         dismissible: true,
         timeout: false,
         type: 'danger'
       });
       return;
     }
-    this.loading = true;
 
     const estado = new Estado().deserialize(this.addForm.value);
-    // chama o serviço para adicionar os dados
-    this.estadoService.adicionarEstado(estado)
+    console.log(estado)
+    this.estadoService.alterarEstado(estado)
       .subscribe(data => {
         var res = JSON.parse(JSON.stringify(data));
-        this.loading = false;
+        console.log(data)
         if (res.codigoRetorno === 0) {
           this.ngFlashMessageService.showFlashMessage({
             messages: [res.mensagem],
@@ -56,11 +68,7 @@ export class AdicionarUfComponent implements OnInit {
             timeout: false,
             type: 'success'
           });
-          this.addForm.reset();
-          for (const key in this.addForm.controls) {
-            this.addForm.get(key).clearValidators();
-            this.addForm.get(key).updateValueAndValidity();
-          }
+          this.router.navigate(['manter-uf']);
         } else {
           if (data != null) {
             this.ngFlashMessageService.showFlashMessage({
@@ -72,7 +80,6 @@ export class AdicionarUfComponent implements OnInit {
           }
         }
       }, (err) => {
-        this.loading = false;
         var res = JSON.parse(JSON.stringify(err));
         this.ngFlashMessageService.showFlashMessage({
           messages: [res.error.mensagem || "Falha ao salvar!"],
@@ -81,6 +88,5 @@ export class AdicionarUfComponent implements OnInit {
           type: 'danger'
         });
       });
-
   }
 }

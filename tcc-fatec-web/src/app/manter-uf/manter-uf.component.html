@@ -7,6 +7,7 @@
       </span>
     </h3>
     <div class="w25">
+      <ng-flash-message></ng-flash-message>
       <div *ngIf="!nenhumResultado" class="table-responsive">
         <table class="table table-striped margin--top-3x">
           <thead>
@@ -22,7 +23,7 @@
               <td>{{estado.nome}}</td>
               <td>
                 <button class="btn btn-primary" (click)="editarEstado(estado)"> Editar</button>
-                <button class="btn btn-danger" (click)="deletarEstado(estado)" style="margin-left: 20px;"> Excluir</button></td>
+                <button class="btn btn-danger" (click)="excluirEstado(estado)" style="margin-left: 20px;"> Excluir</button></td>
             </tr>
           </tbody>
         </table>
@@ -33,5 +34,6 @@
     <div class="text-right">
       <button class="btn btn-primary margin--vertical" (click)="addEstado()"> Adicionar</button>
     </div>
+      <ngx-loading [show]="loading"></ngx-loading>
   </div>
 </div>

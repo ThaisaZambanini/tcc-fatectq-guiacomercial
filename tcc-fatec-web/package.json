@@ -25,6 +25,7 @@
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "ng-flash-messages": "^0.3.0",
+    "ngx-loading": "^3.0.1",
     "ngx-mask": "^7.9.8",
     "ngx-pagination": "^3.2.1",
     "popper.js": "^1.14.7",
