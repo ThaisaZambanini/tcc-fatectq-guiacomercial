@@ -33,6 +33,9 @@ import { AlterarUfComponent } from './manter-uf/edit-uf/edit-uf.component';
 import { ManterFormaPagamentoComponent } from './manter-forma-pagamento/manter-forma-pagamento.component';
 import { AdicionarPagamentoComponent } from './manter-forma-pagamento/add-forma-pagamento/add-forma-pagamento.component';
 import { AlterarFormaPagamentoComponent } from './manter-forma-pagamento/edit-forma-pagamento/edit-forma-pagamento.component';
+import { ManterCidadeComponent } from './manter-cidade/manter-cidade.component';
+import { AdicionarCidadeComponent } from './manter-cidade/add-cidade/add-cidade.component';
+import { EditCidadeComponent } from './manter-cidade/edit-cidade/edit-cidade.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { AlterarFormaPagamentoComponent } from './manter-forma-pagamento/edit-fo
     AlterarUfComponent,
     ManterFormaPagamentoComponent,
     AdicionarPagamentoComponent,
-    AlterarFormaPagamentoComponent
+    AlterarFormaPagamentoComponent,
+    ManterCidadeComponent,
+    AdicionarCidadeComponent,
+    EditCidadeComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,10 @@ import { ManterFormaPagamentoComponent } from './manter-forma-pagamento/manter-f
 import { AdicionarPagamentoComponent } from './manter-forma-pagamento/add-forma-pagamento/add-forma-pagamento.component';
 import { AlterarFormaPagamentoComponent } from './manter-forma-pagamento/edit-forma-pagamento/edit-forma-pagamento.component';
 
+import { ManterCidadeComponent } from './manter-cidade/manter-cidade.component';
+import { AdicionarCidadeComponent } from './manter-cidade/add-cidade/add-cidade.component';
+import { EditCidadeComponent } from './manter-cidade/edit-cidade/edit-cidade.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: 'home', component: HomeComponent },
@@ -22,7 +26,10 @@ const routes: Routes = [
   { path: 'edit-uf', component: AlterarUfComponent },
   { path: 'manter-forma-pagamento', component: ManterFormaPagamentoComponent },
   { path: 'add-forma-pagamento', component: AdicionarPagamentoComponent },
-  { path: 'edit-forma-pagamento', component: AlterarFormaPagamentoComponent }
+  { path: 'edit-forma-pagamento', component: AlterarFormaPagamentoComponent },
+  { path: 'manter-cidade', component: ManterCidadeComponent },
+  { path: 'add-cidade', component: AdicionarCidadeComponent },
+  { path: 'edit-cidade', component: EditCidadeComponent }
 ];
 
 export const routing = RouterModule.forRoot(routes);
