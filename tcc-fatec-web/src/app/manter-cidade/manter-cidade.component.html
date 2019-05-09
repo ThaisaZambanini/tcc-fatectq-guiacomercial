@@ -1,3 +1,48 @@
-<p>
-  manter-cidade works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Cidade
+      </span>
+    </h3>
+    <div class="w25">
+
+      <ng-flash-message></ng-flash-message>
+
+      <form class="" action="index.html" method="post">
+        <div *ngIf="!nenhumResultado" class="table-responsive">
+          <table class="table table-striped margin--top-3x">
+            <thead>
+              <tr>
+                <th class="hidden w-25">Id</th>
+                <th class="w-25">Nome</th>
+                <th class="w-10">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cidade of cidades | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+                <td class="hidden">{{cidade.id}}</td>
+                <td>{{cidade.nome}}</td>
+                <td>
+                  <button class="btn btn-primary" type="button" (click)="editarCidade(cidade)"> Editar</button>
+                  <button class="btn btn-danger" type="button" (click)="excluirCidade(cidade)" style="margin-left: 20px;"> Excluir</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+        </div>
+      </form>
+
+    </div>
+
+    <p *ngIf="nenhumResultado" class="padding--vertical-3x">Nenhum resultado!</p>
+
+    <div class="text-right">
+      <button class="btn btn-primary margin--vertical" (click)="addCidade()"> Adicionar</button>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>
+
+  </div>
+</div>

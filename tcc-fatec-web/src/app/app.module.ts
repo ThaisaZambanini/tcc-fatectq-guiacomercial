@@ -10,7 +10,10 @@ import { HttpModule } from '@angular/http';
 /**SERVICES*/
 import { UserService } from "./service/user.service";
 import { EstadoService } from "./service/estado.service";
+import { CidadeService } from "./service/cidade.service";
 import { FormaPagamentoService } from "./service/forma-pagamento.service";
+import { CategoriaService } from "./service/categoria.service";
+import { EmpresaService } from "./service/empresa.service";
 
 /**LIBS*/
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -37,6 +40,14 @@ import { ManterCidadeComponent } from './manter-cidade/manter-cidade.component';
 import { AdicionarCidadeComponent } from './manter-cidade/add-cidade/add-cidade.component';
 import { EditCidadeComponent } from './manter-cidade/edit-cidade/edit-cidade.component';
 
+import { ManterEmpresaComponent } from './manter-empresa/manter-empresa.component';
+import { AddEmpresaComponent } from './manter-empresa/add-empresa/add-empresa.component';
+import { EditEmpresaComponent } from './manter-empresa/edit-empresa/edit-empresa.component';
+
+import { ManterCategoriaComponent } from './manter-categoria/manter-categoria.component';
+import { AddCategoriaComponent } from './manter-categoria/add-categoria/add-categoria.component';
+import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-categoria.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +65,13 @@ import { EditCidadeComponent } from './manter-cidade/edit-cidade/edit-cidade.com
     AlterarFormaPagamentoComponent,
     ManterCidadeComponent,
     AdicionarCidadeComponent,
-    EditCidadeComponent
+    EditCidadeComponent,
+    ManterEmpresaComponent,
+    AddEmpresaComponent,
+    EditEmpresaComponent,
+    ManterCategoriaComponent,
+    AddCategoriaComponent,
+    EditCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +89,7 @@ import { EditCidadeComponent } from './manter-cidade/edit-cidade/edit-cidade.com
       tertiaryColour: '#ffffff'
     })
   ],
-  providers: [UserService, EstadoService, FormaPagamentoService],
+  providers: [UserService, EstadoService, FormaPagamentoService, CategoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
