@@ -10,4 +10,9 @@ import { map } from 'rxjs/operators';
 export class CategoriaService {
   constructor(private http: HttpClient) { }
   baseUrl = environment.baseUrl + "categoria";
+
+  // getCategorias(estado: string): Observable<Categoria[]> {
+  //   return this.http.get(`${this.baseUrl}/${estado}`).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(cidade))));
+  // }
+
 }
