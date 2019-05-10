@@ -89,7 +89,7 @@ import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-c
       tertiaryColour: '#ffffff'
     })
   ],
-  providers: [UserService, EstadoService, FormaPagamentoService, CategoriaService],
+  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

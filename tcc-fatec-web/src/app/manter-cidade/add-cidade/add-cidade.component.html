@@ -1,3 +1,51 @@
-<p>
-  add-cidade works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Cadastrar Cidade
+      </span>
+    </h3>
+    <div class="padding--vertical">
+
+      <form class="form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <ng-flash-message></ng-flash-message>
+        <input type="text" name="id" class="d-none">
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <label for="estado">Estado: <span class="error">*</span></label>
+            <select class="form-control" id="estado" formControlName="estado">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
+            </select>
+            <div *ngIf="submitted && addForm.controls.estado.errors" class="error">
+              <div *ngIf="addForm.controls.estado.errors.required">Estado é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome: <span class="error">*</span></label>
+            <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da cidade" name="nome" class="form-control" id="nome">
+            <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
+              <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row margin--vertical">
+          <div class="col-md-1">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-warning" type="button" (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
+</div>

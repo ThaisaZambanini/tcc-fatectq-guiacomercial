@@ -8,7 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import tcc.fatec.com.br.guiacomercialtcc.dto.CategoriaDTO;
 import tcc.fatec.com.br.guiacomercialtcc.dto.CidadeDTO;
@@ -23,8 +23,8 @@ public interface Api {
     @GET("estado/")
     Call<List<EstadoDTO>> findEstados();
 
-    @GET("cidade/estado")
-    Call<List<CidadeDTO>> findCidades(@Query("idEstado") Long idEstado);
+    @GET("cidade/estado/{id}")
+    Call<List<CidadeDTO>> findCidades(@Path("id") Long id);
 
     @GET("categoria/")
     Call<List<CategoriaDTO>> findCategorias(@Header("X-Cidade-Id") Long idCidade);

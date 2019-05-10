@@ -10,4 +10,25 @@ import { map } from 'rxjs/operators';
 export class CidadeService {
   constructor(private http: HttpClient) { }
   baseUrl = environment.baseUrl + "cidade";
+
+  getCidadesPorEstado(estado: string): Observable<Cidade[]> {
+    return this.http.get(`${this.baseUrl}/estado/${estado}`).pipe(map((response: any) => response.map((cidade: Cidade) => new Cidade().deserialize(cidade))));
+  }
+
+  adicionarCidade(estado: string, cidade: Cidade): Observable<any> {
+    return this.http.post<Cidade>(`${this.baseUrl}/adicionar/${estado}`, cidade);
+  }
+
+  getCidade(id: string): Observable<Cidade> {
+    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((response: any) => new Cidade().deserialize(response)));
+  }
+
+  alterarCidade(cidade: Cidade): Observable<any> {
+    return this.http.put(`${this.baseUrl}/alterar/${cidade.id}`, cidade);
+  }
+
+  excluirCidade(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deletar/${id}`);
+  }
+
 }
