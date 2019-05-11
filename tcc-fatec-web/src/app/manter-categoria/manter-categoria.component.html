@@ -1,3 +1,84 @@
-<p>
-  manter-categoria works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Categoria
+      </span>
+    </h3>
+
+    <ng-flash-message></ng-flash-message>
+
+    <form class="margin--top-2x form-guia-comercial w-25" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label for="estado">Estado: <span class="error">*</span></label>
+          <select class="form-control" id="estado" formControlName="estado">
+            <option value="" [ngValue]="undefined" [selected]="true"></option>
+            <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label for="cidade">Cidade: <span class="error">*</span></label>
+          <select class="form-control" id="cidade" formControlName="cidade">
+            <option value="" [ngValue]="undefined" [selected]="true"></option>
+            <option [ngValue]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="nome">Nome: <span class="error">*</span></label>
+          <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da cidade" name="nome" class="form-control" id="nome">
+          <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
+            <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="!nenhumResultado" class="table-responsive">
+      <table class="table table-striped margin--top-3x">
+        <thead>
+          <tr>
+            <th class="hidden w-25">Id</th>
+            <th class="w-25">Nome</th>
+            <th class="w-10">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let categoria of categorias | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+            <td class="hidden">{{categoria.id}}</td>
+            <td>{{categoria.nome}}</td>
+            <td>
+              <button class="btn btn-primary" type="button" (click)="editarCategoria(categoria)"> Editar</button>
+              <button class="btn btn-danger" type="button" (click)="excluirCategoria(categoria)" style="margin-left: 20px;"> Excluir</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+    </div>
+
+    <div class="padding--vertical-3x" *ngIf="nenhumResultado">
+      <p class="alert alert-no-result">Nenhum resultado!</p>
+    </div>
+
+    <div class="text-right">
+      <button class="btn btn-primary margin--vertical" (click)="addCategoria()"> Adicionar</button>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>
+
+  </div>
+</div>
