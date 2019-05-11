@@ -1,5 +1,8 @@
 package com.fatec.tcc.cidade;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -15,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fatec.tcc.categoria.Categoria;
 import com.fatec.tcc.estado.Estado;
 
 @Entity
@@ -39,6 +44,12 @@ public class Cidade {
 	@Transient
 	@JsonIgnore
 	private Long idEstado;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnore
+	@ManyToMany(mappedBy = "cidades", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	private Set<Categoria> categorias;
 
 	public Long getId() {
 		return id;

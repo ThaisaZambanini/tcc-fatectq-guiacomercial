@@ -1,17 +1,21 @@
 package com.fatec.tcc.categoria;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,16 +41,20 @@ public class Categoria {
 	@Column(name = "icone", nullable = false)
 	private String icone;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cidade")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JsonIgnore
+	@Transient
 	private Cidade cidade;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "st_ativo")
 	@JsonIgnore
 	private SimNao ativo;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinTable(name = "rl_categoria_cidade", joinColumns = { @JoinColumn(name = "id_cidade") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_categoria") })
+	private Set<Cidade> cidades;
 
 	public Long getId() {
 		return id;
@@ -86,6 +94,14 @@ public class Categoria {
 
 	public void setAtivo(SimNao ativo) {
 		this.ativo = ativo;
+	}
+
+	public Set<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(Set<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 
 }
