@@ -12,29 +12,9 @@
     <form class="margin--top-2x form-guia-comercial w-25" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
-        <div class="col-md-12 form-group">
-          <label for="estado">Estado: <span class="error">*</span></label>
-          <select class="form-control" id="estado" formControlName="estado">
-            <option value="" [ngValue]="undefined" [selected]="true"></option>
-            <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12 form-group">
-          <label for="cidade">Cidade: <span class="error">*</span></label>
-          <select class="form-control" id="cidade" formControlName="cidade">
-            <option value="" [ngValue]="undefined" [selected]="true"></option>
-            <option [ngValue]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
           <label for="nome">Nome: <span class="error">*</span></label>
-          <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da cidade" name="nome" class="form-control" id="nome">
+          <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da categoria" name="nome" class="form-control" id="nome">
           <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
             <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
           </div>
@@ -42,8 +22,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary margin--vertical right" (click)="limparCampos()" id="limpar" type="button">Limpar</button>
         </div>
       </div>
     </form>

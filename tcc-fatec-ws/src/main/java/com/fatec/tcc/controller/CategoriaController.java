@@ -1,6 +1,8 @@
 package com.fatec.tcc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -9,19 +11,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.tcc.categoria.Categoria;
 import com.fatec.tcc.categoria.CategoriaRepository;
-import com.fatec.tcc.cidade.Cidade;
-import com.fatec.tcc.cidade.CidadeRepository;
-import com.fatec.tcc.commons.Constantes;
-import com.fatec.tcc.commons.SimNao;
+import com.fatec.tcc.commons.MensagemRetorno;
 
 @RestController
 @RequestMapping(path = "api/categoria")
@@ -31,41 +31,76 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	@Autowired
-	private CidadeRepository cidadeRepository;
-
 	@GetMapping("/")
-	public ResponseEntity<List<Categoria>> getAllCategorias(
-			@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade) {
-		List<Categoria> lista = categoriaRepository.findAllPorCidades(idCidade);
+	public ResponseEntity<List<Categoria>> getAllCategorias(@RequestParam("categoria") Optional<String> categoria) {
+		List<Categoria> lista = new ArrayList<>();
+		if (categoria.isPresent()) {
+			lista = categoriaRepository.findAllPorNome("%" + categoria.get().toUpperCase() + "%");
+		} else {
+			lista = categoriaRepository.findAll();
+		}
 		return ResponseEntity.ok().body(lista);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
-	public ResponseEntity<Categoria> novaCidade(@RequestBody @Validated Categoria categoria,
-			@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade) throws ResourceNotFoundException {
-		Cidade cidade = cidadeRepository.findById(idCidade)
-				.orElseThrow(() -> new ResourceNotFoundException("Cidade não encontrada :: " + idCidade));
-
-		if (cidade != null) {
-			categoria.setCidade(cidade);
-			categoria.setAtivo(SimNao.S);
-			Categoria categoriaSalvo = categoriaRepository.save(categoria);
-			if (categoriaSalvo != null) {
-				return new ResponseEntity<Categoria>(categoriaSalvo, HttpStatus.OK);
-			}
+	@GetMapping("/{id}")
+	public ResponseEntity<Categoria> getCidade(@PathVariable(value = "id") String categoriaId) {
+		Optional<Categoria> categoria = categoriaRepository.findById(Long.valueOf(categoriaId));
+		if (categoria.isPresent()) {
+			return ResponseEntity.ok().body(categoria.get());
 		}
-		return new ResponseEntity<Categoria>(HttpStatus.INTERNAL_SERVER_ERROR);
+		return ResponseEntity.ok().body(null);
 	}
 
-	@PutMapping("/alterar")
-	public ResponseEntity<Categoria> updateCategoria(@Validated @RequestBody Categoria categoria)
+	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	public ResponseEntity<MensagemRetorno> novaCidade(@RequestBody @Validated Categoria categoria)
 			throws ResourceNotFoundException {
-		Categoria categoriaBanco = categoriaRepository.findById(categoria.getId())
-				.orElseThrow(() -> new ResourceNotFoundException("Estado não encontrado :: " + categoria.getId()));
-		categoriaBanco.setNome(categoria.getNome());
-		categoriaBanco.setIcone(categoria.getIcone());
-		final Categoria alteracaoCategoria = categoriaRepository.save(categoriaBanco);
-		return ResponseEntity.ok(alteracaoCategoria);
+		if (categoriaRepository.findCategoriaExiste(categoria.getNome()) > 0) {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setCodigoRetorno(1);
+			retorno.setMensagem("Categoria " + categoria.getNome() + " já existe!");
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else {
+			Categoria categoriaSalvo = categoriaRepository.save(categoria);
+			if (categoriaSalvo != null) {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Registro salvo com sucesso!");
+				retorno.setCodigoRetorno(0);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Falha ao salvar o registro!");
+				retorno.setCodigoRetorno(1);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+	}
+
+	@PutMapping("/alterar/{id}")
+	public ResponseEntity<MensagemRetorno> updateCategoria(@Validated @RequestBody Categoria categoria,
+			@PathVariable(value = "id") Long categoriaId) {
+		Optional<Categoria> optional = categoriaRepository.findById(categoriaId);
+
+		if (optional.isPresent()) {
+			Categoria categoriaBanco = optional.get();
+			categoriaBanco.setNome(categoria.getNome());
+			categoriaBanco.setIcone(categoria.getIcone());
+			final Categoria alteracaoCategoria = categoriaRepository.save(categoriaBanco);
+			if (alteracaoCategoria != null) {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Registro salvo com sucesso!");
+				retorno.setCodigoRetorno(0);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Falha ao salvar o registro!");
+				retorno.setCodigoRetorno(1);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setMensagem("Registro não encontrado!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

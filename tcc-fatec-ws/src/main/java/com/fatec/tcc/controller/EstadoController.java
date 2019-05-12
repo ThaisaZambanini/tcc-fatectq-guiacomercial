@@ -42,9 +42,7 @@ public class EstadoController {
 		if (estado.isPresent()) {
 			return ResponseEntity.ok().body(estado.get());
 		}
-
 		return ResponseEntity.ok().body(null);
-
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")

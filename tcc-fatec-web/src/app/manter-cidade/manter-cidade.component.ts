@@ -42,6 +42,7 @@ export class ManterCidadeComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     if (this.addForm.invalid) {
+      this.loading = false;
       return;
     }
 

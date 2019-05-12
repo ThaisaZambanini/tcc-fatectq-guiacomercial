@@ -1,3 +1,47 @@
-<p>
-  add-categoria works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Cadastrar Categoria
+      </span>
+    </h3>
+    <div class="padding--vertical">
+
+      <form class="form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <ng-flash-message></ng-flash-message>
+        <input type="text" name="id" class="d-none">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome:</label>
+            <input type="nome" formControlName="nome" placeholder="Nome da categoria" name="nome" class="form-control" id="nome">
+            <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
+              <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row align-items-center">
+          <div class="form-group col-md-3">
+            <input type="file" name="image" (change)="onFileChanged($event)">
+          </div>
+          <div class="info col-md-6" *ngIf="filePreview">
+            <img class="img-icon" [src]="sanitize(filePreview)" />
+          </div>
+        </div>
+
+        <div class="row margin--vertical">
+          <div class="col-md-1">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-warning" type="button" (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
+</div>

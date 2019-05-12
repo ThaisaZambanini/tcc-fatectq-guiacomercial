@@ -75,7 +75,6 @@ export class EditCidadeComponent implements OnInit {
 
     const cidade = new Cidade().deserialize(this.addForm.value);
     cidade.estado.id = this.addForm.controls.estado.value;
-    console.log(cidade);
 
     this.cidadeService.alterarCidade(cidade)
       .subscribe(data => {

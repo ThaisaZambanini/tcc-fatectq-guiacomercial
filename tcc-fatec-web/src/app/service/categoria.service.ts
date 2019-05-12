@@ -11,8 +11,21 @@ export class CategoriaService {
   constructor(private http: HttpClient) { }
   baseUrl = environment.baseUrl + "categoria";
 
-  // getCategorias(estado: string): Observable<Categoria[]> {
-  //   return this.http.get(`${this.baseUrl}/${estado}`).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(cidade))));
-  // }
+  getCategorias(categoria: string): Observable<Categoria[]> {
+    let params = new HttpParams().set('categoria', categoria);
+    return this.http.get(`${this.baseUrl}/`, {params}).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(categoria))));
+  }
+
+  adicionarCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.post<Categoria>(this.baseUrl + "/adicionar", categoria);
+  }
+
+  getCategoria(id: string): Observable<Categoria> {
+    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((response: any) => new Categoria().deserialize(response)));
+  }
+
+  alterarCategoria(categoria: Categoria): Observable<any> {
+    return this.http.put(`${this.baseUrl}/alterar/${categoria.id}`, categoria);
+  }
 
 }
