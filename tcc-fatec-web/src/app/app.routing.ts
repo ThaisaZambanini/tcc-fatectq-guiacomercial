@@ -23,9 +23,12 @@ import { ManterEmpresaComponent } from './manter-empresa/manter-empresa.componen
 import { AddEmpresaComponent } from './manter-empresa/add-empresa/add-empresa.component';
 import { EditEmpresaComponent } from './manter-empresa/edit-empresa/edit-empresa.component';
 
+import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  {path: "mensagem", component: ConsultaMensagemComponent},
   { path: 'add-user', component: AddUserComponent },
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },

@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Mensagem
+      </span>
+    </h3>
+
+    <ng-flash-message></ng-flash-message>
+
+    <div *ngIf="!nenhumResultado" class="table-responsive">
+      <table class="table table-striped margin--top-3x">
+        <thead>
+          <tr>
+            <th class="w-25">Nome</th>
+            <th class="w-25">E-mail</th>
+            <th class="w-25">Telefone</th>
+            <th class="w-25">Assunto</th>
+            <th class="w-25">Mensagem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mensagem of mensagens | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+            <td>{{mensagem.nome}}</td>
+            <td>{{mensagem.email}}</td>
+            <td>{{mensagem.telefone}}</td>
+            <td>{{mensagem.assunto}}</td>
+            <td>{{mensagem.mensagem}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+    </div>
+
+    <div class="padding--vertical-3x" *ngIf="nenhumResultado">
+      <p class="alert alert-no-result">Nenhum resultado!</p>
+    </div>
+
+    <div class="text-right">
+      <button class="btn btn-warning margin--vertical" (click)="voltar()"> Voltar</button>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>
+
+  </div>
+</div>

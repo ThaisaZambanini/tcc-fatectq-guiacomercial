@@ -14,6 +14,7 @@ import { CidadeService } from "./service/cidade.service";
 import { FormaPagamentoService } from "./service/forma-pagamento.service";
 import { CategoriaService } from "./service/categoria.service";
 import { EmpresaService } from "./service/empresa.service";
+import { MensagemUsuarioService } from "./service/mensagem-usuario.service";
 
 /**LIBS*/
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -48,6 +49,8 @@ import { ManterCategoriaComponent } from './manter-categoria/manter-categoria.co
 import { AddCategoriaComponent } from './manter-categoria/add-categoria/add-categoria.component';
 import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-categoria.component';
 
+import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +74,8 @@ import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-c
     EditEmpresaComponent,
     ManterCategoriaComponent,
     AddCategoriaComponent,
-    EditCategoriaComponent
+    EditCategoriaComponent,
+    ConsultaMensagemComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,7 @@ import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-c
       tertiaryColour: '#ffffff'
     })
   ],
-  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService],
+  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService, MensagemUsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
