@@ -5,9 +5,21 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { FiltroEmpresa } from "../model/filtroEmpresa.model";
 
 @Injectable()
 export class EmpresaService {
   constructor(private http: HttpClient) { }
   baseUrl = environment.baseUrl + "empresa";
+
+  getEmpresasFiltroWeb(filtro: FiltroEmpresa): Observable<Empresa[]> {
+    let params = new HttpParams()
+      .set('cidade', filtro.cidade)
+      .set('estado', filtro.estado);
+
+    console.log(params)
+
+    return this.http.get(`${this.baseUrl}/filtro`, { params }).pipe(map((response: any) => response.map((empresa: Empresa) => new Empresa().deserialize(empresa))));
+  }
+
 }

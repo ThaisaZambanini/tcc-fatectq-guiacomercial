@@ -1,5 +1,6 @@
 package com.fatec.tcc.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,20 @@ public class EmpresaController {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+
+	@GetMapping("/")
+	public ResponseEntity<List<Empresa>> getAllEmpresas() {
+		List<Empresa> empresas = empresaRepository.findAllEmpresas();
+		return ResponseEntity.ok().body(empresas);
+	}
+
+	@GetMapping("/filtro")
+	public ResponseEntity<List<Empresa>> getEmpresasFiltroWeb(@RequestParam("estado") Optional<Long> estado,
+			@RequestParam("cidade") Optional<Long> cidade, @RequestParam("logradouro") Optional<String> logradouro,
+			@RequestParam("cep") Optional<String> cep, @RequestParam("numero") Optional<String> numero) {
+		List<Empresa> empresas = empresaRepository.findAllEmpresasWeb(estado, cidade, logradouro, cep, numero);
+		return ResponseEntity.ok().body(empresas);
+	}
 
 	@GetMapping("/busca")
 	public ResponseEntity<EmpresaDTO> getEmpresaPorCategoriaTermo(

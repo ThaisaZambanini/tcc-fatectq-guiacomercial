@@ -93,7 +93,7 @@ import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem
       tertiaryColour: '#ffffff'
     })
   ],
-  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService, MensagemUsuarioService],
+  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService, MensagemUsuarioService, EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

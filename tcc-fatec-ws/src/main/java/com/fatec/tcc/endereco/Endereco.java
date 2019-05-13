@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.cidade.Cidade;
 
@@ -49,7 +51,7 @@ public class Endereco {
 	@JoinColumn(name = "id_cidade")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Cidade cidade;
-	
+
 	@Transient
 	private String linha1;
 
@@ -58,6 +60,9 @@ public class Endereco {
 
 	@Transient
 	private String linha3;
+
+	@Transient
+	private String completo;
 
 	public Long getId() {
 		return id;
@@ -137,6 +142,15 @@ public class Endereco {
 
 	public void setLinha3(String linha3) {
 		this.linha3 = linha3;
+	}
+
+	public String getCompleto() {
+		return getLogradouro() + ", " + getNumero() + ", " + getComplemento() != null ? getComplemento()
+				: StringUtils.EMPTY + ", CEP: " + getCep();
+	}
+
+	public void setCompleto(String completo) {
+		this.completo = completo;
 	}
 
 }

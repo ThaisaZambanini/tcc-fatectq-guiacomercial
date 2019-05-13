@@ -2,6 +2,7 @@ package com.fatec.tcc.empresa;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -97,5 +98,54 @@ public class EmpresaServiceImpl implements EmpresaService {
 			}
 		}
 		return dto;
+	}
+
+	@Override
+	public List<Empresa> findAllEmpresas() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("FROM Empresa empresa ");
+		sb.append("INNER JOIN FETCH empresa.categoria categoria ");
+		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
+		sb.append(" INNER JOIN FETCH endereco.cidade cidade ");
+		sb.append(" INNER JOIN FETCH cidade.estado estado ");
+
+		Query query = em.createQuery(sb.toString(), Empresa.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Empresa> findAllEmpresasWeb(Optional<Long> estado, Optional<Long> cidade, Optional<String> logradouro,
+			Optional<String> cep, Optional<String> numero) {
+		HashMap<String, Object> parametros = new HashMap<>();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("FROM Empresa empresa ");
+		sb.append("INNER JOIN FETCH empresa.categoria categoria ");
+		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
+		sb.append(" INNER JOIN FETCH endereco.cidade cidade ");
+		sb.append(" INNER JOIN FETCH cidade.estado estado ");
+		sb.append("WHERE estado.id = :estado and cidade.id = :cidade");
+
+		if (logradouro.isPresent()) {
+			sb.append("AND endereco.logradouro =:logradouro");
+			parametros.put("logradouro", logradouro.get());
+		}
+
+		if (cep.isPresent()) {
+			sb.append("AND endereco.cep =:cep");
+			parametros.put("cep", cep.get());
+		}
+
+		if (numero.isPresent()) {
+			sb.append("AND endereco.numero =:numero");
+			parametros.put("numero", numero.get());
+		}
+
+		parametros.put("estado", estado.get());
+		parametros.put("cidade", cidade.get());
+
+		Query query = em.createQuery(sb.toString(), Empresa.class);
+		parametros.forEach((chave, valor) -> query.setParameter(chave, valor));
+		return query.getResultList();
 	}
 }
