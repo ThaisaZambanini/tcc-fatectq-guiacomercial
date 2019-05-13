@@ -10,6 +10,7 @@ export class Endereco implements Deserializable {
   numero: string;
   complemento: string;
   cidade: Cidade;
+  completo: string;
 
   deserialize(input: any) {
     Object.assign(this, input);

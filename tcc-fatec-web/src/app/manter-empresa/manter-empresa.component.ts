@@ -36,7 +36,11 @@ export class ManterEmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.setForm();
+    this.getEstados();
+  }
 
+  setForm() {
     this.addForm = this.formBuilder.group({
       estado: ['', Validators.required],
       cidade: ['', Validators.required],
@@ -44,7 +48,9 @@ export class ManterEmpresaComponent implements OnInit {
       cep: [''],
       numero: ['']
     });
+  }
 
+  getEstados() {
     this.estadoService.getEstados().subscribe((data) => {
       this.estados = data;
       this.loading = false;
@@ -76,9 +82,7 @@ export class ManterEmpresaComponent implements OnInit {
       return;
     }
 
-    console.log(this.addForm.value)
     const filtro = new FiltroEmpresa().deserialize(this.addForm.value);
-    console.log(filtro)
 
     this.empresaService.getEmpresasFiltroWeb(filtro).subscribe((data) => {
       this.empresas = data;
@@ -93,4 +97,15 @@ export class ManterEmpresaComponent implements OnInit {
     });
   }
 
+  limparCampos() {
+    this.loading = true;
+    this.empresas = [];
+    this.nenhumResultado = true;
+    this.addForm.reset();
+    this.getEstados();
+  }
+
+  addEmpresa() {
+    this.router.navigate(['add-empresa']);
+  }
 }

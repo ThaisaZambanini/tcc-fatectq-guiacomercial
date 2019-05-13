@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.cidade.Cidade;
 
@@ -145,8 +143,7 @@ public class Endereco {
 	}
 
 	public String getCompleto() {
-		return getLogradouro() + ", " + getNumero() + ", " + getComplemento() != null ? getComplemento()
-				: StringUtils.EMPTY + ", CEP: " + getCep();
+		return completo;
 	}
 
 	public void setCompleto(String completo) {

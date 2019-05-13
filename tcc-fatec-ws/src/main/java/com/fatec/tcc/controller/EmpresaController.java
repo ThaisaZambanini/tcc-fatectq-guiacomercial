@@ -51,6 +51,13 @@ public class EmpresaController {
 			@RequestParam("cidade") Optional<Long> cidade, @RequestParam("logradouro") Optional<String> logradouro,
 			@RequestParam("cep") Optional<String> cep, @RequestParam("numero") Optional<String> numero) {
 		List<Empresa> empresas = empresaRepository.findAllEmpresasWeb(estado, cidade, logradouro, cep, numero);
+
+		empresas.forEach(x -> {
+			Endereco endereco = x.getEndereco();
+			x.getEndereco().setCompleto(endereco.getLogradouro() + ", " + endereco.getBairro() + ", "
+					+ endereco.getNumero() + ", CEP: " + endereco.getCep());
+		});
+
 		return ResponseEntity.ok().body(empresas);
 	}
 
