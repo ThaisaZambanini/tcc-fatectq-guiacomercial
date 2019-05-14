@@ -9,7 +9,9 @@
     <div class="padding--vertical">
 
       <form class="margin--top-2x form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
         <ng-flash-message></ng-flash-message>
+
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="logradouro">Nome: <span class="error">*</span></label>
@@ -137,23 +139,23 @@
           </span>
         </h5>
 
-        <div class="row">
+        <div class="row align-items-end">
           <div class="col-md-2">
-            <label for="cidade">Tipo: <span class="error">*</span></label>
-            <select class="form-control" id="tipo" name="tipo" [(ngModel)]="telefone.tipo">
-              <option value="" [ngValue]="undefined" [selected]="true"></option>
-              <option [ngValue]="T">{{tipoTelefone.Telefone}}</option>
-              <option [ngValue]="W">{{tipoTelefone.Whatsapp}}</option>
-              <option [ngValue]="C">{{tipoTelefone.Celular}}</option>
+            <label for="cidade">Tipo: </label>
+            <select class="form-control" id="tipo" formControlName="tipo" name="tipo" [(ngModel)]="telefone.tipo">
+              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
+              <option value="T" [ngValue]="T">Telefone</option>
+              <option value="W" [ngValue]="W">Whatsapp</option>
+              <option value="C" [ngValue]="C">Celular</option>
             </select>
           </div>
           <div class="col-md-1">
             <label for="cep">DDD:</label>
-            <input type="number" mask="000" maxlength="3" name="ddd" class="form-control" id="ddd" [(ngModel)]="telefone.ddd">
+            <input type="text" mask="000" maxlength="3" formControlName="ddd" name="ddd" class="form-control" id="ddd" [(ngModel)]="telefone.ddd">
           </div>
           <div class="col-md-3">
             <label for="cep">Número:</label>
-            <input type="number" maxlength="8" name="numero" class="form-control" id="numero" [(ngModel)]="telefone.numero">
+            <input type="text" maxlength="8" name="numero" formControlName="numeroTelefone" class="form-control" id="numero" [(ngModel)]="telefone.numero">
           </div>
           <div class="col-md-3">
             <button class="btn btn-primary" type="button" (click)="adicionarTelefone()">Adicionar</button>
@@ -161,8 +163,30 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-            GRID TELEFONES
+          <div class="col-md-12">
+            <div *ngIf="empresa.telefone.length > 0" class="table-responsive">
+              <table class="table table-striped margin--top-3x">
+                <thead>
+                  <tr>
+                    <th class="w-25">Tipo</th>
+                    <th class="w-25">DDD</th>
+                    <th class="w-25">Número</th>
+                    <th class="w-25">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let telefone of empresa.telefone | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+                    <td>{{telefone.tipo}}</td>
+                    <td>{{telefone.ddd}}</td>
+                    <td>{{telefone.numero}}</td>
+                    <td>
+                      <button class="btn btn-danger" type="button" (click)="excluirTelefone(telefone)" style="margin-left: 20px;"> Excluir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+            </div>
           </div>
         </div>
 
@@ -172,9 +196,58 @@
           </span>
         </h5>
 
+        <div class="row align-items-end">
+          <div class="col-md-2">
+            <label for="diaSemana">Dia da Semana: </label>
+            <select class="form-control" id="diaSemana" formControlName="diaSemana" name="diaSemana" [(ngModel)]="horario.diaSemana">
+              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
+              <option value="SEGUNDA" [ngValue]="SEGUNDA">Segunda</option>
+              <option value="TERCA" [ngValue]="TERCA">Terça</option>
+              <option value="QUARTA" [ngValue]="QUARTA">Quarta</option>
+              <option value="QUINTA" [ngValue]="QUINTA">Quinta</option>
+              <option value="SEXTA" [ngValue]="SEXTA">Sexta</option>
+              <option value="SABADO" [ngValue]="SABADO">Sábado</option>
+              <option value="DOMINGO" [ngValue]="DOMINGO">Domingo</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="horarioInicial">Hora Inicial:</label>
+            <input type="text" mask="Hh:m0" [validation]="true"  maxlength="5" formControlName="horarioInicial" name="horarioInicial" class="form-control" id="horarioInicial" [(ngModel)]="horario.horarioInicial">
+          </div>
+          <div class="col-md-2">
+            <label for="horarioFinal">Hora Final:</label>
+            <input type="text" maxlength="5" mask="Hh:m0" [validation]="true" name="horarioFinal" formControlName="horarioFinal" class="form-control" id="horarioFinal" [(ngModel)]="horario.horarioFinal">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" type="button" (click)="adicionarHorario()">Adicionar</button>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-6">
-            GRID HORÁRIOS
+            <div *ngIf="empresa.horario.length > 0" class="table-responsive">
+              <table class="table table-striped margin--top-3x">
+                <thead>
+                  <tr>
+                    <th class="w-25">Tipo</th>
+                    <th class="w-25">DDD</th>
+                    <th class="w-25">Número</th>
+                    <th class="w-25">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let horario of empresa.horario | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+                    <td>{{horario.diaSemana}}</td>
+                    <td>{{horario.horarioInicial}}</td>
+                    <td>{{horario.horarioFinal}}</td>
+                    <td>
+                      <button class="btn btn-danger" type="button" (click)="excluirHorario(horario)" style="margin-left: 20px;"> Excluir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+            </div>
           </div>
         </div>
 

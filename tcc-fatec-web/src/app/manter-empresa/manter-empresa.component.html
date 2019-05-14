@@ -64,10 +64,9 @@
           <button class="btn btn-primary margin--vertical right" (click)="limparCampos()" id="limpar" type="button">Limpar</button>
         </div>
       </div>
-
     </form>
 
-    <div *ngIf="!nenhumResultado" class="table-responsive">
+    <div *ngIf="empresas.length > 0" class="table-responsive">
       <table class="table table-striped margin--top-3x">
         <thead>
           <tr>
@@ -96,10 +95,10 @@
     </div>
 
     <div class="row text-align-end">
-        <div class="col">
-          <button class="btn btn-primary margin--vertical" style="margin-right: 10px" (click)="addEmpresa()"> Adicionar</button>
-          <button class="btn btn-warning margin--vertical" (click)="voltar()"> Voltar</button>
-        </div>
+      <div class="col">
+        <button class="btn btn-primary margin--vertical" style="margin-right: 10px" (click)="addEmpresa()"> Adicionar</button>
+        <button class="btn btn-warning margin--vertical" (click)="voltar()"> Voltar</button>
+      </div>
     </div>
 
     <ngx-loading [show]="loading"></ngx-loading>

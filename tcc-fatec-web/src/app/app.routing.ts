@@ -26,6 +26,7 @@ import { EditEmpresaComponent } from './manter-empresa/edit-empresa/edit-empresa
 import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   {path: "mensagem", component: ConsultaMensagemComponent},

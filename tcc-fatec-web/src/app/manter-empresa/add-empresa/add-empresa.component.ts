@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Cidade } from "../../model/cidade.model";
-import { TipoTelefone } from "../../enum/tipoTelefone.enum";
 import { Estado } from "../../model/uf.model";
 import { Telefone } from "../../model/telefone.model";
+import { Horario } from "../../model/horario.model";
 import { Categoria } from "../../model/categoria.model";
 import { Observable, throwError } from 'rxjs';
 import { NgFlashMessageService } from 'ng-flash-messages';
@@ -23,11 +23,11 @@ export class AddEmpresaComponent implements OnInit {
   cidades: Cidade[];
   estados: Estado[];
   categorias: Categoria[];
+  horario: Horario;
   empresa: Empresa;
   loading: boolean = false;
   submitted: boolean = false;
   telefone: Telefone;
-  tipoTelefone: TipoTelefone;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,6 +42,7 @@ export class AddEmpresaComponent implements OnInit {
   ngOnInit() {
     this.empresa = new Empresa();
     this.telefone = new Telefone();
+    this.horario = new Horario();
 
     this.addForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -57,20 +58,26 @@ export class AddEmpresaComponent implements OnInit {
       numero: ['', Validators.required],
       bairro: ['', Validators.required],
       cep: ['', Validators.required],
-      complemento: ['']
+      complemento: [''],
+      tipo: [''],
+      ddd: [''],
+      numeroTelefone: [''],
+      diaSemana: [''],
+      horarioInicial: [''],
+      horarioFinal: ['']
     });
 
     this.getCategorias();
     this.getEstados();
   }
 
-  adicionaTelefone() {
-    if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
-      && this.telefone.ddd !== null && this.telefone.ddd !== undefined
-      && this.telefone.numero !== null && this.telefone.numero !== undefined) {
-      console.log(this.telefone)
-      // this.empresa.telefone.push(this.telefone);
-      // this.telefone = new Telefone();
+  adicionarHorario() {
+    console.log(this.horario)
+    if (this.horario.diaSemana !== null && this.horario.diaSemana !== undefined
+      && this.horario.horarioInicial !== null && this.horario.horarioInicial !== undefined
+      && this.horario.horarioFinal !== null && this.horario.horarioFinal !== undefined) {
+      this.empresa.horario.push(this.horario);
+      this.horario = new Horario();
     } else {
       this.ngFlashMessageService.showFlashMessage({
         messages: ["Campo obrigatório não preenchido!"],
@@ -78,7 +85,39 @@ export class AddEmpresaComponent implements OnInit {
         timeout: false,
         type: 'danger'
       });
+      window.scrollTo(5000, 0);
+      return;
     }
+  }
+
+  adicionarTelefone() {
+    if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
+      && this.telefone.ddd !== null && this.telefone.ddd !== undefined
+      && this.telefone.numero !== null && this.telefone.numero !== undefined) {
+      this.empresa.telefone.push(this.telefone);
+      this.telefone = new Telefone();
+    } else {
+      this.ngFlashMessageService.showFlashMessage({
+        messages: ["Campo obrigatório não preenchido!"],
+        dismissible: true,
+        timeout: false,
+        type: 'danger'
+      });
+      window.scrollTo(5000, 0);
+      return;
+    }
+  }
+
+  excluirHorario(horario: Horario) {
+    this.empresa.horario.forEach((item, index) => {
+      if (item === horario) this.empresa.horario.splice(index, 1);
+    });
+  }
+
+  excluirTelefone(telefone: Telefone) {
+    this.empresa.telefone.forEach((item, index) => {
+      if (item === telefone) this.empresa.telefone.splice(index, 1);
+    });
   }
 
   onSubmit() {

@@ -6,6 +6,7 @@ import { routing } from "./app.routing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 /**SERVICES*/
 import { UserService } from "./service/user.service";
@@ -82,6 +83,7 @@ import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem
     routing,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     NgxPaginationModule,
     NgxMaskModule.forRoot(),
     HttpModule,

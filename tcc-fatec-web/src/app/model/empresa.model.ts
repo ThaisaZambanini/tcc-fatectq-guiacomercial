@@ -2,6 +2,7 @@ import { Deserializable } from "../model/deserializable.model";
 import { Categoria } from "../model/categoria.model";
 import { Endereco } from "../model/endereco.model";
 import { Telefone } from "../model/telefone.model";
+import { Horario } from "../model/horario.model";
 
 export class Empresa implements Deserializable {
   id: number;
@@ -15,10 +16,13 @@ export class Empresa implements Deserializable {
   categoria: Categoria;
   endereco: Endereco;
   telefone: Telefone[];
+  horario: Horario[];
 
   constructor() {
     this.categoria = new Categoria();
     this.endereco = new Endereco();
+    this.telefone = new Array();
+    this.horario = new Array();
   }
 
   deserialize(input: any) {
