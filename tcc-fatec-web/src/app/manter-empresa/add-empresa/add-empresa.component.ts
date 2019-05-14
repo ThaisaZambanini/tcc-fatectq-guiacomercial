@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Cidade } from "../../model/cidade.model";
+import { TipoTelefone } from "../../enum/tipoTelefone.enum";
 import { Estado } from "../../model/uf.model";
+import { Telefone } from "../../model/telefone.model";
 import { Categoria } from "../../model/categoria.model";
 import { Observable, throwError } from 'rxjs';
 import { NgFlashMessageService } from 'ng-flash-messages';
@@ -24,6 +26,8 @@ export class AddEmpresaComponent implements OnInit {
   empresa: Empresa;
   loading: boolean = false;
   submitted: boolean = false;
+  telefone: Telefone;
+  tipoTelefone: TipoTelefone;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,6 +41,7 @@ export class AddEmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.empresa = new Empresa();
+    this.telefone = new Telefone();
 
     this.addForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -52,11 +57,28 @@ export class AddEmpresaComponent implements OnInit {
       numero: ['', Validators.required],
       bairro: ['', Validators.required],
       cep: ['', Validators.required],
-      complemento: [''],
+      complemento: ['']
     });
 
     this.getCategorias();
     this.getEstados();
+  }
+
+  adicionaTelefone() {
+    if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
+      && this.telefone.ddd !== null && this.telefone.ddd !== undefined
+      && this.telefone.numero !== null && this.telefone.numero !== undefined) {
+      console.log(this.telefone)
+      // this.empresa.telefone.push(this.telefone);
+      // this.telefone = new Telefone();
+    } else {
+      this.ngFlashMessageService.showFlashMessage({
+        messages: ["Campo obrigatório não preenchido!"],
+        dismissible: true,
+        timeout: false,
+        type: 'danger'
+      });
+    }
   }
 
   onSubmit() {

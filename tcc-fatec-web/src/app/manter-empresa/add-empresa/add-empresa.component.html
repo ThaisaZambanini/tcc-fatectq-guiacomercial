@@ -131,6 +131,59 @@
           </div>
         </div>
 
+        <h5 class="title-page-border margin--top-2x ">
+          <span class="">
+            Telefone
+          </span>
+        </h5>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label for="cidade">Tipo: <span class="error">*</span></label>
+            <select class="form-control" id="tipo" name="tipo" [(ngModel)]="telefone.tipo">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="T">{{tipoTelefone.Telefone}}</option>
+              <option [ngValue]="W">{{tipoTelefone.Whatsapp}}</option>
+              <option [ngValue]="C">{{tipoTelefone.Celular}}</option>
+            </select>
+          </div>
+          <div class="col-md-1">
+            <label for="cep">DDD:</label>
+            <input type="number" mask="000" maxlength="3" name="ddd" class="form-control" id="ddd" [(ngModel)]="telefone.ddd">
+          </div>
+          <div class="col-md-3">
+            <label for="cep">Número:</label>
+            <input type="number" maxlength="8" name="numero" class="form-control" id="numero" [(ngModel)]="telefone.numero">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" type="button" (click)="adicionarTelefone()">Adicionar</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            GRID TELEFONES
+          </div>
+        </div>
+
+        <h5 class="title-page-border margin--top-2x ">
+          <span class="">
+            Horários
+          </span>
+        </h5>
+
+        <div class="row">
+          <div class="col-md-6">
+            GRID HORÁRIOS
+          </div>
+        </div>
+
+        <h5 class="title-page-border margin--top-2x ">
+          <span class="">
+            GRID FORMA DE PAGAMENTO
+          </span>
+        </h5>
+
         <div class="row margin--vertical">
           <div class="col-md-1">
             <button class="btn btn-primary" type="submit">Salvar</button>
