@@ -12,6 +12,10 @@ export class Endereco implements Deserializable {
   cidade: Cidade;
   completo: string;
 
+  constructor() {
+    this.cidade = new Cidade();
+  }
+
   deserialize(input: any) {
     Object.assign(this, input);
     this.cidade = new Cidade().deserialize(input.cidade);

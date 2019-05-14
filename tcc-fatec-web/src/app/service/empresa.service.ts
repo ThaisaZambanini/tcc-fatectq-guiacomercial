@@ -17,9 +17,15 @@ export class EmpresaService {
       .set('cidade', filtro.cidade)
       .set('estado', filtro.estado);
 
-    console.log(params)
-
     return this.http.get(`${this.baseUrl}/filtro`, { params }).pipe(map((response: any) => response.map((empresa: Empresa) => new Empresa().deserialize(empresa))));
+  }
+
+  adicionarEmpresa(empresa: Empresa): Observable<any> {
+    return this.http.post<Empresa>(`${this.baseUrl}/adicionar/`, empresa);
+  }
+
+  getEmpresa(id: string): Observable<Empresa> {
+    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((response: any) => new Empresa().deserialize(response)));
   }
 
 }

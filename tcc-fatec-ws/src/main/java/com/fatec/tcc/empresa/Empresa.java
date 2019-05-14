@@ -20,8 +20,8 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.categoria.Categoria;
 import com.fatec.tcc.endereco.Endereco;
-import com.fatec.tcc.formaPagamento.FormaPagamento;
 import com.fatec.tcc.horario.Horario;
+import com.fatec.tcc.rl.RlFormaPagamentoEmpresa;
 import com.fatec.tcc.telefone.Telefone;
 
 @Entity
@@ -56,7 +56,7 @@ public class Empresa {
 	@Column(name = "link_twitter")
 	private String linkTwitter;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_endereco")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Endereco endereco;
@@ -66,17 +66,17 @@ public class Empresa {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Horario> horarios;
 
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Telefone> telefones;
 
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private List<FormaPagamento> formaPagamento;
+	private List<RlFormaPagamentoEmpresa> formaPagamento;
 
 	public Long getId() {
 		return id;
@@ -180,14 +180,11 @@ public class Empresa {
 		this.telefones = telefones;
 	}
 
-	public List<FormaPagamento> getFormaPagamento() {
-		if (formaPagamento == null) {
-			formaPagamento = new ArrayList<>();
-		}
+	public List<RlFormaPagamentoEmpresa> getFormaPagamento() {
 		return formaPagamento;
 	}
 
-	public void setFormaPagamento(List<FormaPagamento> formaPagamento) {
+	public void setFormaPagamento(List<RlFormaPagamentoEmpresa> formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
 

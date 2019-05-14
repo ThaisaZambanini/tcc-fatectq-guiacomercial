@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.tcc.categoria.Categoria;
 import com.fatec.tcc.categoria.CategoriaRepository;
+import com.fatec.tcc.cidade.Cidade;
+import com.fatec.tcc.cidade.CidadeRepository;
 import com.fatec.tcc.commons.Constantes;
+import com.fatec.tcc.commons.MensagemRetorno;
 import com.fatec.tcc.dto.EmpresaDTO;
 import com.fatec.tcc.empresa.Empresa;
 import com.fatec.tcc.empresa.EmpresaRepository;
 import com.fatec.tcc.endereco.Endereco;
-import com.fatec.tcc.endereco.EnderecoRepository;
 
 @RestController
 @RequestMapping(path = "api/empresa")
@@ -38,12 +41,21 @@ public class EmpresaController {
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private CidadeRepository cidadeRepository;
 
 	@GetMapping("/")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
 		List<Empresa> empresas = empresaRepository.findAllEmpresas();
 		return ResponseEntity.ok().body(empresas);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long cidadeId) {
+		Empresa empresa = empresaRepository.findEmpresaFetch(cidadeId);
+		if (empresa != null) {
+			return ResponseEntity.ok().body(empresa);
+		}
+		return ResponseEntity.ok().body(null);
 	}
 
 	@GetMapping("/filtro")
@@ -85,30 +97,44 @@ public class EmpresaController {
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
-	public ResponseEntity<Empresa> novaEmpresa(@RequestBody @Validated Empresa empresa,
-			@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade) throws ResourceNotFoundException {
+	public ResponseEntity<MensagemRetorno> novaEmpresa(@RequestBody @Validated Empresa empresa)
+			throws ResourceNotFoundException {
 
-		Categoria categoria = null;
 		if (empresa.getCategoria() != null) {
-			categoria = categoriaRepository.findById(empresa.getCategoria().getId())
-					.orElseThrow(() -> new ResourceNotFoundException(
-							"Categoria não encontrada :: " + empresa.getCategoria().getId()));
-		}
-
-		Endereco endereco = null;
-		if (empresa.getEndereco() != null) {
-			endereco = enderecoRepository.findById(empresa.getEndereco().getId()).orElseThrow(
-					() -> new ResourceNotFoundException("Endereço não encontrada :: " + empresa.getEndereco().getId()));
-		}
-
-		if (endereco != null && categoria != null) {
-			empresa.setCategoria(categoria);
-			empresa.setEndereco(endereco);
-			Empresa empresaSalvo = empresaRepository.save(empresa);
-			if (empresaSalvo != null) {
-				return new ResponseEntity<Empresa>(empresaSalvo, HttpStatus.OK);
+			Optional<Categoria> categoria = categoriaRepository.findById(empresa.getCategoria().getId());
+			if (categoria.isPresent()) {
+				empresa.setCategoria(categoria.get());
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setCodigoRetorno(1);
+				retorno.setMensagem("Categoria não encontrada!");
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return new ResponseEntity<Empresa>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		if (empresa.getEndereco() != null && empresa.getEndereco().getCidade() != null) {
+			Optional<Cidade> cidade = cidadeRepository.findById(empresa.getEndereco().getCidade().getId());
+			if (cidade.isPresent())
+				empresa.getEndereco().setCidade(cidade.get());
+			else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setCodigoRetorno(1);
+				retorno.setMensagem("Cidade não encontrada!");
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+
+		Empresa empresaSalvo = empresaRepository.save(empresa);
+		if (empresaSalvo != null) {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setMensagem("Registro salvo com sucesso!");
+			retorno.setCodigoRetorno(0);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+		}
+
+		MensagemRetorno retorno = new MensagemRetorno();
+		retorno.setCodigoRetorno(1);
+		retorno.setMensagem("Não foi possível salvar os dados!");
+		return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

@@ -108,4 +108,10 @@ export class ManterEmpresaComponent implements OnInit {
   addEmpresa() {
     this.router.navigate(['add-empresa']);
   }
+
+  editarEmpresa(empresa: Empresa) {
+    localStorage.removeItem("editEmpresaId");
+    localStorage.setItem("editEmpresaId", empresa.id.toString());
+    this.router.navigate(['edit-empresa']);
+  }
 }

@@ -1,3 +1,147 @@
-<p>
-  add-empresa works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Cadastrar Empresa
+      </span>
+    </h3>
+    <div class="padding--vertical">
+
+      <form class="margin--top-2x form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <ng-flash-message></ng-flash-message>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="logradouro">Nome: <span class="error">*</span></label>
+            <input type="text" formControlName="nome" [(ngModel)]="empresa.nome" maxlength="64" name="nome" class="form-control" id="logradouro">
+            <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
+              <div *ngIf="addForm.controls.nome.errors.required">Nome da Empresa é obrigatório!</div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="email">E-mail: <span class="error">*</span></label>
+            <input type="email" formControlName="email" [(ngModel)]="empresa.email" maxlength="64" name="email" class="form-control" id="email">
+            <div *ngIf="submitted && addForm.controls.email.errors" class="error">
+              <div *ngIf="addForm.controls.email.errors.required">E-mail é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="linkSite">Link Site:</label>
+            <input type="text" formControlName="linkSite" [(ngModel)]="empresa.linkSite" maxlength="64" name="linkSite" class="form-control" id="linkSite">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="linkFacebook">Link Facebook:</label>
+            <input type="text" formControlName="linkFacebook" [(ngModel)]="empresa.linkFacebook" maxlength="64" name="linkFacebook" class="form-control" id="linkFacebook">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="linkInstagram">Link Instagram:</label>
+            <input type="text" formControlName="linkInstagram" [(ngModel)]="empresa.linkInstagram" maxlength="64" name="linkInstagram" class="form-control" id="linkInstagram">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="linkTwitter">Link Twitter:</label>
+            <input type="text" formControlName="linkTwitter" [(ngModel)]="empresa.linkTwitter" maxlength="64" name="linkTwitter" class="form-control" id="linkTwitter">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="categoria">Categoria: <span class="error">*</span></label>
+            <select class="form-control" id="categoria" name="categoria" [(ngModel)]="empresa.categoria.id" formControlName="categoria">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="categoria.id" *ngFor="let categoria of categorias">{{categoria.nome}}</option>
+            </select>
+            <div *ngIf="submitted && addForm.controls.categoria.errors" class="error">
+              <div *ngIf="addForm.controls.categoria.errors.required">Categoria é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <h5 class="title-page-border margin--top-2x ">
+          <span class="">
+            Endereço
+          </span>
+        </h5>
+
+        <div class="padding--bottom"></div>
+
+        <div class="row">
+          <div class="col-md-2 form-group">
+            <label for="estado">Estado: <span class="error">*</span></label>
+            <select class="form-control" id="estado" name="estado" [(ngModel)]="empresa.endereco.cidade.estado.id" formControlName="estado" (change)="buscaCidade()">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
+            </select>
+            <div *ngIf="submitted && addForm.controls.estado.errors" class="error">
+              <div *ngIf="addForm.controls.estado.errors.required">Estado é obrigatório!</div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="cidade">Cidade: <span class="error">*</span></label>
+            <select class="form-control" id="cidade" name="cidade" formControlName="cidade" [(ngModel)]="empresa.endereco.cidade.id">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</option>
+            </select>
+            <div *ngIf="submitted && addForm.controls.cidade.errors" class="error">
+              <div *ngIf="addForm.controls.cidade.errors.required">Cidade é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="logradouro">Logradouro:</label>
+            <input type="text" formControlName="logradouro" maxlength="64" name="logradouro" [(ngModel)]="empresa.endereco.logradouro" class="form-control" id="logradouro">
+            <div *ngIf="submitted && addForm.controls.logradouro.errors" class="error">
+              <div *ngIf="addForm.controls.logradouro.errors.required">Logradouro é obrigatório!</div>
+            </div>
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="numero">Número:</label>
+            <input type="text" formControlName="numero" maxlength="64" name="numero" class="form-control" id="numero" [(ngModel)]="empresa.endereco.numero">
+            <div *ngIf="submitted && addForm.controls.numero.errors" class="error">
+              <div *ngIf="addForm.controls.numero.errors.required">Número é obrigatório!</div>
+            </div>
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" formControlName="bairro" maxlength="64" name="bairro" class="form-control" id="bairro" [(ngModel)]="empresa.endereco.bairro">
+            <div *ngIf="submitted && addForm.controls.bairro.errors" class="error">
+              <div *ngIf="addForm.controls.bairro.errors.required">Bairro é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <label for="complemento">Complemento:</label>
+            <input type="text" formControlName="complemento" maxlength="64" name="complemento" class="form-control" id="complemento" [(ngModel)]="empresa.endereco.complemento">
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="cep">CEP:</label>
+            <input type="text" mask="00000-000" formControlName="cep" maxlength="64" name="cep" class="form-control" id="cep" [(ngModel)]="empresa.endereco.cep">
+            <div *ngIf="submitted && addForm.controls.cep.errors" class="error">
+              <div *ngIf="addForm.controls.cep.errors.required">CEP é obrigatório!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row margin--vertical">
+          <div class="col-md-1">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-warning" type="button" (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+
+      </form>
+      <ngx-loading [show]="loading"></ngx-loading>
+    </div>
+  </div>
+</div>

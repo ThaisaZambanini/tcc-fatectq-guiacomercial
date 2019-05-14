@@ -2,18 +2,13 @@ package com.fatec.tcc.formaPagamento;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fatec.tcc.empresa.Empresa;
 
 @Entity
 @Table(name = "tb_forma_pagamento", schema = "dbguiacomercial")
@@ -29,12 +24,6 @@ public class FormaPagamento {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_empresa")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JsonIgnore
-	private Empresa empresa;
-
 	public Long getId() {
 		return id;
 	}
@@ -49,14 +38,6 @@ public class FormaPagamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
 	}
 
 }

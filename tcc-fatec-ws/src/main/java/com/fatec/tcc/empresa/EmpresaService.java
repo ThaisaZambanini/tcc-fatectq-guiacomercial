@@ -15,5 +15,7 @@ public interface EmpresaService {
 
 	List<Empresa> findAllEmpresasWeb(Optional<Long> estado, Optional<Long> cidade, Optional<String> logradouro,
 			Optional<String> cep, Optional<String> numero);
+	
+	Empresa findEmpresaFetch(Long id);
 
 }

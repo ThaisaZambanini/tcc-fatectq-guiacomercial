@@ -6,6 +6,10 @@ export class Cidade implements Deserializable {
   nome: string;
   estado: Estado;
 
+  constructor() {
+    this.estado = new Estado();
+  }
+
   deserialize(input: any) {
     Object.assign(this, input);
     this.estado = new Estado().deserialize(input.estado);

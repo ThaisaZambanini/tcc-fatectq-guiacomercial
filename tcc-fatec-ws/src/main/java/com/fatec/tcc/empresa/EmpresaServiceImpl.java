@@ -127,17 +127,17 @@ public class EmpresaServiceImpl implements EmpresaService {
 		sb.append("WHERE estado.id = :estado and cidade.id = :cidade");
 
 		if (logradouro.isPresent()) {
-			sb.append("AND endereco.logradouro =:logradouro");
+			sb.append("AND endereco.logradouro = :logradouro");
 			parametros.put("logradouro", logradouro.get());
 		}
 
 		if (cep.isPresent()) {
-			sb.append("AND endereco.cep =:cep");
+			sb.append("AND endereco.cep = :cep");
 			parametros.put("cep", cep.get());
 		}
 
 		if (numero.isPresent()) {
-			sb.append("AND endereco.numero =:numero");
+			sb.append("AND endereco.numero = :numero");
 			parametros.put("numero", numero.get());
 		}
 
@@ -147,5 +147,21 @@ public class EmpresaServiceImpl implements EmpresaService {
 		Query query = em.createQuery(sb.toString(), Empresa.class);
 		parametros.forEach((chave, valor) -> query.setParameter(chave, valor));
 		return query.getResultList();
+	}
+
+	@Override
+	public Empresa findEmpresaFetch(Long id) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("FROM Empresa empresa ");
+		sb.append("INNER JOIN FETCH empresa.categoria categoria ");
+		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
+		sb.append("INNER JOIN FETCH endereco.cidade cidade ");
+		sb.append("INNER JOIN FETCH cidade.estado estado ");
+		sb.append("WHERE empresa.id = :empresa ");
+
+		Query query = em.createQuery(sb.toString(), Empresa.class);
+		query.setParameter("empresa", id);
+
+		return (Empresa) query.getSingleResult();
 	}
 }

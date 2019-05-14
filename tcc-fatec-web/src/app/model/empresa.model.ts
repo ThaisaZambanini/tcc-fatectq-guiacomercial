@@ -16,6 +16,11 @@ export class Empresa implements Deserializable {
   endereco: Endereco;
   telefone: Telefone[];
 
+  constructor() {
+    this.categoria = new Categoria();
+    this.endereco = new Endereco();
+  }
+
   deserialize(input: any) {
     Object.assign(this, input);
     this.categoria = new Categoria().deserialize(input.categoria);

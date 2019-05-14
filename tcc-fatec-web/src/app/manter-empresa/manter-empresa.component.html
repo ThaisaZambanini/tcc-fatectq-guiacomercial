@@ -74,6 +74,7 @@
             <th class="w-25">Nome</th>
             <th class="w-25">Categoria</th>
             <th class="w-25">Endereço</th>
+            <th class="w-25">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -81,6 +82,9 @@
             <td>{{empresa.nome}}</td>
             <td>{{empresa.categoria.nome}}</td>
             <td>{{empresa.endereco.completo}}</td>
+            <td>
+              <button class="btn btn-primary" type="button" (click)="editarEmpresa(empresa)"> Editar</button>
+              <button class="btn btn-danger" type="button" (click)="excluirEmpresa(empresa)" style="margin-left: 20px;"> Excluir</button></td>
           </tr>
         </tbody>
       </table>

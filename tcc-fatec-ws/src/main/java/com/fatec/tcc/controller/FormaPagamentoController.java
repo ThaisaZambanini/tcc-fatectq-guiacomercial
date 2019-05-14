@@ -32,22 +32,22 @@ public class FormaPagamentoController {
 	private EmpresaRepository empresaRepository;
 
 	@GetMapping("/")
-	public ResponseEntity<List<FormaPagamento>> getAllHorarios(@RequestParam("idEmpresa") Long idEmpresa) {
-		List<FormaPagamento> lista = formaPagamentoRepository.findAllEmpresa(idEmpresa);
+	public ResponseEntity<List<FormaPagamento>> getAllFormasPagamento() {
+		List<FormaPagamento> lista = formaPagamentoRepository.findAll();
 		return ResponseEntity.ok().body(lista);
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
-	public ResponseEntity<List<FormaPagamento>> novoHorario(
+	public ResponseEntity<List<FormaPagamento>> novaFormaPagamento(
 			@RequestBody @Validated List<FormaPagamento> formasPagamento, @RequestParam("idEmpresa") Long idEmpresa)
 			throws ResourceNotFoundException {
 		Empresa empresa = empresaRepository.findById(idEmpresa)
 				.orElseThrow(() -> new ResourceNotFoundException("Empresa não encontrado :: " + idEmpresa));
 
 		if (empresa != null) {
-			formasPagamento.forEach(x -> {
-				x.setEmpresa(empresa);
-			});
+			/*
+			 * formasPagamento.forEach(x -> { x.setEmpresa(empresa); });
+			 */
 
 			List<FormaPagamento> horariosSavos = formaPagamentoRepository.saveAll(formasPagamento);
 			return new ResponseEntity<List<FormaPagamento>>(horariosSavos, HttpStatus.OK);
