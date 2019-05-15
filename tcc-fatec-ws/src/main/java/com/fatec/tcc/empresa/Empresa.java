@@ -15,11 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.tcc.categoria.Categoria;
 import com.fatec.tcc.endereco.Endereco;
+import com.fatec.tcc.formaPagamento.FormaPagamento;
 import com.fatec.tcc.horario.Horario;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresa;
 import com.fatec.tcc.telefone.Telefone;
@@ -77,6 +79,9 @@ public class Empresa {
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<RlFormaPagamentoEmpresa> formaPagamento;
+	
+	@Transient
+	private List<FormaPagamento> listaFormaPagamento;
 
 	public Long getId() {
 		return id;
@@ -186,6 +191,14 @@ public class Empresa {
 
 	public void setFormaPagamento(List<RlFormaPagamentoEmpresa> formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	public List<FormaPagamento> getListaFormaPagamento() {
+		return listaFormaPagamento;
+	}
+
+	public void setListaFormaPagamento(List<FormaPagamento> listaFormaPagamento) {
+		this.listaFormaPagamento = listaFormaPagamento;
 	}
 
 }

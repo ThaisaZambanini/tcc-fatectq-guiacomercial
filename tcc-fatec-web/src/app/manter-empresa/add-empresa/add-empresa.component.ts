@@ -45,6 +45,7 @@ export class AddEmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.empresa = new Empresa();
     this.telefone = new Telefone();
     this.horario = new Horario();
@@ -78,6 +79,7 @@ export class AddEmpresaComponent implements OnInit {
     this.getCategorias();
     this.getEstados();
     this.getFormasPagamento();
+    this.loading = false;
   }
 
   adicionarHorario() {
@@ -120,14 +122,15 @@ export class AddEmpresaComponent implements OnInit {
   adicionarFormaPagamento() {
     if (this.formaPagamento.id !== null && this.formaPagamento.id !== undefined
       && this.formaPagamento.descricao !== null && this.formaPagamento.descricao !== undefined) {
-      this.empresa.formaPagamento.push(this.formaPagamento);
+      this.empresa.listaFormaPagamento.push(this.formaPagamento);
+      console.log(this.empresa.listaFormaPagamento)
       this.formaPagamento = new FormaPagamento();
     }
   }
 
   excluirFormaPagamento(formaPagamento: FormaPagamento) {
-    this.empresa.formaPagamento.forEach((item, index) => {
-      if (item === formaPagamento) this.empresa.formaPagamento.splice(index, 1);
+    this.empresa.listaFormaPagamento.forEach((item, index) => {
+      if (item === formaPagamento) this.empresa.listaFormaPagamento.splice(index, 1);
     });
   }
 
@@ -152,6 +155,7 @@ export class AddEmpresaComponent implements OnInit {
         timeout: false,
         type: 'danger'
       });
+      this.loading = false;
       return;
     }
     this.loading = true;
@@ -167,6 +171,7 @@ export class AddEmpresaComponent implements OnInit {
           type: 'success'
         });
         this.empresa = new Empresa();
+        this.submitted = false;
       } else {
         if (data != null) {
           this.ngFlashMessageService.showFlashMessage({
@@ -206,30 +211,24 @@ export class AddEmpresaComponent implements OnInit {
   getEstados() {
     this.estadoService.getEstados().subscribe((data) => {
       this.estados = data;
-      this.loading = false;
     }, (err) => {
       console.log(err);
-      this.loading = false;
     });
   }
 
   getFormasPagamento() {
     this.formaPagamentoService.getFormasPagamento("").subscribe((data) => {
       this.formasPagamento = data;
-      this.loading = false;
     }, (err) => {
       console.log(err);
-      this.loading = false;
     });
   }
 
   getCategorias() {
     this.categoriaService.getCategorias("").subscribe((data) => {
       this.categorias = data;
-      this.loading = false;
     }, (err) => {
       console.log(err);
-      this.loading = false;
     });
   }
 

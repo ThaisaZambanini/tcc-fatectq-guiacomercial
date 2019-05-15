@@ -18,14 +18,14 @@ export class Empresa implements Deserializable {
   endereco: Endereco;
   telefone: Telefone[];
   horario: Horario[];
-  formaPagamento: FormaPagamento[];
+  listaFormaPagamento: FormaPagamento[];
 
   constructor() {
     this.categoria = new Categoria();
     this.endereco = new Endereco();
     this.telefone = new Array();
     this.horario = new Array();
-    this.formaPagamento = new Array();
+    this.listaFormaPagamento = new Array();
   }
 
   deserialize(input: any) {

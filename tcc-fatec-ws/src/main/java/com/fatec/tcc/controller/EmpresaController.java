@@ -28,6 +28,9 @@ import com.fatec.tcc.dto.EmpresaDTO;
 import com.fatec.tcc.empresa.Empresa;
 import com.fatec.tcc.empresa.EmpresaRepository;
 import com.fatec.tcc.endereco.Endereco;
+import com.fatec.tcc.formaPagamento.FormaPagamentoRepository;
+import com.fatec.tcc.rl.RlFormaPagamentoEmpresa;
+import com.fatec.tcc.rl.RlFormaPagamentoEmpresaRepository;
 
 @RestController
 @RequestMapping(path = "api/empresa")
@@ -42,6 +45,12 @@ public class EmpresaController {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
+
+	@Autowired
+	private FormaPagamentoRepository formaPagamentoRepository;
+
+	@Autowired
+	private RlFormaPagamentoEmpresaRepository rlFormaPagamentoEmpresaRepository;
 
 	@GetMapping("/")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
@@ -126,6 +135,14 @@ public class EmpresaController {
 
 		Empresa empresaSalvo = empresaRepository.save(empresa);
 		if (empresaSalvo != null) {
+
+			empresa.getListaFormaPagamento().forEach(x -> {
+				RlFormaPagamentoEmpresa rl = new RlFormaPagamentoEmpresa();
+				rl.setEmpresa(empresaSalvo);
+				rl.setFormaPagamento(x);
+				rlFormaPagamentoEmpresaRepository.save(rl);
+			});
+
 			MensagemRetorno retorno = new MensagemRetorno();
 			retorno.setMensagem("Registro salvo com sucesso!");
 			retorno.setCodigoRetorno(0);
