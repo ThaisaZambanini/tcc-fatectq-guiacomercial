@@ -212,7 +212,7 @@
           </div>
           <div class="col-md-2">
             <label for="horarioInicial">Hora Inicial:</label>
-            <input type="text" mask="Hh:m0" [validation]="true"  maxlength="5" formControlName="horarioInicial" name="horarioInicial" class="form-control" id="horarioInicial" [(ngModel)]="horario.horarioInicial">
+            <input type="text" mask="Hh:m0" [validation]="true" maxlength="5" formControlName="horarioInicial" name="horarioInicial" class="form-control" id="horarioInicial" [(ngModel)]="horario.horarioInicial">
           </div>
           <div class="col-md-2">
             <label for="horarioFinal">Hora Final:</label>
@@ -256,6 +256,43 @@
             Formas de Pagamento
           </span>
         </h5>
+
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="cidade">Forma de Pagamento: <span class="error">*</span></label>
+            <select class="form-control" id="formaPagamento" name="formaPagamento" formControlName="formaPagamento" [(ngModel)]="formaPagamento">
+              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option [ngValue]="forma" *ngFor="let forma of formasPagamento">{{forma.descricao}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" type="button" (click)="adicionarFormaPagamento()">Adicionar</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="empresa.formaPagamento.length > 0" class="table-responsive">
+              <table class="table table-striped margin--top-3x">
+                <thead>
+                  <tr>
+                    <th class="w-25">Nome</th>
+                    <th class="w-25">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let forma of empresa.formaPagamento | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+                    <td>{{forma.descricao}}</td>
+                    <td>
+                      <button class="btn btn-danger" type="button" (click)="excluirFormaPagamento(forma)" style="margin-left: 20px;"> Excluir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+            </div>
+          </div>
+        </div>
 
         <div class="row margin--vertical">
           <div class="col-md-1">

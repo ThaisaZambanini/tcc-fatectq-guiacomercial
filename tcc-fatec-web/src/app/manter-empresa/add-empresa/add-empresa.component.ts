@@ -6,6 +6,7 @@ import { Estado } from "../../model/uf.model";
 import { Telefone } from "../../model/telefone.model";
 import { Horario } from "../../model/horario.model";
 import { Categoria } from "../../model/categoria.model";
+import { FormaPagamento } from "../../model/forma-pagamento.model";
 import { Observable, throwError } from 'rxjs';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Empresa } from "../../model/empresa.model";
@@ -13,6 +14,7 @@ import { EstadoService } from "../../service/estado.service";
 import { CidadeService } from "../../service/cidade.service";
 import { EmpresaService } from "../../service/empresa.service";
 import { CategoriaService } from "../../service/categoria.service";
+import { FormaPagamentoService } from "../../service/forma-pagamento.service";
 
 @Component({
   selector: 'app-add-empresa',
@@ -22,12 +24,14 @@ export class AddEmpresaComponent implements OnInit {
   addForm: FormGroup;
   cidades: Cidade[];
   estados: Estado[];
+  formasPagamento: FormaPagamento[];
   categorias: Categoria[];
   horario: Horario;
   empresa: Empresa;
   loading: boolean = false;
   submitted: boolean = false;
   telefone: Telefone;
+  formaPagamento: FormaPagamento;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,13 +40,16 @@ export class AddEmpresaComponent implements OnInit {
     private cidadeService: CidadeService,
     private empresaService: EmpresaService,
     private categoriaService: CategoriaService,
-    private ngFlashMessageService: NgFlashMessageService
+    private ngFlashMessageService: NgFlashMessageService,
+    private formaPagamentoService: FormaPagamentoService
   ) { }
 
   ngOnInit() {
     this.empresa = new Empresa();
     this.telefone = new Telefone();
     this.horario = new Horario();
+    this.formaPagamento = new FormaPagamento();
+    this.formasPagamento = new Array();
 
     this.addForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -64,11 +71,13 @@ export class AddEmpresaComponent implements OnInit {
       numeroTelefone: [''],
       diaSemana: [''],
       horarioInicial: [''],
-      horarioFinal: ['']
+      horarioFinal: [''],
+      formaPagamento: ['']
     });
 
     this.getCategorias();
     this.getEstados();
+    this.getFormasPagamento();
   }
 
   adicionarHorario() {
@@ -106,6 +115,20 @@ export class AddEmpresaComponent implements OnInit {
       window.scrollTo(5000, 0);
       return;
     }
+  }
+
+  adicionarFormaPagamento() {
+    if (this.formaPagamento.id !== null && this.formaPagamento.id !== undefined
+      && this.formaPagamento.descricao !== null && this.formaPagamento.descricao !== undefined) {
+      this.empresa.formaPagamento.push(this.formaPagamento);
+      this.formaPagamento = new FormaPagamento();
+    }
+  }
+
+  excluirFormaPagamento(formaPagamento: FormaPagamento) {
+    this.empresa.formaPagamento.forEach((item, index) => {
+      if (item === formaPagamento) this.empresa.formaPagamento.splice(index, 1);
+    });
   }
 
   excluirHorario(horario: Horario) {
@@ -183,6 +206,16 @@ export class AddEmpresaComponent implements OnInit {
   getEstados() {
     this.estadoService.getEstados().subscribe((data) => {
       this.estados = data;
+      this.loading = false;
+    }, (err) => {
+      console.log(err);
+      this.loading = false;
+    });
+  }
+
+  getFormasPagamento() {
+    this.formaPagamentoService.getFormasPagamento("").subscribe((data) => {
+      this.formasPagamento = data;
       this.loading = false;
     }, (err) => {
       console.log(err);
