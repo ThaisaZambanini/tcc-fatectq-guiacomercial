@@ -36,6 +36,7 @@ export class ManterEmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.empresas = new Array();
     this.setForm();
     this.getEstados();
   }
