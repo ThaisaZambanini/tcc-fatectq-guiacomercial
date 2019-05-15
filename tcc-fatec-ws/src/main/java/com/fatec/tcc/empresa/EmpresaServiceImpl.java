@@ -1,5 +1,6 @@
 package com.fatec.tcc.empresa;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fatec.tcc.dto.EmpresaDTO;
+import com.fatec.tcc.formaPagamento.FormaPagamento;
 
 public class EmpresaServiceImpl implements EmpresaService {
 
@@ -157,11 +159,23 @@ public class EmpresaServiceImpl implements EmpresaService {
 		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
 		sb.append("INNER JOIN FETCH endereco.cidade cidade ");
 		sb.append("INNER JOIN FETCH cidade.estado estado ");
+		sb.append("INNER JOIN FETCH empresa.horarios horarios ");
+		sb.append("INNER JOIN FETCH empresa.telefones telefones ");
+		sb.append("INNER JOIN FETCH empresa.formaPagamento formaPagamento ");
 		sb.append("WHERE empresa.id = :empresa ");
 
 		Query query = em.createQuery(sb.toString(), Empresa.class);
 		query.setParameter("empresa", id);
 
-		return (Empresa) query.getSingleResult();
+		Empresa empresa = (Empresa) query.getSingleResult();
+		List<FormaPagamento> listaFormasPagamento = new ArrayList<>();
+		if (empresa != null) {
+			empresa.getFormaPagamento().forEach(x -> {
+				listaFormasPagamento.add(x.getFormaPagamento());
+			});
+		}
+
+		empresa.setListaFormaPagamento(listaFormasPagamento);
+		return empresa;
 	}
 }

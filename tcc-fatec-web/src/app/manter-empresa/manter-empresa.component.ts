@@ -85,6 +85,8 @@ export class ManterEmpresaComponent implements OnInit {
 
     const filtro = new FiltroEmpresa().deserialize(this.addForm.value);
 
+    console.log(filtro);
+
     this.empresaService.getEmpresasFiltroWeb(filtro).subscribe((data) => {
       this.empresas = data;
       this.nenhumResultado = false;

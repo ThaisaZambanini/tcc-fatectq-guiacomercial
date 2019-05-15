@@ -59,8 +59,8 @@ public class EmpresaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long cidadeId) {
-		Empresa empresa = empresaRepository.findEmpresaFetch(cidadeId);
+	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long id) {
+		Empresa empresa = empresaRepository.findEmpresaFetch(id);
 		if (empresa != null) {
 			return ResponseEntity.ok().body(empresa);
 		}
@@ -97,8 +97,7 @@ public class EmpresaController {
 	@GetMapping("/empresa/")
 	public ResponseEntity<Empresa> getEmpresaPorId(@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade,
 			@RequestParam("id") Optional<Long> id) {
-		Empresa empresa = empresaRepository.findById(id.get())
-				.orElseThrow(() -> new ResourceNotFoundException("Empresa não encontrada :: " + id));
+		Empresa empresa = empresaRepository.findEmpresaFetch(id.get());
 		if (empresa != null) {
 			return ResponseEntity.ok().body(empresa);
 		}
