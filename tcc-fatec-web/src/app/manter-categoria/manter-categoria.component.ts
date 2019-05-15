@@ -18,7 +18,12 @@ export class ManterCategoriaComponent implements OnInit {
   pageActual: number = 1;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private categoriaService: CategoriaService, private ngFlashMessageService: NgFlashMessageService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private categoriaService: CategoriaService,
+    private ngFlashMessageService: NgFlashMessageService
+  ) { }
 
   ngOnInit() {
     this.loading = true;
@@ -69,10 +74,9 @@ export class ManterCategoriaComponent implements OnInit {
     }
   }
 
-
-    editarCategoria(categoria: Categoria): void {
-      localStorage.removeItem("editCategoriaId");
-      localStorage.setItem("editCategoriaId", categoria.id.toString());
-      this.router.navigate(['edit-categoria']);
-    }
+  editarCategoria(categoria: Categoria): void {
+    localStorage.removeItem("editCategoriaId");
+    localStorage.setItem("editCategoriaId", categoria.id.toString());
+    this.router.navigate(['edit-categoria']);
+  }
 }

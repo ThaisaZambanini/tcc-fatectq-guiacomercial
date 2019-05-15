@@ -19,8 +19,13 @@ export class EditCategoriaComponent implements OnInit {
   fileName: string;
   filePreview: string
 
-  constructor(private sanitizer: DomSanitizer, private formBuilder: FormBuilder, private router: Router, private categoriaService: CategoriaService, private ngFlashMessageService: NgFlashMessageService) {
-  }
+  constructor(
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private categoriaService: CategoriaService,
+    private ngFlashMessageService: NgFlashMessageService
+  ) {}
 
   ngOnInit() {
     this.loading = true;

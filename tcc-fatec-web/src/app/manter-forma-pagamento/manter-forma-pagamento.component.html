@@ -1,3 +1,71 @@
-<p>
-  manter-forma-pagamento works!
-</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-md-12 margin--top-2x">
+    <h3 class="title-page-border">
+      <span class="title-page--line-yellow">
+        Consulta de Forma de Pagamento
+      </span>
+    </h3>
+
+    <ng-flash-message></ng-flash-message>
+
+    <form class="margin--top-2x form-guia-comercial w-50" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="nome">Nome: <span class="error">*</span></label>
+          <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da forma de pagamento" name="nome" class="form-control" id="nome">
+          <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
+            <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary margin--vertical right" (click)="limparCampos()" id="limpar" type="button">Limpar</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngIf="formasPagamento.length > 0" class="table-responsive">
+          <table class="table table-striped margin--top-3x">
+            <thead>
+              <tr>
+                <th class="w-10">Id</th>
+                <th class="w-10">Nome</th>
+                <th class="w-10">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let forma of formasPagamento | paginate: {itemsPerPage: 10, currentPage: pageActual}">
+                <td>{{forma.id}}</td>
+                <td>{{forma.descricao}}</td>
+                <td>
+                  <button class="btn btn-primary" type="button" (click)="editarForma(forma)"> Editar</button>
+                  <button class="btn btn-danger" type="button" (click)="excluirForma(forma)" style="margin-left: 20px;"> Excluir</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" responsive="true" screenReaderPaginationLabel="Paginação" nextLabel="Próximo"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div class="padding--vertical-3x" *ngIf="formasPagamento.length > 0">
+      <p class="alert alert-no-result">Nenhum resultado!</p>
+    </div>
+
+    <div class="text-right">
+      <button class="btn btn-primary margin--vertical" (click)="addFormaPagamento()"> Adicionar</button>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>
+
+  </div>
+</div>

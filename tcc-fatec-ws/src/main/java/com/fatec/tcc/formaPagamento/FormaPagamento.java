@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "tb_forma_pagamento", schema = "dbguiacomercial")
 public class FormaPagamento {
@@ -18,7 +16,6 @@ public class FormaPagamento {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dbguiacomercial.sq_forma_pagamento")
 	@SequenceGenerator(name = "dbguiacomercial.sq_forma_pagamento", sequenceName = "dbguiacomercial.sq_forma_pagamento", initialValue = 1, allocationSize = 50)
 	@Column(name = "co_seq_forma_pagamento", nullable = false)
-	@JsonIgnore
 	private Long id;
 
 	@Column(name = "descricao")
