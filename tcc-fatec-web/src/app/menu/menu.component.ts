@@ -6,10 +6,15 @@ import { Router } from "@angular/router";
   templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {
+  menuAtivo: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  setMenu(menuAtual: string) {
+    this.menuAtivo = menuAtual;
   }
 
   sair() {

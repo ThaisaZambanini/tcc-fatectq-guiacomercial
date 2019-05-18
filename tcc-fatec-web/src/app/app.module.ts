@@ -51,6 +51,7 @@ import { AddCategoriaComponent } from './manter-categoria/add-categoria/add-cate
 import { EditCategoriaComponent } from './manter-categoria/edit-categoria/edit-categoria.component';
 
 import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem
     ManterCategoriaComponent,
     AddCategoriaComponent,
     EditCategoriaComponent,
-    ConsultaMensagemComponent
+    ConsultaMensagemComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

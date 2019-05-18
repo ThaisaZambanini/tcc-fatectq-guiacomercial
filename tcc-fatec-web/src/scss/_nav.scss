@@ -1,23 +1,26 @@
 .navbar-custom {
-    background-color: $primary-dark;
+  background-color: $primary-dark;
 }
 /* change the brand and text color */
+
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-    color: #FFF;
+  color: #FFF;
 }
 /* change the link color */
+
 .navbar-custom .navbar-nav .nav-link {
-    color: #FFF;
+  color: #FFF;
 }
 /* change the color of active or hovered links */
-.navbar-custom .nav-item.active .nav-link{
-    color: $yellow;
+
+.navbar-custom .nav-item.active .nav-link {
+  color: $yellow;
 }
 
 .navbar-custom .nav-item:hover .nav-link {
-    color: $yellow;
-    opacity: 0.8;
+  color: $yellow;
+  opacity: 0.8;
 }
 
 .navbar {
@@ -31,4 +34,7 @@
     left: 0;
     width: 6%;
   }
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+  color: $yellow !important;
 }
