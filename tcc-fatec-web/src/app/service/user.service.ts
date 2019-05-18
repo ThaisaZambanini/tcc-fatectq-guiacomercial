@@ -14,7 +14,7 @@ export class UserService {
     return this.http.get<Usuario>(this.baseUrl + "/");
   }
 
-  getUsuarioAutenticado(cpf: string, senha: string) {
+  getUsuarioAutenticado(cpf: string, senha: string): Observable<Usuario> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     let params: HttpParams = new HttpParams();
     params.set('cpf', cpf);

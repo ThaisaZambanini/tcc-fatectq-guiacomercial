@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class CidadeService {
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "cidade";
+  baseUrl = environment.baseUrl + "cidades";
 
   getCidadesPorEstado(estado: string): Observable<Cidade[]> {
     return this.http.get(`${this.baseUrl}/estado/${estado}`).pipe(map((response: any) => response.map((cidade: Cidade) => new Cidade().deserialize(cidade))));

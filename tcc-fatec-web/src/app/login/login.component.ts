@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import { Usuario } from "../model/user.model";
 import { UserService } from "../service/user.service";
 import { MensagemRetorno } from "../model/mensagem.model";
 
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
   loading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, public service: UserService, ) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, public service: UserService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -34,11 +35,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     const cpf = this.loginForm.controls.cpf.value;
     const senha = this.loginForm.controls.senha.value;
-    this.service.getUsuarioAutenticado(cpf, senha).subscribe((data: {}) => {
+    this.service.getUsuarioAutenticado(cpf, senha).subscribe((data) => {
       if (data) {
         this.loading = false;
-        var resp = JSON.parse(JSON.stringify(data));
-        if (resp.codigoRetorno === 0) {
+        let usuario = new Usuario();
+        usuario = data;
+        if (usuario !== null && usuario != undefined) {
+          localStorage.setItem("usuario", JSON.stringify(usuario));
           this.router.navigate(['home']);
         } else {
           this.invalidLogin = true;

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.tcc.commons.GeralUtil;
-import com.fatec.tcc.commons.MensagemRetorno;
 import com.fatec.tcc.usuario.Usuario;
 import com.fatec.tcc.usuario.UsuarioRepository;
 
@@ -35,16 +34,16 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/autenticar")
-	public MensagemRetorno autenticarUsuario(@RequestParam("cpf") String cpf, @RequestParam("senha") String senha) {
+	public Usuario autenticarUsuario(@RequestParam("cpf") String cpf, @RequestParam("senha") String senha) {
 		Usuario usuarioAutenticado = usuarioRepository.autenticarUsuario(cpf, senha);
 		if (usuarioAutenticado != null) {
-			return new MensagemRetorno(0);
+			return usuarioAutenticado;
 		}
-		return new MensagemRetorno(1);
+		return null;
 	}
 
 	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
-	public ResponseEntity<Usuario> novaCidade(@RequestBody @Validated Usuario usuario)
+	public ResponseEntity<Usuario> novoUsuario(@RequestBody @Validated Usuario usuario)
 			throws ResourceNotFoundException {
 
 		if (usuario != null) {

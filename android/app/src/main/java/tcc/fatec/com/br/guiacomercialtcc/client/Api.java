@@ -20,10 +20,10 @@ import tcc.fatec.com.br.guiacomercialtcc.model.Empresa;
 
 public interface Api {
 
-    @GET("estado/")
+    @GET("estados")
     Call<List<EstadoDTO>> findEstados();
 
-    @GET("cidade/estado/{id}")
+    @GET("cidades/estado/{id}")
     Call<List<CidadeDTO>> findCidades(@Path("id") Long id);
 
     @GET("categoria/")

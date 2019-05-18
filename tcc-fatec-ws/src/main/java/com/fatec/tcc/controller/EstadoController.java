@@ -23,14 +23,14 @@ import com.fatec.tcc.estado.Estado;
 import com.fatec.tcc.estado.EstadoRepository;
 
 @RestController
-@RequestMapping(path = "api/estado")
+@RequestMapping(path = "api/estados")
 @CrossOrigin
 public class EstadoController {
 
 	@Autowired
 	private EstadoRepository estadoRepository;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<List<Estado>> getAllEstados() {
 		List<Estado> lista = estadoRepository.findAll();
 		return ResponseEntity.ok().body(lista);
