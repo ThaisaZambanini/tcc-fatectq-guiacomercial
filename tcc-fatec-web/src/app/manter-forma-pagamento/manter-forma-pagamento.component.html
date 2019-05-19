@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-md-12 margin--top-2x">
+  <div class="col-md-12 margin--top-2x margin--bottom-6x">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
         Consulta de Forma de Pagamento
@@ -8,10 +8,10 @@
 
     <ng-flash-message></ng-flash-message>
 
-    <form class="margin--top-2x form-guia-comercial w-50" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <form class="margin--top-2x form-guia-comercial padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-4">
           <label for="nome">Nome: <span class="error">*</span></label>
           <input type="nome" formControlName="nome" maxlength="64" placeholder="Digite o nome da forma de pagamento" name="nome" class="form-control" id="nome">
           <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
@@ -20,8 +20,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-4">
+      <div class="row padding--top">
+        <div class="col-md-1">
           <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
         </div>
         <div class="col-md-2">
@@ -36,14 +36,12 @@
           <table class="table table-striped margin--top-3x">
             <thead>
               <tr>
-                <th class="w-10">Id</th>
                 <th class="w-10">Nome</th>
                 <th class="w-10">Ação</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let forma of formasPagamento | paginate: {itemsPerPage: 10, currentPage: pageActual}">
-                <td>{{forma.id}}</td>
                 <td>{{forma.descricao}}</td>
                 <td>
                   <button class="btn btn-primary" type="button" (click)="editarForma(forma)"> Editar</button>
@@ -56,7 +54,7 @@
       </div>
     </div>
 
-    <div class="padding--vertical-3x" *ngIf="formasPagamento.length > 0">
+    <div class="padding--vertical-3x" *ngIf="formasPagamento.length == 0">
       <p class="alert alert-no-result">Nenhum resultado!</p>
     </div>
 

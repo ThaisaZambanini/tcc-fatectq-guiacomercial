@@ -1,4 +1,4 @@
-<div class="container margin--vertical-2x">
+<div class="container margin--vertical-2x margin--bottom-6x">
   <div class="col-md-12">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
@@ -8,7 +8,7 @@
 
     <ng-flash-message></ng-flash-message>
 
-    <form class="margin--top-2x form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <form class="margin--top-2x form-guia-comercial padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
         <div class="col-md-2 form-group">
@@ -22,14 +22,11 @@
           </div>
         </div>
         <div class="col-md-4 form-group">
-          <label for="cidade">Cidade: <span class="error">*</span></label>
+          <label for="cidade">Cidade:</label>
           <select class="form-control" id="cidade" name="cidade" formControlName="cidade">
             <option value="" [ngValue]="undefined" [selected]="true"></option>
             <option [ngValue]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</option>
           </select>
-          <div *ngIf="submitted && addForm.controls.cidade.errors" class="error">
-            <div *ngIf="addForm.controls.cidade.errors.required">Cidade é obrigatório!</div>
-          </div>
         </div>
       </div>
 
@@ -51,11 +48,9 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row"></div>
 
-      </div>
-
-      <div class="row">
+      <div class="row padding--top">
         <div class="col-md-1">
           <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
         </div>
@@ -96,7 +91,7 @@
     <div class="row text-align-end">
       <div class="col">
         <button class="btn btn-primary margin--vertical" style="margin-right: 10px" (click)="addEmpresa()"> Adicionar</button>
-        <button class="btn btn-warning margin--vertical" (click)="voltar()"> Voltar</button>
+        <!-- <button class="btn btn-warning margin--vertical" (click)="voltar()"> Voltar</button> -->
       </div>
     </div>
 

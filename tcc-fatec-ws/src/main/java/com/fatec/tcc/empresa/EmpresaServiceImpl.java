@@ -126,7 +126,12 @@ public class EmpresaServiceImpl implements EmpresaService {
 		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
 		sb.append(" INNER JOIN FETCH endereco.cidade cidade ");
 		sb.append(" INNER JOIN FETCH cidade.estado estado ");
-		sb.append("WHERE estado.id = :estado and cidade.id = :cidade");
+		sb.append("WHERE estado.id = :estado ");
+
+		if (cidade.isPresent()) {
+			sb.append("and cidade.id = :cidade ");
+			parametros.put("cidade", cidade.get());
+		}
 
 		if (logradouro.isPresent()) {
 			sb.append("AND endereco.logradouro = :logradouro");
@@ -144,7 +149,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}
 
 		parametros.put("estado", estado.get());
-		parametros.put("cidade", cidade.get());
 
 		Query query = em.createQuery(sb.toString(), Empresa.class);
 		parametros.forEach((chave, valor) -> query.setParameter(chave, valor));

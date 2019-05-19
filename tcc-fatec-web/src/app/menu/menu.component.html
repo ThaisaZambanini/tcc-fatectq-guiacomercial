@@ -15,7 +15,7 @@
           <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['home']">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link dropdown-toggle menu-estado"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Manter Estado
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -24,12 +24,12 @@
           </div>
         </li>
         <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link dropdown-toggle menu-cidade" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Manter Cidade
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-            <a class="dropdown-item" href="/manter-cidade">Consulta</a>
-            <a class="dropdown-item" href="/add-cidade">Cadastro</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['manter-cidade']">Consulta</a>
+            <a class="dropdown-item" [routerLink]="['add-cidade']">Cadastro</a>
           </div>
         </li>
         <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
@@ -37,8 +37,8 @@
             Manter Categoria
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/manter-categoria">Consulta</a>
-            <a class="dropdown-item" href="/add-categoria">Cadastro</a>
+            <a class="dropdown-item" [routerLink]="['manter-categoria']">Consulta</a>
+            <a class="dropdown-item" [routerLink]="['add-categoria']">Cadastro</a>
           </div>
         </li>
         <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
@@ -46,8 +46,8 @@
             Manter Forma de Pagamento
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/manter-forma-pagamento">Consulta</a>
-            <a class="dropdown-item" href="/add-forma-pagamento">Cadastro</a>
+            <a class="dropdown-item" [routerLink]="['manter-forma-pagamento']">Consulta</a>
+            <a class="dropdown-item" [routerLink]="['add-forma-pagamento']">Cadastro</a>
           </div>
         </li>
         <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
@@ -55,8 +55,8 @@
             Manter Empresa
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/manter-empresa">Consulta</a>
-            <a class="dropdown-item" href="/add-empresa">Cadastro</a>
+            <a class="dropdown-item" [routerLink]="['manter-empresa']">Consulta</a>
+            <a class="dropdown-item" [routerLink]="['add-empresa']">Cadastro</a>
           </div>
         </li>
         <li class="nav-item">

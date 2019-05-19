@@ -44,7 +44,7 @@ export class ManterEmpresaComponent implements OnInit {
   setForm() {
     this.addForm = this.formBuilder.group({
       estado: ['', Validators.required],
-      cidade: ['', Validators.required],
+      cidade: [''],
       logradouro: [''],
       cep: [''],
       numero: ['']

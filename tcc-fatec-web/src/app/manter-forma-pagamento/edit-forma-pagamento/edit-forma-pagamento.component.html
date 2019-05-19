@@ -12,7 +12,7 @@
         <input type="text" name="id" class="d-none">
         <div class="row">
           <div class="form-group col-md-6">
-            <label for="nome">Nome:</label>
+            <label for="nome">Nome: <span class="error">*</span></label>
             <input type="nome" [(ngModel)]="formaPagamento.descricao" formControlName="descricao" placeholder="Nome da forma de pagamento" name="descricao" class="form-control" id="descricao">
             <div *ngIf="submitted && addForm.controls.descricao.errors" class="error">
               <div *ngIf="addForm.controls.descricao.errors.required">Nome é obrigatório!</div>

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-md-12 margin--top-2x">
+  <div class="col-md-12 margin--top-2x margin--bottom-6x">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
         Consulta de Categoria
@@ -8,8 +8,7 @@
 
     <ng-flash-message></ng-flash-message>
 
-    <form class="margin--top-2x form-guia-comercial w-25" [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
+    <form class="margin--top-2x form-guia-comercial w-25 padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="form-group col-md-12">
           <label for="nome">Nome: <span class="error">*</span></label>
@@ -20,7 +19,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row padding--top">
         <div class="col-md-4">
           <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
         </div>

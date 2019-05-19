@@ -45,7 +45,7 @@ public class EstadoController {
 		return ResponseEntity.ok().body(null);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> newUsuario(@RequestBody @Validated Estado estado) {
 		if (estadoRepository.findEstadoExiste(estado.getNome()) > 0) {
 			MensagemRetorno retorno = new MensagemRetorno();

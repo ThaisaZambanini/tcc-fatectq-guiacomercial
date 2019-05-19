@@ -16,7 +16,7 @@ export class EstadoService {
   }
 
   adicionarEstado(estado: Estado): Observable<Estado> {
-    return this.http.post<Estado>(this.baseUrl + "/adicionar", estado);
+    return this.http.post<Estado>(this.baseUrl, estado);
   }
 
   getEstado(id: string): Observable<Estado> {

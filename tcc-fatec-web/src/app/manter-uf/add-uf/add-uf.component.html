@@ -7,20 +7,20 @@
     </h3>
     <div class="padding--vertical">
 
-      <form class="form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+      <form class="form-guia-comercial padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
         <ng-flash-message></ng-flash-message>
         <input type="text" name="id" class="d-none">
         <div class="row">
           <div class="form-group col-md-6">
-            <label for="nome">Nome:</label>
-            <input type="nome" formControlName="nome" placeholder="Nome" name="nome" class="form-control" id="nome">
+            <label for="nome">Sigla:</label>
+            <input type="nome" formControlName="nome" placeholder="Digite a sigla do estado" name="nome" class="form-control" id="nome">
             <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
-              <div *ngIf="addForm.controls.nome.errors.required">Nome é obrigatório!</div>
+              <div *ngIf="addForm.controls.nome.errors.required">Sigla é obrigatório!</div>
             </div>
           </div>
         </div>
 
-        <div class="row margin--vertical">
+        <div class="row margin--vertical padding--top">
           <div class="col-md-1">
             <button class="btn btn-primary" type="submit">Salvar</button>
           </div>

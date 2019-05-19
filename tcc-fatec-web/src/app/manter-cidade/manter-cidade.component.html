@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margin-bottom-2x margin--bottom-6x">
   <div class="col-md-12 margin--top-2x">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
@@ -8,13 +8,13 @@
 
     <ng-flash-message></ng-flash-message>
 
-    <form class="margin--top-2x form-guia-comercial w-25" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <form class="margin--top-2x form-guia-comercial w-25 padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
         <div class="col-md-12 form-group">
           <label for="estado">Estado: <span class="error">*</span></label>
           <select class="form-control" id="estado" formControlName="estado">
-            <option value="" [ngValue]="undefined" [selected]="true"></option>
+            <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
             <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
           </select>
           <div *ngIf="submitted && addForm.controls.estado.errors" class="error">
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row padding--top">
         <div class="col-md-2">
           <button class="btn btn-warning margin--vertical right" id="buscar" type="submit">Buscar</button>
         </div>

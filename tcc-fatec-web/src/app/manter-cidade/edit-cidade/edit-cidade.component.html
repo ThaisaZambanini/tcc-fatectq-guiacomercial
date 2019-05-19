@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margin-bottom-2x margin--bottom-6x">
   <div class="col-md-12 margin--top-2x">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
@@ -7,14 +7,14 @@
     </h3>
     <div class="padding--vertical">
       <ng-flash-message></ng-flash-message>
-      <form class="form-guia-comercial" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+      <form class="form-guia-comercial padding--top" [formGroup]="addForm" (ngSubmit)="onSubmit()">
         <input type="text" formControlName="id" name="id" id="id" class="d-none">
 
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="estado">Estado: <span class="error">*</span></label>
             <select [compareWith]="compareFn" class="form-control" id="estado" name="estado" formControlName="estado">
-              <option value="" [ngValue]=""></option>
+              <option value="" [ngValue]="undefined">Selecione</option>
               <option [ngValue]="country.id" *ngFor="let country of estados" ng-selected="">{{country.nome}}</option>
             </select>
             <div *ngIf="submitted && addForm.controls.estado.errors" class="error">
@@ -33,7 +33,7 @@
           </div>
         </div>
 
-        <div class="row margin--vertical">
+        <div class="row margin--vertical padding--top">
           <div class="col-md-1">
             <button class="btn btn-primary" type="submit">Salvar</button>
           </div>
