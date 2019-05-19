@@ -105,6 +105,14 @@ export class AddEmpresaComponent implements OnInit {
     if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
       && this.telefone.ddd !== null && this.telefone.ddd !== undefined
       && this.telefone.numero !== null && this.telefone.numero !== undefined) {
+      if (this.telefone.tipo === 'T') {
+        this.telefone.tipoApresentacao = 'Telefone';
+      } else if (this.telefone.tipo === 'W') {
+        this.telefone.tipoApresentacao = 'Whatsapp';
+      } else if (this.telefone.tipo === 'C') {
+        this.telefone.tipoApresentacao = 'Celular';
+      }
+
       this.empresa.telefone.push(this.telefone);
       this.telefone = new Telefone();
     } else {

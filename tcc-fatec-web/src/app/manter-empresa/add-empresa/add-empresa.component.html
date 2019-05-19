@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-md-12 margin--top-2x">
+  <div class="col-md-12 margin--top-2x margin--bottom-6x">
     <h3 class="title-page-border">
       <span class="title-page--line-yellow">
         Cadastrar Empresa
@@ -14,14 +14,14 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="logradouro">Nome: <span class="error">*</span></label>
-            <input type="text" formControlName="nome" [(ngModel)]="empresa.nome" maxlength="64" name="nome" class="form-control" id="logradouro">
+            <input type="text" formControlName="nome" placeholder="Digite o nome da empresa" [(ngModel)]="empresa.nome" maxlength="64" name="nome" class="form-control" id="logradouro">
             <div *ngIf="submitted && addForm.controls.nome.errors" class="error">
               <div *ngIf="addForm.controls.nome.errors.required">Nome da Empresa é obrigatório!</div>
             </div>
           </div>
           <div class="col-md-6 form-group">
             <label for="email">E-mail: <span class="error">*</span></label>
-            <input type="email" formControlName="email" [(ngModel)]="empresa.email" maxlength="64" name="email" class="form-control" id="email">
+            <input type="email" formControlName="email" placeholder="Digite o e-mail da empresa" [(ngModel)]="empresa.email" maxlength="64" name="email" class="form-control" id="email">
             <div *ngIf="submitted && addForm.controls.email.errors" class="error">
               <div *ngIf="addForm.controls.email.errors.required">E-mail é obrigatório!</div>
             </div>
@@ -31,22 +31,22 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="linkSite">Link Site:</label>
-            <input type="text" formControlName="linkSite" [(ngModel)]="empresa.linkSite" maxlength="64" name="linkSite" class="form-control" id="linkSite">
+            <input type="text" formControlName="linkSite" placeholder="Digite o link do site" [(ngModel)]="empresa.linkSite" maxlength="64" name="linkSite" class="form-control" id="linkSite">
           </div>
           <div class="col-md-6 form-group">
             <label for="linkFacebook">Link Facebook:</label>
-            <input type="text" formControlName="linkFacebook" [(ngModel)]="empresa.linkFacebook" maxlength="64" name="linkFacebook" class="form-control" id="linkFacebook">
+            <input type="text" formControlName="linkFacebook" placeholder="Digite o link do facebook" [(ngModel)]="empresa.linkFacebook" maxlength="64" name="linkFacebook" class="form-control" id="linkFacebook">
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="linkInstagram">Link Instagram:</label>
-            <input type="text" formControlName="linkInstagram" [(ngModel)]="empresa.linkInstagram" maxlength="64" name="linkInstagram" class="form-control" id="linkInstagram">
+            <input type="text" formControlName="linkInstagram" placeholder="Digite o link do instagram" [(ngModel)]="empresa.linkInstagram" maxlength="64" name="linkInstagram" class="form-control" id="linkInstagram">
           </div>
           <div class="col-md-6 form-group">
             <label for="linkTwitter">Link Twitter:</label>
-            <input type="text" formControlName="linkTwitter" [(ngModel)]="empresa.linkTwitter" maxlength="64" name="linkTwitter" class="form-control" id="linkTwitter">
+            <input type="text" formControlName="linkTwitter" placeholder="Digite o link do twitter" [(ngModel)]="empresa.linkTwitter" maxlength="64" name="linkTwitter" class="form-control" id="linkTwitter">
           </div>
         </div>
 
@@ -54,7 +54,7 @@
           <div class="col-md-4 form-group">
             <label for="categoria">Categoria: <span class="error">*</span></label>
             <select class="form-control" id="categoria" name="categoria" [(ngModel)]="empresa.categoria.id" formControlName="categoria">
-              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
               <option [ngValue]="categoria.id" *ngFor="let categoria of categorias">{{categoria.nome}}</option>
             </select>
             <div *ngIf="submitted && addForm.controls.categoria.errors" class="error">
@@ -75,7 +75,7 @@
           <div class="col-md-2 form-group">
             <label for="estado">Estado: <span class="error">*</span></label>
             <select class="form-control" id="estado" name="estado" [(ngModel)]="empresa.endereco.cidade.estado.id" formControlName="estado" (change)="buscaCidade()">
-              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
               <option [ngValue]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</option>
             </select>
             <div *ngIf="submitted && addForm.controls.estado.errors" class="error">
@@ -85,7 +85,7 @@
           <div class="col-md-4 form-group">
             <label for="cidade">Cidade: <span class="error">*</span></label>
             <select class="form-control" id="cidade" name="cidade" formControlName="cidade" [(ngModel)]="empresa.endereco.cidade.id">
-              <option value="" [ngValue]="undefined" [selected]="true"></option>
+              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
               <option [ngValue]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</option>
             </select>
             <div *ngIf="submitted && addForm.controls.cidade.errors" class="error">
@@ -97,21 +97,21 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="logradouro">Logradouro:</label>
-            <input type="text" formControlName="logradouro" maxlength="64" name="logradouro" [(ngModel)]="empresa.endereco.logradouro" class="form-control" id="logradouro">
+            <input type="text" formControlName="logradouro" placeholder="Digite o logradouro da empresa" maxlength="64" name="logradouro" [(ngModel)]="empresa.endereco.logradouro" class="form-control" id="logradouro">
             <div *ngIf="submitted && addForm.controls.logradouro.errors" class="error">
               <div *ngIf="addForm.controls.logradouro.errors.required">Logradouro é obrigatório!</div>
             </div>
           </div>
           <div class="col-md-3 form-group">
             <label for="numero">Número:</label>
-            <input type="text" formControlName="numero" maxlength="64" name="numero" class="form-control" id="numero" [(ngModel)]="empresa.endereco.numero">
+            <input type="text" formControlName="numero" maxlength="64" placeholder="Digite do número" name="numero" class="form-control" id="numero" [(ngModel)]="empresa.endereco.numero">
             <div *ngIf="submitted && addForm.controls.numero.errors" class="error">
               <div *ngIf="addForm.controls.numero.errors.required">Número é obrigatório!</div>
             </div>
           </div>
           <div class="col-md-3 form-group">
             <label for="bairro">Bairro:</label>
-            <input type="text" formControlName="bairro" maxlength="64" name="bairro" class="form-control" id="bairro" [(ngModel)]="empresa.endereco.bairro">
+            <input type="text" formControlName="bairro" placeholder="Digite o bairro" maxlength="64" name="bairro" class="form-control" id="bairro" [(ngModel)]="empresa.endereco.bairro">
             <div *ngIf="submitted && addForm.controls.bairro.errors" class="error">
               <div *ngIf="addForm.controls.bairro.errors.required">Bairro é obrigatório!</div>
             </div>
@@ -125,14 +125,14 @@
           </div>
           <div class="col-md-3 form-group">
             <label for="cep">CEP:</label>
-            <input type="text" mask="00000-000" formControlName="cep" maxlength="64" name="cep" class="form-control" id="cep" [(ngModel)]="empresa.endereco.cep">
+            <input type="text" mask="00000-000" placeholder="Digite o CEP" formControlName="cep" maxlength="64" name="cep" class="form-control" id="cep" [(ngModel)]="empresa.endereco.cep">
             <div *ngIf="submitted && addForm.controls.cep.errors" class="error">
               <div *ngIf="addForm.controls.cep.errors.required">CEP é obrigatório!</div>
             </div>
           </div>
         </div>
 
-        <h5 class="title-page-border margin--top-2x ">
+        <h5 class="title-page-border margin--top-2x padding--top">
           <span class="">
             Telefones
           </span>
@@ -154,7 +154,7 @@
           </div>
           <div class="col-md-3">
             <label for="cep">Número:</label>
-            <input type="text" maxlength="8" name="numero" formControlName="numeroTelefone" class="form-control" id="numero" [(ngModel)]="telefone.numero">
+            <input type="text" maxlength="8" mask="9999999999" name="numero" formControlName="numeroTelefone" class="form-control" id="numero" [(ngModel)]="telefone.numero">
           </div>
           <div class="col-md-3">
             <button class="btn btn-primary" type="button" (click)="adicionarTelefone()">Adicionar</button>
@@ -175,7 +175,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let telefone of empresa.telefone | paginate: {itemsPerPage: 10, currentPage: pageActual}">
-                    <td>{{telefone.tipo}}</td>
+                    <td>{{telefone.tipoApresentacao}}</td>
                     <td>{{telefone.ddd}}</td>
                     <td>{{telefone.numero}}</td>
                     <td>
@@ -189,7 +189,7 @@
           </div>
         </div>
 
-        <h5 class="title-page-border margin--top-2x ">
+        <h5 class="title-page-border margin--top-2x padding--top">
           <span class="">
             Horários
           </span>
@@ -228,17 +228,17 @@
               <table class="table table-striped margin--top-3x">
                 <thead>
                   <tr>
-                    <th class="w-25">Tipo</th>
-                    <th class="w-25">DDD</th>
-                    <th class="w-25">Número</th>
+                    <th class="w-25">Dia da Semana</th>
+                    <th class="w-25">Horário Inicial</th>
+                    <th class="w-25">Horário Final</th>
                     <th class="w-25">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let horario of empresa.horario | paginate: {itemsPerPage: 10, currentPage: pageActual}">
                     <td>{{horario.diaSemana}}</td>
-                    <td>{{horario.horarioInicial}}</td>
-                    <td>{{horario.horarioFinal}}</td>
+                    <td>{{horario.horarioInicial | mask: 'Hh:m0'}}</td>
+                    <td>{{horario.horarioFinal | mask: 'Hh:m0'}}</td>
                     <td>
                       <button class="btn btn-danger" type="button" (click)="excluirHorario(horario)" style="margin-left: 20px;"> Excluir</button>
                     </td>
@@ -250,7 +250,7 @@
           </div>
         </div>
 
-        <h5 class="title-page-border margin--top-2x ">
+        <h5 class="title-page-border margin--top-2x padding--top">
           <span class="">
             Formas de Pagamento
           </span>
@@ -258,9 +258,9 @@
 
         <div class="row align-items-center">
           <div class="col-md-4 form-group">
-            <label for="cidade">Forma de Pagamento: <span class="error">*</span></label>
+            <label for="cidade">Forma de Pagamento:</label>
             <select class="form-control" id="formaPagamento" name="formaPagamento" formControlName="formaPagamento" [(ngModel)]="formaPagamento">
-              <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
+              <option value="" [ngValue]="undefined" [selected]="true" selected>Selecione</option>
               <option [ngValue]="forma" *ngFor="let forma of formasPagamento">{{forma.descricao}}</option>
             </select>
           </div>
@@ -293,7 +293,7 @@
           </div>
         </div>
 
-        <div class="row margin--vertical">
+        <div class="row margin--vertical padding--top">
           <div class="col-md-1">
             <button class="btn btn-primary" type="submit">Salvar</button>
           </div>

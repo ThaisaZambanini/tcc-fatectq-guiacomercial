@@ -4,6 +4,7 @@ export class Telefone implements Deserializable {
 
   id: number;
   tipo: string;
+  tipoApresentacao: string;
   ddd: number;
   numero: number;
 

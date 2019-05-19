@@ -51,6 +51,9 @@ public class Telefone {
 
 	@Transient
 	private String discagem;
+	
+	@Transient
+	private String tipoApresentacao;
 
 	public Long getId() {
 		return id;
@@ -112,6 +115,14 @@ public class Telefone {
 
 	public void setTipo(TipoTelefone tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getTipoApresentacao() {
+		return tipoApresentacao;
+	}
+
+	public void setTipoApresentacao(String tipoApresentacao) {
+		this.tipoApresentacao = tipoApresentacao;
 	}
 
 }
