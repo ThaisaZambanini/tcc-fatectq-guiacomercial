@@ -9,15 +9,15 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class CategoriaService {
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "categoria";
+  baseUrl = environment.baseUrl + "categorias";
 
   getCategorias(categoria: string): Observable<Categoria[]> {
     let params = new HttpParams().set('categoria', categoria);
-    return this.http.get(`${this.baseUrl}/`, {params}).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(categoria))));
+    return this.http.get(${ this.baseUrl }, { params }).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(categoria))));
   }
 
   adicionarCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>(this.baseUrl + "/adicionar", categoria);
+    return this.http.post<Categoria>(this.baseUrl, categoria);
   }
 
   getCategoria(id: string): Observable<Categoria> {
@@ -25,7 +25,7 @@ export class CategoriaService {
   }
 
   alterarCategoria(categoria: Categoria): Observable<any> {
-    return this.http.put(`${this.baseUrl}/alterar/${categoria.id}`, categoria);
+    return this.http.put(`${this.baseUrl}/${categoria.id}`, categoria);
   }
 
 }

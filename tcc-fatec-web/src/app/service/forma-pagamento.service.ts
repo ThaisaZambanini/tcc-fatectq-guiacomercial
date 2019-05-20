@@ -10,15 +10,15 @@ import { map } from 'rxjs/operators';
 export class FormaPagamentoService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "formaPagamento";
+  baseUrl = environment.baseUrl + "formasPagamento";
 
   getFormasPagamento(formaPagamento: string): Observable<FormaPagamento[]> {
     let params = new HttpParams().set('formaPagamento', formaPagamento);
-    return this.http.get(`${this.baseUrl}/`, { params }).pipe(map((response: any) => response.map((forma: FormaPagamento) => new FormaPagamento().deserialize(forma))));
+    return this.http.get(${this.baseUrl}, { params }).pipe(map((response: any) => response.map((forma: FormaPagamento) => new FormaPagamento().deserialize(forma))));
   }
 
   adicionarFormaPagamento(forma: FormaPagamento): Observable<FormaPagamento> {
-    return this.http.post<FormaPagamento>(this.baseUrl + "/adicionar", forma);
+    return this.http.post<FormaPagamento>(this.baseUrl, forma);
   }
 
   getFormaPagamento(id: string): Observable<FormaPagamento> {
@@ -26,11 +26,11 @@ export class FormaPagamentoService {
   }
 
   alterarFormaPagamento(forma: FormaPagamento): Observable<any> {
-    return this.http.put(`${this.baseUrl}/alterar/${forma.id}`, forma);
+    return this.http.put(`${this.baseUrl}/${forma.id}`, forma);
   }
 
   excluirFormaPagamento(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deletar/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }

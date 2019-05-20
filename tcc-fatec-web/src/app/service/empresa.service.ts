@@ -10,7 +10,7 @@ import { FiltroEmpresa } from "../model/filtroEmpresa.model";
 @Injectable()
 export class EmpresaService {
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "empresa";
+  baseUrl = environment.baseUrl + "empresas";
 
   getEmpresasFiltroWeb(filtro: FiltroEmpresa): Observable<Empresa[]> {
     let params = new HttpParams()
@@ -21,7 +21,7 @@ export class EmpresaService {
   }
 
   adicionarEmpresa(empresa: Empresa): Observable<any> {
-    return this.http.post<Empresa>(`${this.baseUrl}/adicionar/`, empresa);
+    return this.http.post<Empresa>(${this.baseUrl}, empresa);
   }
 
   getEmpresa(id: string): Observable<Empresa> {

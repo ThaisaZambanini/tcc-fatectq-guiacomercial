@@ -104,7 +104,7 @@ public class EmpresaController {
 		return new ResponseEntity<Empresa>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> novaEmpresa(@RequestBody @Validated Empresa empresa)
 			throws ResourceNotFoundException {
 
