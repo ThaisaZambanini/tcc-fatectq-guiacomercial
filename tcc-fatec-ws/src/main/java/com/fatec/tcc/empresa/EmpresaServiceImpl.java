@@ -163,9 +163,9 @@ public class EmpresaServiceImpl implements EmpresaService {
 		sb.append("INNER JOIN FETCH empresa.endereco endereco ");
 		sb.append("INNER JOIN FETCH endereco.cidade cidade ");
 		sb.append("INNER JOIN FETCH cidade.estado estado ");
-		sb.append("INNER JOIN FETCH empresa.horarios horarios ");
-		sb.append("INNER JOIN FETCH empresa.telefones telefones ");
-		sb.append("INNER JOIN FETCH empresa.formaPagamento formaPagamento ");
+		sb.append("LEFT JOIN FETCH empresa.horarios horarios ");
+		sb.append("LEFT JOIN FETCH empresa.telefones telefones ");
+		sb.append("LEFT JOIN FETCH empresa.formaPagamento formaPagamento ");
 		sb.append("WHERE empresa.id = :empresa ");
 
 		Query query = em.createQuery(sb.toString(), Empresa.class);

@@ -16,15 +16,15 @@ export class Empresa implements Deserializable {
   linkTwitter: string;
   categoria: Categoria;
   endereco: Endereco;
-  telefone: Telefone[];
-  horario: Horario[];
+  telefones: Telefone[];
+  horarios: Horario[];
   listaFormaPagamento: FormaPagamento[];
 
   constructor() {
     this.categoria = new Categoria();
     this.endereco = new Endereco();
-    this.telefone = new Array();
-    this.horario = new Array();
+    this.telefones = new Array();
+    this.horarios = new Array();
     this.listaFormaPagamento = new Array();
   }
 

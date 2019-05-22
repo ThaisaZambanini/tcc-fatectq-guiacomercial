@@ -24,14 +24,14 @@ import com.fatec.tcc.categoria.CategoriaRepository;
 import com.fatec.tcc.commons.MensagemRetorno;
 
 @RestController
-@RequestMapping(path = "api/categoria")
+@RequestMapping(path = "api/categorias")
 @CrossOrigin
 public class CategoriaController {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<List<Categoria>> getAllCategorias(@RequestParam("categoria") Optional<String> categoria) {
 		List<Categoria> lista = new ArrayList<>();
 		if (categoria.isPresent()) {
@@ -39,6 +39,13 @@ public class CategoriaController {
 		} else {
 			lista = categoriaRepository.findAll();
 		}
+		return ResponseEntity.ok().body(lista);
+	}
+
+	@GetMapping("/cidade/{id}")
+	public ResponseEntity<List<Categoria>> getAllCategorias(@PathVariable(value = "id") String id) {
+		List<Categoria> lista = new ArrayList<>();
+		lista = categoriaRepository.findCategoriaPorCidade(Long.valueOf(id));
 		return ResponseEntity.ok().body(lista);
 	}
 
@@ -51,7 +58,7 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(null);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> novaCidade(@RequestBody @Validated Categoria categoria)
 			throws ResourceNotFoundException {
 		if (categoriaRepository.findCategoriaExiste(categoria.getNome()) > 0) {
@@ -75,7 +82,7 @@ public class CategoriaController {
 		}
 	}
 
-	@PutMapping("/alterar/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> updateCategoria(@Validated @RequestBody Categoria categoria,
 			@PathVariable(value = "id") Long categoriaId) {
 		Optional<Categoria> optional = categoriaRepository.findById(categoriaId);

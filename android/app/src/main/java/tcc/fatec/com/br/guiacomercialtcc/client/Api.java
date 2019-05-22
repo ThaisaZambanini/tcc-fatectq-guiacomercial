@@ -26,17 +26,16 @@ public interface Api {
     @GET("cidades/estado/{id}")
     Call<List<CidadeDTO>> findCidades(@Path("id") Long id);
 
-    @GET("categoria/")
-    Call<List<CategoriaDTO>> findCategorias(@Header("X-Cidade-Id") Long idCidade);
+    @GET("categorias/cidade/{id}")
+    Call<List<CategoriaDTO>> findCategorias(@Path("id") Long id);
 
-    @GET("empresa/busca")
+    @GET("empresas/busca")
     Call<ClientEmpresaDTO> findCategoriaEmpresaTermo(@Header("X-Cidade-Id") Long idCidade, @QueryMap Map<String, Object> options);
 
-    @GET("empresa/empresa/")
-    Call<Empresa> findEmpresaDetalhes(@Header("X-Cidade-Id") Long idCidade, @QueryMap Map<String, Long> options);
+    @GET("empresas/{id}")
+    Call<Empresa> findEmpresaDetalhes(@Path("id") Long id);
 
     @POST("contato/adicionar")
     Call<MensagemDTO> sendSolicitacaoContato(@Body Contato contato);
-
 
 }

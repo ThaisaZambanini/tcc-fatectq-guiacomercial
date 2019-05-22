@@ -40,11 +40,11 @@ public class EmpresaFormaPagamentoFragment extends Fragment {
         rv_cartoes_pagamento.setLayoutManager(mGridLayoutManager);
 
         TextView linearFormaPagamento = view.findViewById(R.id.txt_formaPagamento);
-        if (empresa.getCartoes().isEmpty()) {
+        if (empresa.getListaFormaPagamento().isEmpty()) {
             linearFormaPagamento.setVisibility(View.GONE);
         }
 
-        CartaoAdapter adapterCartao = new CartaoAdapter(getActivity().getApplicationContext(), empresa.getCartoes());
+        CartaoAdapter adapterCartao = new CartaoAdapter(getActivity().getApplicationContext(), empresa.getListaFormaPagamento());
         rv_cartoes_pagamento.setAdapter(adapterCartao);
 
         return view;

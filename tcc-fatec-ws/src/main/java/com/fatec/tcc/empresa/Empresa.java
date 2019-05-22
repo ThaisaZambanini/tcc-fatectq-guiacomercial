@@ -1,7 +1,8 @@
 package com.fatec.tcc.empresa;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Fetch;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -69,19 +72,22 @@ public class Empresa {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "empresa",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private List<Horario> horarios;
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	private Set<Horario> horarios;
 
-	@OneToMany(mappedBy = "empresa",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private List<Telefone> telefones;
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	private Set<Telefone> telefones;
 
-	@OneToMany(mappedBy = "empresa",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JsonIgnore
-	private List<RlFormaPagamentoEmpresa> formaPagamento;
-	
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	private Set<RlFormaPagamentoEmpresa> formaPagamento;
+
 	@Transient
 	private List<FormaPagamento> listaFormaPagamento;
 
@@ -125,14 +131,14 @@ public class Empresa {
 		this.categoria = categoria;
 	}
 
-	public List<Horario> getHorarios() {
+	public Set<Horario> getHorarios() {
 		if (horarios == null) {
-			horarios = new ArrayList<>();
+			horarios = new HashSet<>();
 		}
 		return horarios;
 	}
 
-	public void setHorarios(List<Horario> horarios) {
+	public void setHorarios(Set<Horario> horarios) {
 		this.horarios = horarios;
 	}
 
@@ -176,22 +182,22 @@ public class Empresa {
 		this.linkTwitter = linkTwitter;
 	}
 
-	public List<Telefone> getTelefones() {
+	public Set<Telefone> getTelefones() {
 		if (telefones == null) {
-			telefones = new ArrayList<>();
+			telefones = new HashSet<>();
 		}
 		return telefones;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
+	public void setTelefones(Set<Telefone> telefones) {
 		this.telefones = telefones;
 	}
 
-	public List<RlFormaPagamentoEmpresa> getFormaPagamento() {
+	public Set<RlFormaPagamentoEmpresa> getFormaPagamento() {
 		return formaPagamento;
 	}
 
-	public void setFormaPagamento(List<RlFormaPagamentoEmpresa> formaPagamento) {
+	public void setFormaPagamento(Set<RlFormaPagamentoEmpresa> formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
 

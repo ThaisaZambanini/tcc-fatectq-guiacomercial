@@ -38,7 +38,7 @@
                     android:id="@+id/text_nome_empresa_categoria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:paddingLeft="@dimen/fab_margin"
                     android:text="Empresa"
                     android:textColor="@color/text"
@@ -77,6 +77,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/fab_margin"
                     android:layout_marginLeft="@dimen/fab_margin"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -94,35 +96,6 @@
                         android:layout_marginLeft="8dp"
                         android:gravity="center_vertical"
                         android:text="@string/categoria"
-                        android:textColor="@color/text"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_local"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/fab_margin"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_place" />
-
-                    <TextView
-                        android:id="@+id/text_localizacao"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/distancia"
                         android:textColor="@color/text"
                         android:textSize="14sp"
                         android:textStyle="bold" />

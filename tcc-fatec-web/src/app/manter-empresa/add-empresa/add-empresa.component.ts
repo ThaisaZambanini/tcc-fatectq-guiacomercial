@@ -83,11 +83,10 @@ export class AddEmpresaComponent implements OnInit {
   }
 
   adicionarHorario() {
-    console.log(this.horario)
     if (this.horario.diaSemana !== null && this.horario.diaSemana !== undefined
       && this.horario.horarioInicial !== null && this.horario.horarioInicial !== undefined
       && this.horario.horarioFinal !== null && this.horario.horarioFinal !== undefined) {
-      this.empresa.horario.push(this.horario);
+      this.empresa.horarios.push(this.horario);
       this.horario = new Horario();
     } else {
       this.ngFlashMessageService.showFlashMessage({
@@ -113,7 +112,7 @@ export class AddEmpresaComponent implements OnInit {
         this.telefone.tipoApresentacao = 'Celular';
       }
 
-      this.empresa.telefone.push(this.telefone);
+      this.empresa.telefones.push(this.telefone);
       this.telefone = new Telefone();
     } else {
       this.ngFlashMessageService.showFlashMessage({
@@ -143,14 +142,14 @@ export class AddEmpresaComponent implements OnInit {
   }
 
   excluirHorario(horario: Horario) {
-    this.empresa.horario.forEach((item, index) => {
-      if (item === horario) this.empresa.horario.splice(index, 1);
+    this.empresa.horarios.forEach((item, index) => {
+      if (item === horario) this.empresa.horarios.splice(index, 1);
     });
   }
 
   excluirTelefone(telefone: Telefone) {
-    this.empresa.telefone.forEach((item, index) => {
-      if (item === telefone) this.empresa.telefone.splice(index, 1);
+    this.empresa.telefones.forEach((item, index) => {
+      if (item === telefone) this.empresa.telefones.splice(index, 1);
     });
   }
 

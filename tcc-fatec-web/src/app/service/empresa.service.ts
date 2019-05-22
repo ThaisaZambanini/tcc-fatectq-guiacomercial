@@ -21,7 +21,7 @@ export class EmpresaService {
   }
 
   adicionarEmpresa(empresa: Empresa): Observable<any> {
-    return this.http.post<Empresa>(`${this.baseUrl}/adicionar/`, empresa);
+    return this.http.post<Empresa>(`${this.baseUrl}`, empresa);
   }
 
   getEmpresa(id: string): Observable<Empresa> {

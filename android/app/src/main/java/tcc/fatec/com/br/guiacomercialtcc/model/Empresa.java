@@ -21,7 +21,7 @@ public class Empresa implements Serializable {
 
     private List<TelefoneDTO> telefones;
     private List<Horario> horarios;
-    private List<FormaPagamento> formaPagamento;
+    private List<FormaPagamento> listaFormaPagamento;
 
     private String maisInformacoes;
 
@@ -113,14 +113,6 @@ public class Empresa implements Serializable {
         this.horarios = horarios;
     }
 
-    public List<FormaPagamento> getCartoes() {
-        return formaPagamento;
-    }
-
-    public void setCartoes(List<FormaPagamento> formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
     public String getLinkTwitter() {
         return linkTwitter;
     }
@@ -135,5 +127,13 @@ public class Empresa implements Serializable {
 
     public void setMaisInformacoes(String maisInformacoes) {
         this.maisInformacoes = maisInformacoes;
+    }
+
+    public List<FormaPagamento> getListaFormaPagamento() {
+        return listaFormaPagamento;
+    }
+
+    public void setListaFormaPagamento(List<FormaPagamento> listaFormaPagamento) {
+        this.listaFormaPagamento = listaFormaPagamento;
     }
 }

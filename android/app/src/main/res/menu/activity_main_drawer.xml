@@ -10,10 +10,6 @@
             android:id="@+id/nav_guiaComercial"
             android:icon="@drawable/ic_map"
             android:title="@string/guia_comercial" />
-        <item
-            android:id="@+id/nav_cadastrarEmpresa"
-            android:icon="@drawable/ic_card_travel"
-            android:title="@string/cadastre_empresa" />
 
         <item
             android:id="@+id/nav_contato"

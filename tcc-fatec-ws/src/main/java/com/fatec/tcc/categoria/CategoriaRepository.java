@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+@Repository
+public interface CategoriaRepository extends JpaRepository<Categoria, Long>, CategoriaService {
 
 	@Query("SELECT count(categoria) FROM Categoria categoria where categoria.nome = :nome")
 	int findCategoriaExiste(String nome);

@@ -35,7 +35,7 @@
                     android:layout_marginBottom="@dimen/fab_margin"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="Indique o Aplicativo do Guia Fonejá para um amigo"
+                    android:text="Indique o Aplicativo do Guia Comercial para um amigo"
                     android:textColor="#FFF"
                     android:textSize="20sp" />
             </LinearLayout>

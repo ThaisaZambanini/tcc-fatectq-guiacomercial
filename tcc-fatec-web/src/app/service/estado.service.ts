@@ -24,11 +24,11 @@ export class EstadoService {
   }
 
   alterarEstado(estado: Estado): Observable<any> {
-    return this.http.put(`${this.baseUrl}/alterar/${estado.id}`, estado);
+    return this.http.put(`${this.baseUrl}/${estado.id}`, estado);
   }
 
   excluirEstado(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deletar/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }

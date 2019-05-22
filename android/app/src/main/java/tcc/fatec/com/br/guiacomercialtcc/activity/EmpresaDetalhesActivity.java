@@ -63,12 +63,8 @@ public class EmpresaDetalhesActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        CidadeDTO cidadeSessao = SessaoUtil.getCidade(getApplicationContext());
-        Map<String, Long> options = new HashMap<>();
-        options.put("id", id);
-
         Api api = ClientApi.getApi();
-        Call<Empresa> call = api.findEmpresaDetalhes(cidadeSessao.getId(), options);
+        Call<Empresa> call = api.findEmpresaDetalhes(id);
         call.enqueue(new Callback<Empresa>() {
             @Override
             public void onResponse(Call<Empresa> call, Response<Empresa> response) {
@@ -94,7 +90,7 @@ public class EmpresaDetalhesActivity extends AppCompatActivity {
             adapter.addFragment(EmpresaHorarioFragment.newInstance(empresa), "");
         }
 
-        if (empresa.getCartoes() != null && !empresa.getCartoes().isEmpty()) {
+        if (empresa.getListaFormaPagamento() != null && !empresa.getListaFormaPagamento().isEmpty()) {
             adapter.addFragment(EmpresaFormaPagamentoFragment.newInstance(empresa), "");
         }
 
@@ -108,7 +104,7 @@ public class EmpresaDetalhesActivity extends AppCompatActivity {
             tabLayout.getTabAt(count++).setIcon(tabIcons[1]);
         }
 
-        if (empresa.getCartoes() != null && !empresa.getCartoes().isEmpty()) {
+        if (empresa.getListaFormaPagamento() != null && !empresa.getListaFormaPagamento().isEmpty()) {
             tabLayout.getTabAt(count++).setIcon(tabIcons[2]);
         }
     }

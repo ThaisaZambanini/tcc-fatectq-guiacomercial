@@ -1,5 +1,7 @@
 package com.fatec.tcc.rl;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +19,8 @@ import com.fatec.tcc.formaPagamento.FormaPagamento;
 
 @Entity
 @Table(name = "rl_forma_pagamento_empresa", schema = "dbguiacomercial")
-public class RlFormaPagamentoEmpresa {
+public class RlFormaPagamentoEmpresa implements Serializable {
+	private static final long serialVersionUID = 2058417732937478795L;
 
 	@Id
 	@SequenceGenerator(name = "dbguiacomercial.sq_rl_forma_empresa", sequenceName = "dbguiacomercial.sq_rl_forma_empresa", initialValue = 1, allocationSize = 1)
@@ -30,7 +33,7 @@ public class RlFormaPagamentoEmpresa {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Empresa empresa;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_forma_pagamento", nullable = false)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private FormaPagamento formaPagamento;

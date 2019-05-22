@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity
             fragment = new GuiaComercialFragment();
         } else if (id == R.id.nav_indicar) {
             fragment = new IndiqueAppFragment();
-        } else if (id == R.id.nav_cadastrarEmpresa) {
-            // fragment = new CadastroEmpresaFragment();
         } else if (id == R.id.nav_contato) {
             fragment = new ContatoFragment();
         } else if (id == R.id.nav_trocar) {

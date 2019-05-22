@@ -28,12 +28,11 @@ import com.fatec.tcc.dto.EmpresaDTO;
 import com.fatec.tcc.empresa.Empresa;
 import com.fatec.tcc.empresa.EmpresaRepository;
 import com.fatec.tcc.endereco.Endereco;
-import com.fatec.tcc.formaPagamento.FormaPagamentoRepository;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresa;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresaRepository;
 
 @RestController
-@RequestMapping(path = "api/empresa")
+@RequestMapping(path = "api/empresas")
 @CrossOrigin
 public class EmpresaController {
 
@@ -47,24 +46,12 @@ public class EmpresaController {
 	private CidadeRepository cidadeRepository;
 
 	@Autowired
-	private FormaPagamentoRepository formaPagamentoRepository;
-
-	@Autowired
 	private RlFormaPagamentoEmpresaRepository rlFormaPagamentoEmpresaRepository;
 
 	@GetMapping("/")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
 		List<Empresa> empresas = empresaRepository.findAllEmpresas();
 		return ResponseEntity.ok().body(empresas);
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long id) {
-		Empresa empresa = empresaRepository.findEmpresaFetch(id);
-		if (empresa != null) {
-			return ResponseEntity.ok().body(empresa);
-		}
-		return ResponseEntity.ok().body(null);
 	}
 
 	@GetMapping("/filtro")
@@ -94,17 +81,16 @@ public class EmpresaController {
 		return ResponseEntity.ok().body(dto);
 	}
 
-	@GetMapping("/empresa/")
-	public ResponseEntity<Empresa> getEmpresaPorId(@RequestHeader(value = Constantes.CIDADE_HEADER) Long idCidade,
-			@RequestParam("id") Optional<Long> id) {
-		Empresa empresa = empresaRepository.findEmpresaFetch(id.get());
+	@GetMapping("/{id}")
+	public ResponseEntity<Empresa> getEmpresaPorId(@PathVariable(value = "id") Long id) {
+		Empresa empresa = empresaRepository.findEmpresaFetch(id);
 		if (empresa != null) {
 			return ResponseEntity.ok().body(empresa);
 		}
 		return new ResponseEntity<Empresa>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> novaEmpresa(@RequestBody @Validated Empresa empresa)
 			throws ResourceNotFoundException {
 

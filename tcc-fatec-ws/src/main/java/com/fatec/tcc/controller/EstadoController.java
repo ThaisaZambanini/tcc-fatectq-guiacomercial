@@ -68,7 +68,7 @@ public class EstadoController {
 		}
 	}
 
-	@PutMapping("/alterar/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> updateUser(@Validated @RequestBody Estado estado,
 			@PathVariable(value = "id") Long estadoId) {
 		Optional<Estado> optional = estadoRepository.findById(estado.getId());
@@ -95,7 +95,7 @@ public class EstadoController {
 		}
 	}
 
-	@DeleteMapping("/deletar/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> deleteUser(@PathVariable(value = "id") Long estadoId) {
 		try {
 			Estado estado = estadoRepository.findById(estadoId)

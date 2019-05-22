@@ -67,8 +67,8 @@ public class EmpresaDetalhesFragment extends Fragment {
 
         final TextView txt_categoria = view.findViewById(R.id.text_categoria);
 
-        final Uri uri = Uri.parse(dto.getLogo());
-        logo.setImageURI(uri);
+//        final Uri uri = Uri.parse(dto.getLogo());
+//        logo.setImageURI(uri);
 
         txt_nome.setText(dto.getNome());
         txt_categoria.setText(dto.getCategoria().getNome());
