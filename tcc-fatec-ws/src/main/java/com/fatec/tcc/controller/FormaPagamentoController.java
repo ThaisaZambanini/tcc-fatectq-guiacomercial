@@ -26,7 +26,7 @@ import com.fatec.tcc.formaPagamento.FormaPagamentoRepository;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresaRepository;
 
 @RestController
-@RequestMapping(path = "api/formaPagamento")
+@RequestMapping(path = "api/formasPagamento")
 @CrossOrigin
 public class FormaPagamentoController {
 
@@ -36,7 +36,7 @@ public class FormaPagamentoController {
 	@Autowired
 	private RlFormaPagamentoEmpresaRepository rlFormaPagamentoEmpresaRepository;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<List<FormaPagamento>> getAllFormasPagamento(
 			@RequestParam("formaPagamento") Optional<String> categoria) {
 		List<FormaPagamento> lista = new ArrayList<>();
@@ -57,7 +57,7 @@ public class FormaPagamentoController {
 		return ResponseEntity.ok().body(null);
 	}
 
-	@PutMapping("/alterar/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> updateFormaPagamento(@Validated @RequestBody FormaPagamento forma,
 			@PathVariable(value = "id") Long formaId) {
 		Optional<FormaPagamento> optional = formaPagamentoRepository.findById(formaId);
@@ -85,7 +85,7 @@ public class FormaPagamentoController {
 		}
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> novaFormaPagamento(@RequestBody @Validated FormaPagamento formaPagamento)
 			throws ResourceNotFoundException {
 		if (formaPagamentoRepository.findFormaPagamentoExiste(formaPagamento.getDescricao()) > 0) {
@@ -109,7 +109,7 @@ public class FormaPagamentoController {
 		}
 	}
 
-	@DeleteMapping("/deletar/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> deleteFormaPagamento(@PathVariable(value = "id") String id) {
 		Optional<FormaPagamento> forma = formaPagamentoRepository.findById(Long.valueOf(id));
 

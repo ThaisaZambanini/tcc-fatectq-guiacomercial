@@ -10,7 +10,7 @@ import { FiltroEmpresa } from "../model/filtroEmpresa.model";
 @Injectable()
 export class EmpresaService {
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "empresa";
+  baseUrl = environment.baseUrl + "empresas";
 
   getEmpresasFiltroWeb(filtro: FiltroEmpresa): Observable<Empresa[]> {
     let params = new HttpParams()

@@ -16,7 +16,7 @@ export class CidadeService {
   }
 
   adicionarCidade(estado: string, cidade: Cidade): Observable<any> {
-    return this.http.post<Cidade>(`${this.baseUrl}/adicionar/${estado}`, cidade);
+    return this.http.post<Cidade>(`${this.baseUrl}/estado/${estado}`, cidade);
   }
 
   getCidade(id: string): Observable<Cidade> {
@@ -24,11 +24,11 @@ export class CidadeService {
   }
 
   alterarCidade(cidade: Cidade): Observable<any> {
-    return this.http.put(`${this.baseUrl}/alterar/${cidade.id}`, cidade);
+    return this.http.put(`${this.baseUrl}/${cidade.id}`, cidade);
   }
 
   excluirCidade(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deletar/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }

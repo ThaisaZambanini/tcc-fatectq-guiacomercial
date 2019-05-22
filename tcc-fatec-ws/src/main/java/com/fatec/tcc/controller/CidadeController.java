@@ -57,7 +57,7 @@ public class CidadeController {
 		return ResponseEntity.ok().body(null);
 	}
 
-	@PostMapping(value = "/adicionar/{id}", headers = "Content-Type=application/json")
+	@PostMapping(value = "/estado/{id}", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> novaCidade(@RequestBody @Validated Cidade cidade,
 			@PathVariable("id") Long idEstado) throws ResourceNotFoundException {
 		if (cidadeRepository.findCidadeExiste(cidade.getNome(), Long.valueOf(idEstado)) > 0) {
@@ -87,7 +87,7 @@ public class CidadeController {
 		return new ResponseEntity<MensagemRetorno>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PutMapping("/alterar/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> updateCidade(@Validated @RequestBody Cidade cidade,
 			@PathVariable(value = "id") Long cidadeId) {
 		Optional<Cidade> optional = cidadeRepository.findById(cidade.getId());
@@ -117,7 +117,7 @@ public class CidadeController {
 		}
 	}
 
-	@DeleteMapping("/deletar/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<MensagemRetorno> deleteCidade(@PathVariable(value = "id") String cidadeId) {
 		try {
 			Cidade cidade = cidadeRepository.findById(Long.valueOf(cidadeId))
