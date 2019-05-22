@@ -104,7 +104,7 @@ export class AddEmpresaComponent implements OnInit {
     if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
       && this.telefone.ddd !== null && this.telefone.ddd !== undefined
       && this.telefone.numero !== null && this.telefone.numero !== undefined) {
-      if (this.telefone.tipo === 'T') {
+      if (this.telefone.tipo === 'F') {
         this.telefone.tipoApresentacao = 'Telefone';
       } else if (this.telefone.tipo === 'W') {
         this.telefone.tipoApresentacao = 'Whatsapp';

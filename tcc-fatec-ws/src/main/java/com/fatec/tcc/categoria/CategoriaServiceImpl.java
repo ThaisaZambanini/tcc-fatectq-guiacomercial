@@ -14,7 +14,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Override
 	public List<Categoria> findCategoriaPorCidade(Long id) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Select categoria FROM Empresa empresa ");
+		sb.append("Select distinct categoria FROM Empresa empresa ");
 		sb.append("INNER JOIN empresa.categoria categoria ");
 		sb.append("INNER JOIN empresa.endereco endereco ");
 		sb.append("INNER JOIN endereco.cidade cidade ");

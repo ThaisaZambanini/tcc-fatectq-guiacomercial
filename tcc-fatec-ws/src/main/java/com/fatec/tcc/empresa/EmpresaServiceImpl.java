@@ -1,9 +1,12 @@
 package com.fatec.tcc.empresa;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.fatec.tcc.dto.EmpresaDTO;
 import com.fatec.tcc.formaPagamento.FormaPagamento;
+import com.fatec.tcc.horario.Horario;
 
 public class EmpresaServiceImpl implements EmpresaService {
 
@@ -180,6 +184,24 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}
 
 		empresa.setListaFormaPagamento(listaFormasPagamento);
+
+		if (empresa.getHorarios() != null && !empresa.getHorarios().isEmpty()) {
+			List<Horario> horarios = empresa.getHorarios().stream().collect(Collectors.toList());
+
+			Collections.sort(horarios, new Comparator<Horario>() {
+				@Override
+				public int compare(Horario horario1, Horario horario2) {
+					if(horario1.getDiaSemana().ordinal() < horario2.getDiaSemana().ordinal())
+			            return 1;
+			        else if(horario1.getDiaSemana().ordinal() > horario2.getDiaSemana().ordinal())
+			            return -1;
+			        else
+			            return 1;
+				}
+			});
+			empresa.setHorarios(horarios.stream().collect(Collectors.toSet()));
+		}
+
 		return empresa;
 	}
 }

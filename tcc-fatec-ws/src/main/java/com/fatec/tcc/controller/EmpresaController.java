@@ -90,7 +90,7 @@ public class EmpresaController {
 		return new ResponseEntity<Empresa>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping(value = "", headers = "Content-Type=application/json")
+	@PostMapping
 	public ResponseEntity<MensagemRetorno> novaEmpresa(@RequestBody @Validated Empresa empresa)
 			throws ResourceNotFoundException {
 
@@ -104,6 +104,18 @@ public class EmpresaController {
 				retorno.setMensagem("Categoria não encontrada!");
 				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+		}
+
+		if (!empresa.getHorarios().isEmpty()) {
+			empresa.getHorarios().forEach(x -> {
+				x.setEmpresa(empresa);
+			});
+		}
+
+		if (!empresa.getTelefones().isEmpty()) {
+			empresa.getTelefones().forEach(x -> {
+				x.setEmpresa(empresa);
+			});
 		}
 
 		if (empresa.getEndereco() != null && empresa.getEndereco().getCidade() != null) {

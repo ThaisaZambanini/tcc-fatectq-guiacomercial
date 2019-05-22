@@ -13,11 +13,11 @@ export class CategoriaService {
 
   getCategorias(categoria: string): Observable<Categoria[]> {
     let params = new HttpParams().set('categoria', categoria);
-    return this.http.get(${ this.baseUrl }, { params }).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(categoria))));
+    return this.http.get(`${this.baseUrl}`, { params }).pipe(map((response: any) => response.map((categoria: Categoria) => new Categoria().deserialize(categoria))));
   }
 
   adicionarCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>(this.baseUrl, categoria);
+    return this.http.post<Categoria>(`${this.baseUrl}`, categoria);
   }
 
   getCategoria(id: string): Observable<Categoria> {

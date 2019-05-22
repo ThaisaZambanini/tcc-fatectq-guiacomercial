@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fatec.tcc.commons.DiaSemanaEnum;
 import com.fatec.tcc.commons.HoraHandler;
 import com.fatec.tcc.empresa.Empresa;
 
@@ -37,7 +40,8 @@ public class Horario {
 
 	@NotNull
 	@Column(name = "dia", nullable = false)
-	private String diaSemana;
+	@Enumerated(EnumType.STRING)
+	private DiaSemanaEnum diaSemana;
 
 	@Temporal(TemporalType.TIME)
 	@Column(name = "horainicial")
@@ -58,6 +62,9 @@ public class Horario {
 	@Transient
 	private String horario;
 
+	@Transient
+	private String diaSemanaApp;
+
 	public Long getId() {
 		return id;
 	}
@@ -66,11 +73,11 @@ public class Horario {
 		this.id = id;
 	}
 
-	public String getDiaSemana() {
+	public DiaSemanaEnum getDiaSemana() {
 		return diaSemana;
 	}
 
-	public void setDiaSemana(String diaSemana) {
+	public void setDiaSemana(DiaSemanaEnum diaSemana) {
 		this.diaSemana = diaSemana;
 	}
 
@@ -109,4 +116,13 @@ public class Horario {
 	public void setHorarioFinal(Date horarioFinal) {
 		this.horarioFinal = horarioFinal;
 	}
+
+	public String getDiaSemanaApp() {
+		return getDiaSemana().getDescricao();
+	}
+
+	public void setDiaSemanaApp(String diaSemanaApp) {
+		this.diaSemanaApp = diaSemanaApp;
+	}
+
 }

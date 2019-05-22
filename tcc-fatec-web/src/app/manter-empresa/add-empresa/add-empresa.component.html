@@ -143,7 +143,7 @@
             <label for="cidade">Tipo: </label>
             <select class="form-control" id="tipo" formControlName="tipo" name="tipo" [(ngModel)]="telefone.tipo">
               <option value="" [ngValue]="undefined" [selected]="true">Selecione</option>
-              <option value="T" [ngValue]="T">Telefone</option>
+              <option value="F" [ngValue]="F">Telefone</option>
               <option value="W" [ngValue]="W">Whatsapp</option>
               <option value="C" [ngValue]="C">Celular</option>
             </select>
@@ -154,7 +154,7 @@
           </div>
           <div class="col-md-3">
             <label for="cep">Número:</label>
-            <input type="text" maxlength="8" mask="9999999999" name="numero" formControlName="numeroTelefone" class="form-control" id="numero" [(ngModel)]="telefone.numero">
+            <input type="text" maxlength="9" mask="999999999" name="numero" formControlName="numeroTelefone" class="form-control" id="numero" [(ngModel)]="telefone.numero">
           </div>
           <div class="col-md-3">
             <button class="btn btn-primary" type="button" (click)="adicionarTelefone()">Adicionar</button>
@@ -211,11 +211,11 @@
           </div>
           <div class="col-md-2">
             <label for="horarioInicial">Hora Inicial:</label>
-            <input type="text" mask="Hh:m0" [validation]="true" maxlength="5" formControlName="horarioInicial" name="horarioInicial" class="form-control" id="horarioInicial" [(ngModel)]="horario.horarioInicial">
+            <input type="text" mask="Hh:m0" [dropSpecialCharacters]="false" [validation]="true" maxlength="5" model-view-value="true" formControlName="horarioInicial" name="horarioInicial" class="form-control" id="horarioInicial" [(ngModel)]="horario.horarioInicial">
           </div>
           <div class="col-md-2">
             <label for="horarioFinal">Hora Final:</label>
-            <input type="text" maxlength="5" mask="Hh:m0" [validation]="true" name="horarioFinal" formControlName="horarioFinal" class="form-control" id="horarioFinal" [(ngModel)]="horario.horarioFinal">
+            <input type="text" maxlength="5" [dropSpecialCharacters]="false" mask="Hh:m0" [validation]="true" model-view-value="true" name="horarioFinal" formControlName="horarioFinal" class="form-control" id="horarioFinal" [(ngModel)]="horario.horarioFinal">
           </div>
           <div class="col-md-3">
             <button class="btn btn-primary" type="button" (click)="adicionarHorario()">Adicionar</button>

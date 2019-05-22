@@ -13,12 +13,17 @@ export class FormaPagamentoService {
   baseUrl = environment.baseUrl + "formasPagamento";
 
   getFormasPagamento(formaPagamento: string): Observable<FormaPagamento[]> {
-    let params = new HttpParams().set('formaPagamento', formaPagamento);
-    return this.http.get(${this.baseUrl}, { params }).pipe(map((response: any) => response.map((forma: FormaPagamento) => new FormaPagamento().deserialize(forma))));
+    if (formaPagamento !== '' && formaPagamento !== null && formaPagamento !== undefined) {
+      let params = new HttpParams().set('formaPagamento', formaPagamento);
+      return this.http.get(`${this.baseUrl}`, { params }).pipe(map((response: any) => response.map((forma: FormaPagamento) => new FormaPagamento().deserialize(forma))));
+    } else {
+      let params = new HttpParams();
+      return this.http.get(`${this.baseUrl}`, { params }).pipe(map((response: any) => response.map((forma: FormaPagamento) => new FormaPagamento().deserialize(forma))));
+    }
   }
 
   adicionarFormaPagamento(forma: FormaPagamento): Observable<FormaPagamento> {
-    return this.http.post<FormaPagamento>(this.baseUrl, forma);
+    return this.http.post<FormaPagamento>(`${this.baseUrl}`, forma);
   }
 
   getFormaPagamento(id: string): Observable<FormaPagamento> {
