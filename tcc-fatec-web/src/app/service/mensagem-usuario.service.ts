@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class MensagemUsuarioService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "mensagem";
+  baseUrl = environment.baseUrl + "mensagens";
 
   getMensagens(): Observable<MensagemUsuario[]> {
     return this.http.get(`${this.baseUrl}/`).pipe(map((response: any) => response.map((mensagem: MensagemUsuario) => new MensagemUsuario().deserialize(mensagem))));

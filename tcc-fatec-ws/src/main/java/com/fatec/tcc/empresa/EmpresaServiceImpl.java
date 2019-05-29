@@ -191,15 +191,9 @@ public class EmpresaServiceImpl implements EmpresaService {
 			Collections.sort(horarios, new Comparator<Horario>() {
 				@Override
 				public int compare(Horario horario1, Horario horario2) {
-					if(horario1.getDiaSemana().ordinal() < horario2.getDiaSemana().ordinal())
-			            return 1;
-			        else if(horario1.getDiaSemana().ordinal() > horario2.getDiaSemana().ordinal())
-			            return -1;
-			        else
-			            return 1;
+					return horario1.getDiaSemana().compareTo(horario2.getDiaSemana());
 				}
 			});
-			empresa.setHorarios(horarios.stream().collect(Collectors.toSet()));
 		}
 
 		return empresa;

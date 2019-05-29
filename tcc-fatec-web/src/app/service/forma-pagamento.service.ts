@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class FormaPagamentoService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = environment.baseUrl + "formasPagamento";
+  baseUrl = environment.baseUrl + "formasPagamentos";
 
   getFormasPagamento(formaPagamento: string): Observable<FormaPagamento[]> {
     if (formaPagamento !== '' && formaPagamento !== null && formaPagamento !== undefined) {

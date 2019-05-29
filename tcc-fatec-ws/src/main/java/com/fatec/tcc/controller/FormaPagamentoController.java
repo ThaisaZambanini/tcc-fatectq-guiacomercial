@@ -26,7 +26,7 @@ import com.fatec.tcc.formaPagamento.FormaPagamentoRepository;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresaRepository;
 
 @RestController
-@RequestMapping(path = "api/formasPagamento")
+@RequestMapping(path = "api/formasPagamentos")
 @CrossOrigin
 public class FormaPagamentoController {
 

@@ -27,7 +27,6 @@ public class Telefone {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dbguiacomercial.sq_telefone")
 	@SequenceGenerator(name = "dbguiacomercial.sq_telefone", sequenceName = "dbguiacomercial.sq_telefone", initialValue = 1, allocationSize = 1)
 	@Column(name = "co_seq_telefone", nullable = false)
-	@JsonIgnore
 	private Long id;
 
 	@Enumerated(EnumType.STRING)

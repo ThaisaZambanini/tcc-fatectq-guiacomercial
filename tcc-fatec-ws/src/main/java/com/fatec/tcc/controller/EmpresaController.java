@@ -48,7 +48,7 @@ public class EmpresaController {
 	@Autowired
 	private RlFormaPagamentoEmpresaRepository rlFormaPagamentoEmpresaRepository;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
 		List<Empresa> empresas = empresaRepository.findAllEmpresas();
 		return ResponseEntity.ok().body(empresas);

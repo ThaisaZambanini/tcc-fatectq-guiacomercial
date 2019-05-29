@@ -35,7 +35,6 @@ public class Horario {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dbguiacomercial.sq_horario")
 	@SequenceGenerator(name = "dbguiacomercial.sq_horario", sequenceName = "dbguiacomercial.sq_horario", initialValue = 1, allocationSize = 50)
 	@Column(name = "co_seq_horario", nullable = false)
-	@JsonIgnore
 	private Long id;
 
 	@NotNull

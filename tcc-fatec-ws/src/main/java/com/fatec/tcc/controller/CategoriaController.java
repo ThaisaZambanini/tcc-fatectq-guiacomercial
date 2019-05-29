@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,6 +107,22 @@ public class CategoriaController {
 		} else {
 			MensagemRetorno retorno = new MensagemRetorno();
 			retorno.setMensagem("Registro não encontrado!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<MensagemRetorno> deleteCategoria(@PathVariable(value = "id") Long categoriaId) {
+		try {
+			Categoria categoria = categoriaRepository.findById(categoriaId)
+					.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada :: " + categoriaId));
+			categoriaRepository.delete(categoria);
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Categoria foi removido com sucesso!");
+			retorno.setCodigoRetorno(0);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+		} catch (Exception e) {
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Não foi possível remover a Categoria!");
 			retorno.setCodigoRetorno(1);
 			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -35,7 +35,7 @@ public interface Api {
     @GET("empresas/{id}")
     Call<Empresa> findEmpresaDetalhes(@Path("id") Long id);
 
-    @POST("contato/adicionar")
+    @POST("mensagens")
     Call<MensagemDTO> sendSolicitacaoContato(@Body Contato contato);
 
 }

@@ -1,5 +1,6 @@
 package com.fatec.tcc.empresa;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,7 +76,7 @@ public class Empresa {
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
-	private Set<Horario> horarios;
+	private List<Horario> horarios;
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -131,14 +132,14 @@ public class Empresa {
 		this.categoria = categoria;
 	}
 
-	public Set<Horario> getHorarios() {
+	public List<Horario> getHorarios() {
 		if (horarios == null) {
-			horarios = new HashSet<>();
+			horarios = new ArrayList<>();
 		}
 		return horarios;
 	}
 
-	public void setHorarios(Set<Horario> horarios) {
+	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
 	}
 

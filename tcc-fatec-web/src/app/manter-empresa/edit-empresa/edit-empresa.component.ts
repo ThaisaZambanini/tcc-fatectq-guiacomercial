@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Cidade } from "../../model/cidade.model";
 import { Estado } from "../../model/uf.model";
+import { Telefone } from "../../model/telefone.model";
+import { Horario } from "../../model/horario.model";
 import { Categoria } from "../../model/categoria.model";
+import { FormaPagamento } from "../../model/forma-pagamento.model";
 import { Observable, throwError } from 'rxjs';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Empresa } from "../../model/empresa.model";
@@ -11,6 +14,7 @@ import { EstadoService } from "../../service/estado.service";
 import { CidadeService } from "../../service/cidade.service";
 import { EmpresaService } from "../../service/empresa.service";
 import { CategoriaService } from "../../service/categoria.service";
+import { FormaPagamentoService } from "../../service/forma-pagamento.service";
 
 @Component({
   selector: 'app-edit-empresa',
@@ -20,10 +24,14 @@ export class EditEmpresaComponent implements OnInit {
   addForm: FormGroup;
   cidades: Cidade[];
   estados: Estado[];
+  formasPagamento: FormaPagamento[];
   categorias: Categoria[];
+  horario: Horario;
   empresa: Empresa;
   loading: boolean = false;
   submitted: boolean = false;
+  telefone: Telefone;
+  formaPagamento: FormaPagamento;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,14 +40,17 @@ export class EditEmpresaComponent implements OnInit {
     private cidadeService: CidadeService,
     private empresaService: EmpresaService,
     private categoriaService: CategoriaService,
-    private ngFlashMessageService: NgFlashMessageService
+    private ngFlashMessageService: NgFlashMessageService,
+    private formaPagamentoService: FormaPagamentoService
   ) { }
 
   ngOnInit() {
     this.loading = true;
     this.empresa = new Empresa();
-    this.getCategorias();
-    this.getEstados();
+    this.telefone = new Telefone();
+    this.horario = new Horario();
+    this.formaPagamento = new FormaPagamento();
+    this.formasPagamento = new Array();
 
     this.addForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -56,7 +67,19 @@ export class EditEmpresaComponent implements OnInit {
       bairro: ['', Validators.required],
       cep: ['', Validators.required],
       complemento: [''],
+      tipo: [''],
+      ddd: [''],
+      numeroTelefone: [''],
+      diaSemana: [''],
+      horarioInicial: [''],
+      horarioFinal: [''],
+      formaPagamento: ['']
     });
+
+    this.getCategorias();
+    this.getEstados();
+    this.getFormasPagamento();
+    this.loading = false;
 
     const editEmpresaId = localStorage.getItem("editEmpresaId");
     localStorage.removeItem("editEmpresaId");
@@ -68,6 +91,8 @@ export class EditEmpresaComponent implements OnInit {
         .subscribe(data => {
           this.empresa = new Empresa().deserialize(data)
           this.buscaCidade(this.empresa.endereco.cidade.estado.id.toString())
+          this.addForm.controls['estado'].patchValue(this.empresa.endereco.cidade.estado.id);
+          this.addForm.controls['categoria'].patchValue(this.empresa.categoria.id);
         });
     }
   }
@@ -84,21 +109,34 @@ export class EditEmpresaComponent implements OnInit {
   getEstados() {
     this.estadoService.getEstados().subscribe((data) => {
       this.estados = data;
+      console.log(data)
       this.loading = false;
     }, (err) => {
       this.loading = false;
+    });
+  }
+
+  getFormasPagamento() {
+    this.formaPagamentoService.getFormasPagamento("").subscribe((data) => {
+      this.formasPagamento = data;
+    }, (err) => {
+      console.log(err);
     });
   }
 
   getCategorias() {
     this.categoriaService.getCategorias("").subscribe((data) => {
       this.categorias = data;
+      console.log(data)
       this.loading = false;
     }, (err) => {
       this.loading = false;
     });
   }
 
+  voltar() {
+    this.router.navigate(['manter-empresa']);
+  }
 
   onSubmit() {
     this.submitted = true;

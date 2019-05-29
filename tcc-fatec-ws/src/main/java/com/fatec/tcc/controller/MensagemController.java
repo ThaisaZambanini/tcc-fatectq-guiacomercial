@@ -14,24 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.tcc.commons.MensagemRetorno;
-import com.fatec.tcc.mensagem.EmailService;
 import com.fatec.tcc.mensagem.Mensagem;
 import com.fatec.tcc.mensagem.MensagemRepository;
-import com.fatec.tcc.usuario.UsuarioRepository;
 
 @RestController
-@RequestMapping(path = "api/mensagem")
+@RequestMapping(path = "api/mensagens")
 @CrossOrigin
 public class MensagemController {
 
 	@Autowired
 	private MensagemRepository mensagemRepository;
-
-	@Autowired
-	private EmailService emailService;
-
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 
 	@GetMapping("/")
 	public ResponseEntity<List<Mensagem>> getAllMensagens() {
@@ -39,17 +31,10 @@ public class MensagemController {
 		return ResponseEntity.ok().body(lista);
 	}
 
-	@PostMapping(value = "/adicionar", headers = "Content-Type=application/json")
+	@PostMapping(value = "", headers = "Content-Type=application/json")
 	public ResponseEntity<MensagemRetorno> newUsuario(@RequestBody @Validated Mensagem mensagem) {
 		Mensagem mensagemSalvo = mensagemRepository.save(mensagem);
 		if (mensagemSalvo != null) {
-//			List<Usuario> usuarios = usuarioRepository.findAll();
-//			Usuario admin = usuarios.get(0);
-//			emailService.sendSimpleMessage(admin.getEmail(), "Nova Mensagem!",
-//					"Nova mensagem enviado pelo aplicativo!");
-//			emailService.sendSimpleMessage(mensagem.getEmail(), "App Guia Comercial",
-//					"Recebemos sua mensagem e em breve entraremos em contato!");
-
 			MensagemRetorno retorno = new MensagemRetorno();
 			retorno.setMensagem("Registro salvo com sucesso!");
 			retorno.setCodigoRetorno(0);
