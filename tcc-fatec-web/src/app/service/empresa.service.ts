@@ -28,4 +28,12 @@ export class EmpresaService {
     return this.http.get(`${this.baseUrl}/${id}`).pipe(map((response: any) => new Empresa().deserialize(response)));
   }
 
+  alterarEmpresa(empresa: Empresa): Observable<any> {
+    return this.http.put<Empresa>(`${this.baseUrl}/${empresa.id}`, empresa);
+  }
+
+  excluirEmpresa(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }

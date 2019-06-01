@@ -92,6 +92,15 @@ public class Empresa {
 	@Transient
 	private List<FormaPagamento> listaFormaPagamento;
 
+	@Transient
+	private List<Telefone> listaTelefonesRemovidos;
+
+	@Transient
+	private List<Horario> listaHorariosRemovidos;
+
+	@Transient
+	private List<FormaPagamento> listaFormaPagamentoRemovido;
+
 	public Long getId() {
 		return id;
 	}
@@ -208,6 +217,39 @@ public class Empresa {
 
 	public void setListaFormaPagamento(List<FormaPagamento> listaFormaPagamento) {
 		this.listaFormaPagamento = listaFormaPagamento;
+	}
+
+	public List<Telefone> getListaTelefonesRemovidos() {
+		if (listaTelefonesRemovidos == null) {
+			listaTelefonesRemovidos = new ArrayList<>();
+		}
+		return listaTelefonesRemovidos;
+	}
+
+	public void setListaTelefonesRemovidos(List<Telefone> listaTelefonesRemovidos) {
+		this.listaTelefonesRemovidos = listaTelefonesRemovidos;
+	}
+
+	public List<Horario> getListaHorariosRemovidos() {
+		if (listaHorariosRemovidos == null) {
+			listaHorariosRemovidos = new ArrayList<>();
+		}
+		return listaHorariosRemovidos;
+	}
+
+	public void setListaHorariosRemovidos(List<Horario> listaHorariosRemovidos) {
+		this.listaHorariosRemovidos = listaHorariosRemovidos;
+	}
+
+	public List<FormaPagamento> getListaFormaPagamentoRemovido() {
+		if (listaFormaPagamentoRemovido == null) {
+			listaFormaPagamentoRemovido = new ArrayList<>();
+		}
+		return listaFormaPagamentoRemovido;
+	}
+
+	public void setListaFormaPagamentoRemovido(List<FormaPagamento> listaFormaPagamentoRemovido) {
+		this.listaFormaPagamentoRemovido = listaFormaPagamentoRemovido;
 	}
 
 }

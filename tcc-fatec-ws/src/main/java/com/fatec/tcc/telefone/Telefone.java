@@ -50,7 +50,7 @@ public class Telefone {
 
 	@Transient
 	private String discagem;
-	
+
 	@Transient
 	private String tipoApresentacao;
 
@@ -117,6 +117,7 @@ public class Telefone {
 	}
 
 	public String getTipoApresentacao() {
+		tipoApresentacao = getTipo().getDescricao();
 		return tipoApresentacao;
 	}
 

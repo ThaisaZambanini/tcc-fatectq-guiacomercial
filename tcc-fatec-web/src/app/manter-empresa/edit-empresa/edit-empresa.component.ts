@@ -51,6 +51,8 @@ export class EditEmpresaComponent implements OnInit {
     this.horario = new Horario();
     this.formaPagamento = new FormaPagamento();
     this.formasPagamento = new Array();
+    this.empresa.listaTelefonesRemovidos = new Array();
+    this.empresa.listaFormaPagamentoRemovido = new Array();
 
     this.addForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -153,39 +155,134 @@ export class EditEmpresaComponent implements OnInit {
       return;
     }
 
-    // this.cidadeService.alterarCidade(cidade)
-    //   .subscribe(data => {
-    //     var res = JSON.parse(JSON.stringify(data));
-    //     if (res.codigoRetorno === 0) {
-    //       this.ngFlashMessageService.showFlashMessage({
-    //         messages: [res.mensagem],
-    //         dismissible: true,
-    //         timeout: false,
-    //         type: 'success'
-    //       });
-    //       this.router.navigate(['manter-cidade']);
-    //       this.loading = false;
-    //     } else {
-    //       if (data != null) {
-    //         this.loading = false;
-    //         this.ngFlashMessageService.showFlashMessage({
-    //           messages: [res.mensagem],
-    //           dismissible: true,
-    //           timeout: false,
-    //           type: 'danger'
-    //         });
-    //       }
-    //     }
-    //   }, (err) => {
-    //     this.loading = false;
-    //     var res = JSON.parse(JSON.stringify(err));
-    //     this.ngFlashMessageService.showFlashMessage({
-    //       messages: [res.error.mensagem || "Falha ao salvar!"],
-    //       dismissible: true,
-    //       timeout: false,
-    //       type: 'danger'
-    //     });
-    //   });
+    this.empresaService.alterarEmpresa(this.empresa)
+      .subscribe(data => {
+        var res = JSON.parse(JSON.stringify(data));
+        if (res.codigoRetorno === 0) {
+          this.ngFlashMessageService.showFlashMessage({
+            messages: [res.mensagem],
+            dismissible: true,
+            timeout: false,
+            type: 'success'
+          });
+          this.router.navigate(['manter-empresa']);
+          this.loading = false;
+        } else {
+          if (data != null) {
+            this.loading = false;
+            this.ngFlashMessageService.showFlashMessage({
+              messages: [res.mensagem],
+              dismissible: true,
+              timeout: false,
+              type: 'danger'
+            });
+          }
+        }
+      }, (err) => {
+        this.loading = false;
+        var res = JSON.parse(JSON.stringify(err));
+        this.ngFlashMessageService.showFlashMessage({
+          messages: [res.error.mensagem || "Falha ao salvar!"],
+          dismissible: true,
+          timeout: false,
+          type: 'danger'
+        });
+      });
+  }
+
+  adicionarHorario() {
+    if (this.horario.diaSemana !== null && this.horario.diaSemana !== undefined
+      && this.horario.horarioInicial !== null && this.horario.horarioInicial !== undefined
+      && this.horario.horarioFinal !== null && this.horario.horarioFinal !== undefined) {
+      this.empresa.horarios.push(this.horario);
+      this.horario = new Horario();
+    } else {
+      this.ngFlashMessageService.showFlashMessage({
+        messages: ["Campo obrigatório não preenchido!"],
+        dismissible: true,
+        timeout: false,
+        type: 'danger'
+      });
+      window.scrollTo(5000, 0);
+      return;
+    }
+  }
+
+  adicionarTelefone() {
+    if (this.telefone.tipo !== null && this.telefone.tipo !== undefined
+      && this.telefone.ddd !== null && this.telefone.ddd !== undefined
+      && this.telefone.numero !== null && this.telefone.numero !== undefined) {
+      if (this.telefone.tipo === 'F') {
+        this.telefone.tipoApresentacao = 'Telefone';
+      } else if (this.telefone.tipo === 'W') {
+        this.telefone.tipoApresentacao = 'Whatsapp';
+      } else if (this.telefone.tipo === 'C') {
+        this.telefone.tipoApresentacao = 'Celular';
+      }
+
+      this.empresa.telefones.push(this.telefone);
+      this.telefone = new Telefone();
+    } else {
+      this.ngFlashMessageService.showFlashMessage({
+        messages: ["Campo obrigatório não preenchido!"],
+        dismissible: true,
+        timeout: false,
+        type: 'danger'
+      });
+      window.scrollTo(5000, 0);
+      return;
+    }
+  }
+
+  adicionarFormaPagamento() {
+    if (this.formaPagamento.id !== null && this.formaPagamento.id !== undefined
+      && this.formaPagamento.descricao !== null && this.formaPagamento.descricao !== undefined) {
+      this.empresa.listaFormaPagamento.push(this.formaPagamento);
+      console.log(this.empresa.listaFormaPagamento)
+      this.formaPagamento = new FormaPagamento();
+    }
+  }
+
+  excluirFormaPagamento(formaPagamento: FormaPagamento) {
+    this.empresa.listaFormaPagamento.forEach((item, index) => {
+      if (item === formaPagamento) {
+
+        if(this.empresa.listaFormaPagamentoRemovido === null) {
+          this.empresa.listaFormaPagamentoRemovido = [];
+        }
+        this.empresa.listaFormaPagamentoRemovido.push(item);
+        this.empresa.listaFormaPagamento.splice(index, 1);
+
+      }
+    });
+  }
+
+  excluirHorario(horario: Horario) {
+    this.empresa.horarios.forEach((item, index) => {
+      if (item === horario) {
+        if (item.id !== null && item.id !== undefined) {
+          if (this.empresa.listaHorariosRemovidos === null) {
+            this.empresa.listaHorariosRemovidos = [];
+          }
+          this.empresa.listaHorariosRemovidos.push(item);
+        }
+        this.empresa.horarios.splice(index, 1);
+      }
+    });
+  }
+
+  excluirTelefone(telefone: Telefone) {
+    this.empresa.telefones.forEach((item, index) => {
+      if (item === telefone) {
+        if (telefone.id !== null && telefone.id !== undefined) {
+          if (this.empresa.listaTelefonesRemovidos === null) {
+            this.empresa.listaTelefonesRemovidos = [];
+          }
+          this.empresa.listaTelefonesRemovidos.push(item);
+        }
+        this.empresa.telefones.splice(index, 1);
+      }
+    });
   }
 
 }

@@ -19,6 +19,9 @@ export class Empresa implements Deserializable {
   telefones: Telefone[];
   horarios: Horario[];
   listaFormaPagamento: FormaPagamento[];
+  listaTelefonesRemovidos: Telefone[];
+  listaHorariosRemovidos: Horario[];
+  listaFormaPagamentoRemovido: FormaPagamento[];
 
   constructor() {
     this.categoria = new Categoria();
@@ -26,6 +29,9 @@ export class Empresa implements Deserializable {
     this.telefones = new Array();
     this.horarios = new Array();
     this.listaFormaPagamento = new Array();
+    this.listaTelefonesRemovidos = new Array();
+    this.listaHorariosRemovidos = new Array();
+    this.listaFormaPagamentoRemovido = new Array();
   }
 
   deserialize(input: any) {

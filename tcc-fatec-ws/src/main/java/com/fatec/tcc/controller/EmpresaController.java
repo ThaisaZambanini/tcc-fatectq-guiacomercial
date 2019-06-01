@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,10 @@ import com.fatec.tcc.dto.EmpresaDTO;
 import com.fatec.tcc.empresa.Empresa;
 import com.fatec.tcc.empresa.EmpresaRepository;
 import com.fatec.tcc.endereco.Endereco;
+import com.fatec.tcc.horario.HorarioRepository;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresa;
 import com.fatec.tcc.rl.RlFormaPagamentoEmpresaRepository;
+import com.fatec.tcc.telefone.TelefoneRepository;
 
 @RestController
 @RequestMapping(path = "api/empresas")
@@ -47,6 +51,12 @@ public class EmpresaController {
 
 	@Autowired
 	private RlFormaPagamentoEmpresaRepository rlFormaPagamentoEmpresaRepository;
+
+	@Autowired
+	private TelefoneRepository telefoneRepository;
+
+	@Autowired
+	private HorarioRepository horarioRepository;
 
 	@GetMapping("")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
@@ -150,5 +160,133 @@ public class EmpresaController {
 		retorno.setCodigoRetorno(1);
 		retorno.setMensagem("Não foi possível salvar os dados!");
 		return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<MensagemRetorno> updateEmpresa(@Validated @RequestBody Empresa empresa,
+			@PathVariable(value = "id") Long empresaId) {
+
+		if (!empresa.getListaTelefonesRemovidos().isEmpty()) {
+			empresa.getListaTelefonesRemovidos().forEach(x -> {
+				x.setEmpresa(empresa);
+			});
+
+			telefoneRepository.deleteAll(empresa.getListaTelefonesRemovidos());
+		}
+
+		if (!empresa.getListaHorariosRemovidos().isEmpty()) {
+			empresa.getListaHorariosRemovidos().forEach(x -> {
+				x.setEmpresa(empresa);
+			});
+
+			horarioRepository.deleteAll(empresa.getListaHorariosRemovidos());
+		}
+
+		if (!empresa.getListaFormaPagamentoRemovido().isEmpty()) {
+			empresa.getListaFormaPagamentoRemovido().forEach(x -> {
+				RlFormaPagamentoEmpresa rl = rlFormaPagamentoEmpresaRepository.findFormaEmpresa(x.getId(),
+						empresa.getId());
+				if (rl != null) {
+					rlFormaPagamentoEmpresaRepository.delete(rl);
+				}
+			});
+		}
+
+		Empresa empresaBanco = empresaRepository.findEmpresaFetch(empresaId);
+
+		if (empresaBanco != null) {
+			empresaBanco.setCategoria(empresa.getCategoria());
+			empresaBanco.setEmail(empresa.getEmail());
+			empresaBanco.setLinkFacebook(empresa.getLinkFacebook());
+			empresaBanco.setLinkInstagram(empresa.getLinkInstagram());
+			empresaBanco.setLinkSite(empresa.getLinkSite());
+			empresaBanco.setLinkTwitter(empresa.getLinkTwitter());
+			empresaBanco.setNome(empresa.getNome());
+
+			if (empresa.getCategoria() != null) {
+				Optional<Categoria> categoria = categoriaRepository.findById(empresa.getCategoria().getId());
+				if (categoria.isPresent()) {
+					empresaBanco.setCategoria(categoria.get());
+				} else {
+					MensagemRetorno retorno = new MensagemRetorno();
+					retorno.setCodigoRetorno(1);
+					retorno.setMensagem("Categoria não encontrada!");
+					return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			}
+
+			if (!empresa.getHorarios().isEmpty()) {
+				empresa.getHorarios().forEach(x -> {
+					x.setEmpresa(empresaBanco);
+				});
+			}
+
+			empresaBanco.setHorarios(empresa.getHorarios());
+
+			if (!empresa.getTelefones().isEmpty()) {
+				empresa.getTelefones().forEach(x -> {
+					x.setEmpresa(empresaBanco);
+				});
+			}
+
+			empresaBanco.setTelefones(empresa.getTelefones());
+
+			if (empresa.getEndereco() != null && empresa.getEndereco().getCidade() != null) {
+				Optional<Cidade> cidade = cidadeRepository.findById(empresa.getEndereco().getCidade().getId());
+				if (cidade.isPresent())
+					empresaBanco.getEndereco().setCidade(cidade.get());
+				else {
+					MensagemRetorno retorno = new MensagemRetorno();
+					retorno.setCodigoRetorno(1);
+					retorno.setMensagem("Cidade não encontrada!");
+					return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			}
+
+			final Empresa alteracaoEmpresa = empresaRepository.save(empresaBanco);
+
+			empresa.getListaFormaPagamento().forEach(x -> {
+				RlFormaPagamentoEmpresa rl = rlFormaPagamentoEmpresaRepository.findFormaEmpresa(x.getId(),
+						empresa.getId());
+				if (rl == null) {
+					RlFormaPagamentoEmpresa rl2 = new RlFormaPagamentoEmpresa();
+					rl2.setEmpresa(empresaBanco);
+					rl2.setFormaPagamento(x);
+					rlFormaPagamentoEmpresaRepository.save(rl2);
+				}
+			});
+
+			if (alteracaoEmpresa != null) {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Registro salvo com sucesso!");
+				retorno.setCodigoRetorno(0);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+			} else {
+				MensagemRetorno retorno = new MensagemRetorno();
+				retorno.setMensagem("Falha ao salvar o registro!");
+				retorno.setCodigoRetorno(1);
+				return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			MensagemRetorno retorno = new MensagemRetorno();
+			retorno.setMensagem("Registro não encontrado!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<MensagemRetorno> deleteEmpresa(@PathVariable(value = "id") Long empresaId) {
+		try {
+			Empresa empresaBanco = empresaRepository.findEmpresaFetch(empresaId);
+			empresaRepository.delete(empresaBanco);
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Empresa foi removido com sucesso!");
+			retorno.setCodigoRetorno(0);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.OK);
+		} catch (Exception e) {
+			MensagemRetorno retorno = new MensagemRetorno("Atenção", "Não foi possível remover a Empresa!");
+			retorno.setCodigoRetorno(1);
+			return new ResponseEntity<MensagemRetorno>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -185,14 +186,22 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 		empresa.setListaFormaPagamento(listaFormasPagamento);
 
+		List<Horario> lista = empresa.getHorarios().stream().distinct().collect(Collectors.toList());
+		empresa.getHorarios().clear();
+		empresa.setHorarios(lista);
 		if (empresa.getHorarios() != null && !empresa.getHorarios().isEmpty()) {
-			List<Horario> horarios = empresa.getHorarios().stream().collect(Collectors.toList());
 
-			Collections.sort(horarios, new Comparator<Horario>() {
+			Collections.sort(empresa.getHorarios(), new Comparator<Horario>() {
 				@Override
 				public int compare(Horario horario1, Horario horario2) {
 					return horario1.getDiaSemana().compareTo(horario2.getDiaSemana());
 				}
+			});
+		}
+
+		if (!empresa.getTelefones().isEmpty()) {
+			empresa.getTelefones().forEach(x -> {
+				x.setTipoApresentacao(x.getTipo().getDescricao());
 			});
 		}
 

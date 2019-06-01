@@ -117,4 +117,45 @@ export class ManterEmpresaComponent implements OnInit {
     localStorage.setItem("editEmpresaId", empresa.id.toString());
     this.router.navigate(['edit-empresa']);
   }
+
+  excluirEmpresa(empresa: Empresa) {
+    this.loading = true;
+
+    this.empresaService.excluirEmpresa(empresa.id.toString())
+      .subscribe(data => {
+        this.loading = false;
+        var res = JSON.parse(JSON.stringify(data));
+        if (res.codigoRetorno === 0) {
+          this.ngFlashMessageService.showFlashMessage({
+            messages: [res.mensagem],
+            dismissible: true,
+            timeout: false,
+            type: 'success'
+          });
+
+          this.limparCampos();
+          window.scrollTo(5000, 0);
+        } else {
+          if (data != null) {
+            this.ngFlashMessageService.showFlashMessage({
+              messages: [res.mensagem],
+              dismissible: true,
+              timeout: false,
+              type: 'danger'
+            });
+          }
+        }
+        window.scrollTo(5000, 0);
+      }, (err) => {
+        this.loading = false;
+        var res = JSON.parse(JSON.stringify(err));
+        this.ngFlashMessageService.showFlashMessage({
+          messages: [res.error.mensagem || "Falha ao excluir!"],
+          dismissible: true,
+          timeout: false,
+          type: 'danger'
+        });
+        window.scrollTo(5000, 0);
+      });
+  }
 }
