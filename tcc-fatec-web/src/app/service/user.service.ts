@@ -20,7 +20,14 @@ export class UserService {
     params.set('cpf', cpf);
     params.set('senha', senha);
 
-    return this.http.get<Usuario>(this.baseUrl + "/autenticar?cpf=" + cpf + "&senha=" + senha, {headers: headers});
+    return this.http.get<Usuario>(this.baseUrl + "/autenticar?cpf=" + cpf + "&senha=" + senha, { headers: headers });
+  }
+
+  public isAuthenticated(): boolean {
+    let usuario = new Usuario();
+    usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    return usuario !== null && usuario !== undefined;
   }
 
 }

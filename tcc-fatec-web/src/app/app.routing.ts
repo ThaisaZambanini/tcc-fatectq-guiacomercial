@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { LoginComponent } from "./login/login.component";
 import { AddUserComponent } from "./add-user/add-user.component";
 import { ListUserComponent } from "./list-user/list-user.component";
@@ -24,40 +24,41 @@ import { AddEmpresaComponent } from './manter-empresa/add-empresa/add-empresa.co
 import { EditEmpresaComponent } from './manter-empresa/edit-empresa/edit-empresa.component';
 
 import { ConsultaMensagemComponent } from './consulta-mensagem/consulta-mensagem.component';
+import {AuthGuardService as AuthGuard} from "./service/auth-guard.service";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  {path: "mensagem", component: ConsultaMensagemComponent},
-  { path: 'add-user', component: AddUserComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: "mensagem", component: ConsultaMensagemComponent, canActivate: [AuthGuard]},
+  { path: 'add-user', component: AddUserComponent},
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },
 
   /**ESTADO*/
-  { path: 'manter-uf', component: ManterUfComponent },
-  { path: 'add-uf', component: AdicionarUfComponent },
-  { path: 'edit-uf', component: AlterarUfComponent },
+  { path: 'manter-uf', component: ManterUfComponent,canActivate: [AuthGuard] },
+  { path: 'add-uf', component: AdicionarUfComponent,canActivate: [AuthGuard] },
+  { path: 'edit-uf', component: AlterarUfComponent,canActivate: [AuthGuard] },
 
   /**FORMA PAGAMENTO*/
-  { path: 'manter-forma-pagamento', component: ManterFormaPagamentoComponent },
-  { path: 'add-forma-pagamento', component: AdicionarPagamentoComponent },
-  { path: 'edit-forma-pagamento', component: AlterarFormaPagamentoComponent },
+  { path: 'manter-forma-pagamento', component: ManterFormaPagamentoComponent, canActivate: [AuthGuard] },
+  { path: 'add-forma-pagamento', component: AdicionarPagamentoComponent, canActivate: [AuthGuard] },
+  { path: 'edit-forma-pagamento', component: AlterarFormaPagamentoComponent, canActivate: [AuthGuard] },
 
   /**CIDADE*/
-  { path: 'manter-cidade', component: ManterCidadeComponent },
-  { path: 'add-cidade', component: AdicionarCidadeComponent },
-  { path: 'edit-cidade', component: EditCidadeComponent },
+  { path: 'manter-cidade', component: ManterCidadeComponent, canActivate: [AuthGuard] },
+  { path: 'add-cidade', component: AdicionarCidadeComponent, canActivate: [AuthGuard] },
+  { path: 'edit-cidade', component: EditCidadeComponent, canActivate: [AuthGuard] },
 
   /**CATEGORIA*/
-  { path: 'manter-categoria', component: ManterCategoriaComponent },
-  { path: 'add-categoria', component: AddCategoriaComponent },
-  { path: 'edit-categoria', component: EditCategoriaComponent },
+  { path: 'manter-categoria', component: ManterCategoriaComponent, canActivate: [AuthGuard] },
+  { path: 'add-categoria', component: AddCategoriaComponent, canActivate: [AuthGuard] },
+  { path: 'edit-categoria', component: EditCategoriaComponent, canActivate: [AuthGuard] },
 
   /**EMPRESA*/
-  { path: 'manter-empresa', component: ManterEmpresaComponent },
-  { path: 'add-empresa', component: AddEmpresaComponent },
-  { path: 'edit-empresa', component: EditEmpresaComponent }
+  { path: 'manter-empresa', component: ManterEmpresaComponent, canActivate: [AuthGuard] },
+  { path: 'add-empresa', component: AddEmpresaComponent, canActivate: [AuthGuard] },
+  { path: 'edit-empresa', component: EditEmpresaComponent, canActivate: [AuthGuard] }
 ];
 
 export const routing = RouterModule.forRoot(routes);

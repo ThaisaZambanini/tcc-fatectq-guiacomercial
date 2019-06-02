@@ -17,6 +17,8 @@ import { CategoriaService } from "./service/categoria.service";
 import { EmpresaService } from "./service/empresa.service";
 import { MensagemUsuarioService } from "./service/mensagem-usuario.service";
 
+import { AuthGuardService } from "./service/auth-guard.service";
+
 /**LIBS*/
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMaskModule } from 'ngx-mask';
@@ -97,7 +99,7 @@ import { FooterComponent } from './footer/footer.component';
       tertiaryColour: '#ffffff'
     })
   ],
-  providers: [UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService, MensagemUsuarioService, EmpresaService],
+  providers: [AuthGuardService, UserService, EstadoService, CidadeService, FormaPagamentoService, CategoriaService, MensagemUsuarioService, EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
